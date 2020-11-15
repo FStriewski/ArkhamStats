@@ -8,7 +8,7 @@ export type Investigator = {
     slots: any;
 } 
 
-export type HistogramValue = {
+export type DataPoint = {
     x: string;
     y: number;
 }
@@ -17,5 +17,14 @@ export type Histogram = {
     meta: {
         title: string;
     }
-    values: HistogramValue[];
+    datapoints: DataPoint[];
+}
+
+type Dataset = {
+     values: number[];
+}
+
+export type ParsedLineChartInput = {
+    labels: string[];
+    datasets: Dataset[]
 }
