@@ -1,18 +1,32 @@
-import React from 'react';
-import {FChart}  from './Components/FChart';
-import {histogram} from './Processor/histogram';
-import {parser} from './Processor/parser';
+import React, {useState, useEffect} from 'react';
+import {HeatChart}  from './Components/HeatChart';
+import {getIDeckByDate} from './utils/requests';
+import {HeatHistogram, Response} from './types';
+import {heatmapParser} from './utils/parser';
 
-import { default as json } from './Resources/sample.json';
 
 function App() {
-    
-  const rawdata = histogram(json, '01004');
-  const data = parser(rawdata);
+  const [heatData, setHeatData] = React.useState<HeatHistogram[]>()
+  const [lineData, setLineData] = React.useState<HeatHistogram[]>()
+
+  useEffect(
+         () => {
+          const fetchData = async() => { 
+            const result: Response = await getIDeckByDate('1004')
+            console.log(result)
+            setHeatData(heatmapParser(result)
+)
+         }
+         fetchData()
+        }
+        , []
+  )
+
 
   return (
     <div className="App">
-      <FChart input={data}/>
+      Investigator Decks per Day
+      {/* {data && data.length && data.map( year => <FChart key={year.year} input={year}/>) } */}
     </div>
   );
 }
