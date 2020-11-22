@@ -1,4 +1,4 @@
-import { ParsedLineChartInput, Response, HeatHistogram} from '../types';
+import { LineHistogram, Response, HeatHistogram} from '../types';
 
 const dateparser = (date: string):string => {
     const year = +date.slice(0,4);
@@ -43,29 +43,20 @@ export const heatmapParser = (range: Response): HeatHistogram[] => {
 
     return yearCollection
 }
-export const lineParser = (range: Response): HeatHistogram[] => {
+
+export const lineChartParser = (range: Response): LineHistogram[] => {
 
     const yearCollection = []
     let year: string;
+
     for(year in range.datapoints){
                 
-        const tick = Object.entries(range.datapoints[year]);
-        yearCollection.push({
-            year,
-            tick})
+        const ticks = Object.entries(range.datapoints[year]);
+        const labels = ticks.map(t => t[0])
+        const values = ticks.map(t => t[1])
 
+        yearCollection.push({year, labels, datasets: [{name: year, values}]})
     }
 
     return yearCollection
-}
-
-export const lineChartParser = (input): ParsedLineChartInput => {
-
-    const {datapoints } = input
-
-    const labels = datapoints.map(val => dateparser(val.x))
-    const values = datapoints.map(val => val.y)
-
-
-    return {labels, datasets: [{values}]}
 }

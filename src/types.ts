@@ -38,13 +38,16 @@ export type HeatHistogram =  {
     end?: string;
 }
 
-type Set = {
-     values: number[];
-}
-
-export type ParsedLineChartInput = {
-    labels: string[];
-    datasets: Set[]
-}
 
 export type HeatMapObject = { [key: string]: number };
+
+type Set = {
+    name: string;
+    values: number[];
+}
+
+export type LineHistogram = {
+    year: string;
+    labels: string[];
+    datasets: Set[];
+}

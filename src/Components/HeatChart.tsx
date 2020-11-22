@@ -1,7 +1,6 @@
 import React from "react";
 import ReactFrappeChart from "react-frappe-charts";
-import {HeatHistogram, ParsedLineChartInput} from '../types';
-import {heatmapParser} from '../utils/parser';
+import {HeatHistogram} from '../types';
 
 type Input = {
   input: HeatHistogram; 
