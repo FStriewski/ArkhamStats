@@ -43,6 +43,21 @@ export const heatmapParser = (range: Response): HeatHistogram[] => {
 
     return yearCollection
 }
+export const lineParser = (range: Response): HeatHistogram[] => {
+
+    const yearCollection = []
+    let year: string;
+    for(year in range.datapoints){
+                
+        const tick = Object.entries(range.datapoints[year]);
+        yearCollection.push({
+            year,
+            tick})
+
+    }
+
+    return yearCollection
+}
 
 export const lineChartParser = (input): ParsedLineChartInput => {
 
