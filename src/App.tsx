@@ -4,7 +4,8 @@ import {LineChart}  from './Components/LineChart';
 import {getIDeckByDate} from './utils/requests';
 import {HeatHistogram, Response, LineHistogram} from './types';
 import {heatmapParser, lineChartParser} from './utils/parser';
-
+import {Header} from './Components/UI/Header';
+import {Tabbar} from './Components/UI/Tabbar';
 
 function App() {
   const [heatData, setHeatData] = React.useState<HeatHistogram[]>()
@@ -26,6 +27,8 @@ function App() {
 
   return (
     <div className="App">
+      <Header />
+      <Tabbar />
       Investigator Decks per Day
       {lineData && lineData.length && lineData.map( year => <LineChart input={year}/>) }
     </div>
