@@ -26,7 +26,7 @@ function App() {
 
   return (
     <div className="App">
-      Investigator Decks per Day
+      Investigator Decks per Month
       {lineData && lineData.length && lineData.map( year => <LineChart input={year}/>) }
     </div>
   );

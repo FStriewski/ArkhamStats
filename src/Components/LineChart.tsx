@@ -13,8 +13,8 @@ export const LineChart = ({input}: Input) =>  {
     <div>
       <div>{input.year}</div>
       <ReactFrappeChart
-        type="bar"
-        colors = {[ '#17459e']}
+        type="line"
+        colors = {[ '#007f00']}
         axisOptions={{ xAxisMode: "tick", yAxisMode: "tick", xIsSeries: 1 }}
         height={250}
         data={{
