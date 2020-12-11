@@ -8,6 +8,10 @@ export type Investigator = {
     slots: any;
 } 
 
+export type SingleInvestigator = {
+    [index: string]: DataPoint[]
+}
+
 export type DataPoint = {
     x: string;
     y: number;
@@ -21,10 +25,10 @@ export type DatePoint = {
 
 export type APIResponse = {
     meta: {
-        investigator: string;
+        investigator: string[];
         total: number;
     }
-    datapoints: {[index: string]: DataPoint[]};
+    datapoints: {[index: string]: SingleInvestigator};
 }
 
 export type HeatHistogram =  {
