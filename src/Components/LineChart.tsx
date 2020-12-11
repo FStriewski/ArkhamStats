@@ -24,7 +24,7 @@ export const ArkLineChart = ({input}: any) =>  {
           <YAxis />
           <Tooltip />
           <Legend />
-          <Line type="monotone" dataKey="value" stroke="#007f00" />
+          <Line name="decks/month"  type="monotone" dataKey="value" stroke="#007f00" />
         </LineChart>
     </div>
   );
