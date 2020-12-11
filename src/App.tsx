@@ -10,6 +10,8 @@ import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import {investigatorList} from './utils/investigatorList';
+import {Header} from './Components/UI/Header';
+import {Tabbar} from './Components/UI/Tabbar';
 
 //{"datapoints":{"2016":[{"date":"2016-01","value":0},{"date":"2020-12","value":0}]},"meta":{"investigator":"1004","total":896}}
 
