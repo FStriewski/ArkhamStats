@@ -1,4 +1,4 @@
-import { LineHistogram, Response, HeatHistogram} from '../types';
+import { LineHistogram, APIResponse, HeatHistogram} from '../types';
 
 const dateparser = (date: string):string => {
     const year = +date.slice(0,4);
@@ -16,18 +16,12 @@ export const ymdSlashtoDateString = (date: string):string => {
     return Date.parse(newdate).toString().slice(0,10)
 }
 
-export const heatmapParser = (range: Response): HeatHistogram[] => {
+// For Frappe Heat Map
+export const heatmapParser = (range: APIResponse): HeatHistogram[] => {
 
     const yearCollection = []
     let year: string;
     for(year in range.datapoints){
-        // let thisYearData = {}
-
-        // let obj;
-        // for(obj in range.datapoints[year]){
-        //     const newKey = obj //ymdSlashtoDateString(obj)
-        //     thisYearData[newKey] = range.datapoints[year][obj]
-        // }
 
         const startDate = `${year}-01-01`
         const endDate = `${year}-12-31`
@@ -44,19 +38,20 @@ export const heatmapParser = (range: Response): HeatHistogram[] => {
     return yearCollection
 }
 
-export const lineChartParser = (range: Response): LineHistogram[] => {
+// For Frappe Line Chart
+// export const lineChartParser = (range: Response): LineHistogram[] => {
 
-    const yearCollection = []
-    let year: string;
+//     const yearCollection = []
+//     let year: string;
 
-    for(year in range.datapoints){
+//     for(year in range.datapoints){
                 
-        const ticks = Object.entries(range.datapoints[year]);
-        const labels = ticks.map(t => t[0])
-        const values = ticks.map(t => t[1])
+//         const ticks = Object.entries(range.datapoints[year]);
+//         const labels = ticks.map(t => t[0])
+//         const values = ticks.map(t => t[1])
 
-        yearCollection.push({year, labels, datasets: [{name: year, values}]})
-    }
+//         yearCollection.push({year, labels, datasets: [{name: year, values}]})
+//     }
 
-    return yearCollection
-}
+//     return yearCollection
+// }

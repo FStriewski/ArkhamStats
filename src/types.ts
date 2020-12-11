@@ -17,18 +17,14 @@ export type DatePoint = {
     y: number;
 }
 
-// export type HeatHistogram = {
-//     year: string,
-//     datapoints: 
-//     {[index: string]: number};
-// }
+//{"datapoints":{"2016":[{"date":"2016-01","value":0},{"date":"2020-12","value":0}]},"meta":{"investigator":"1004","total":896}}
 
-export type Response = {
+export type APIResponse = {
     meta: {
         investigator: string;
         total: number;
     }
-    datapoints: {[index: string]: number};
+    datapoints: {[index: string]: DataPoint[]};
 }
 
 export type HeatHistogram =  {

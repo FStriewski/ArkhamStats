@@ -1,21 +1,21 @@
 import React, {useState, useEffect} from 'react';
 import {HeatChart}  from './Components/HeatChart';
-import {LineChart}  from './Components/LineChart';
+import {ArkLineChart}  from './Components/LineChart';
 import {getIDeckByDate} from './utils/requests';
-import {HeatHistogram, Response, LineHistogram} from './types';
-import {heatmapParser, lineChartParser} from './utils/parser';
+import {HeatHistogram, APIResponse, LineHistogram} from './types';
+import {heatmapParser } from './utils/parser';
+
+//{"datapoints":{"2016":[{"date":"2016-01","value":0},{"date":"2020-12","value":0}]},"meta":{"investigator":"1004","total":896}}
 
 
 function App() {
-  const [heatData, setHeatData] = React.useState<HeatHistogram[]>()
-  const [lineData, setLineData] = React.useState<LineHistogram[]>()
+  const [lineData, setLineData] = React.useState<APIResponse>()
 
   useEffect(
          () => {
           const fetchData = async() => { 
-            const result: Response = await getIDeckByDate('1002')
-            setHeatData(heatmapParser(result))
-            setLineData(lineChartParser(result))
+            const result: APIResponse = await getIDeckByDate('1002')
+            setLineData(result)
             console.log(lineData)
          }
          fetchData()
@@ -27,7 +27,7 @@ function App() {
   return (
     <div className="App">
       Investigator Decks per Month
-      {lineData && lineData.length && lineData.map( year => <LineChart input={year}/>) }
+      {lineData && lineData.datapoints &&  <ArkLineChart input={lineData.datapoints['2020']}/> }
     </div>
   );
 }
