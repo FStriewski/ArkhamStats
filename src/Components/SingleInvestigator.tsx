@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
 
 export const SingleInvestigator = () =>  {
   const classes = useStyles();
-  const [investigatorCode, setInvestigatorCodes] = React.useState('01004');
+  const [investigatorCode, setInvestigatorCode] = React.useState('01004');
   const [selectedInvestigators, chooseInvestigators] = React.useState<APIResponse>();
 
   useEffect(
@@ -29,7 +29,6 @@ export const SingleInvestigator = () =>  {
           const fetchData = async() => { 
             const result: APIResponse = await getInvestigatorByDate(investigatorCode)
             chooseInvestigators(result)
-            console.log(selectedInvestigators)
          }
          fetchData()
         }
@@ -37,7 +36,7 @@ export const SingleInvestigator = () =>  {
   )
 
   const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
-    setInvestigatorCodes(event.target.value as string);
+    setInvestigatorCode(event.target.value as string);
   };
 
     return (
@@ -57,7 +56,7 @@ export const SingleInvestigator = () =>  {
       </FormControl>
       Decks per Month
       <br/>
-        {selectedInvestigators && selectedInvestigators.datapoints[investigatorCode] &&  <ArkLineChart input={selectedInvestigators.datapoints[investigatorCode]['2020']}/> }
+        {selectedInvestigators && selectedInvestigators.datapoints &&  <ArkLineChart input={selectedInvestigators}/> }
     </div>
   );
 }

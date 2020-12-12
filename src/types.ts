@@ -1,11 +1,17 @@
 export type Investigator = {
     id: number;
-    name: string,
-    date_creation: Date,
+    name: string;
+    date_creation: Date;
     user_id: number;
     investigator_code: string;
     investigator_name: string;
     slots: any;
+} 
+export type InvestigatorListItem = {
+    name: string;
+    code: string;
+    faction_code: string;
+    deck_options: any;
 } 
 
 export type SingleInvestigator = {
