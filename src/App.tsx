@@ -1,34 +1,13 @@
 import React, {useState, useEffect} from 'react';
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link,
-  useRouteMatch,
-  useParams
-} from "react-router-dom";
-import {ArkLineChart}  from './Components/Charts/LineChart';
-import {getInvestigatorByDate, getInvestigatorComparisonByDate} from './utils/requests';
-import {HeatHistogram, APIResponse, LineHistogram} from './types';
-import {heatmapParser } from './utils/parser';
-import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
-import FormHelperText from '@material-ui/core/FormHelperText';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
-import {investigatorList} from './utils/investigatorList';
 import {Sidebar} from './Components/UI/Sidebar';
 import { SingleInvestigator } from './Components/SingleInvestigator';
-import { InvestigatorComparison } from './Components/InvestigatorComparison';
-
-//{"datapoints":{"2016":[{"date":"2016-01","value":0},{"date":"2020-12","value":0}]},"meta":{"investigator":"1004","total":896}}
-
 import { makeStyles, Theme } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
+import Paper from '@material-ui/core/Paper';
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -56,17 +35,9 @@ function TabPanel(props: TabPanelProps) {
   );
 }
 
-function a11yProps(index: any) {
-  return {
-    id: `simple-tab-${index}`,
-    'aria-controls': `simple-tabpanel-${index}`,
-  };
-}
-
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
     flexGrow: 1,
-    backgroundColor: theme.palette.background.paper,
   },
 }));
 
@@ -80,18 +51,24 @@ export const App = () => {
 
   return (
     <div className={classes.root}>
-      <AppBar position="static">
-        <Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
-          <Tab label="SingleInvestigator" {...a11yProps(0)} />
-          <Tab label="InvestigatorComparison" {...a11yProps(1)} />
-          <Tab label="Item Three" {...a11yProps(2)} />
+        <Paper className={classes.root}>
+        <Tabs
+          value={value}
+          onChange={handleChange}
+          indicatorColor="primary"
+          textColor="primary"
+          centered
+        >
+          <Tab label="Scope" />
+          <Tab label="Comparison" />
+          <Tab label="Placeholder" />
         </Tabs>
-      </AppBar>
+      </Paper>
       <TabPanel value={value} index={0}>
         <SingleInvestigator />
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <Sidebar/>
+        <Sidebar />
         {/* <InvestigatorComparison/> */}
       </TabPanel>
       <TabPanel value={value} index={2}>

@@ -7,7 +7,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
-import {investigatorList} from '../utils/investigatorList';
+import {investigatorList} from '../lookups/investigatorList';
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -60,10 +60,18 @@ export const SingleInvestigator = () =>  {
         Decks per Month
         <br />
         {selectedInvestigators && selectedInvestigators.datapoints && (
+          <>
           <ArkLineChart
-            input={selectedInvestigators}
+            input={selectedInvestigators.datapoints['2019']}
             ids={[investigatorCode]}
+            year='2019'
+            />
+          <ArkLineChart
+            input={selectedInvestigators.datapoints['2020']}
+            ids={[investigatorCode]}
+            year='2020'
           />
+          </>
         )}
       </div>
     );

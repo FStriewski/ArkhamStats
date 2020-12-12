@@ -2,19 +2,17 @@ import React from "react";
 import { createStyles, Theme, makeStyles } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
 import FormLabel from "@material-ui/core/FormLabel";
 import FormControl from "@material-ui/core/FormControl";
 import FormGroup from "@material-ui/core/FormGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormHelperText from "@material-ui/core/FormHelperText";
-import Checkbox from "@material-ui/core/Checkbox";
-import { investigatorList } from "../../utils/investigatorList";
+import {CustomCheckbox} from '../UI/Checkbox';
+import { investigatorList, lookupInvestigator } from "../../lookups/investigatorList";
 import { InvestigatorListItem } from "../../types";
 import { InvestigatorComparison } from "../InvestigatorComparison";
 
-const drawerWidth = 240;
+const drawerWidth = 200;
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -40,11 +38,11 @@ const useStyles = makeStyles((theme: Theme) =>
       fontSize: "10px",
     },
     formControl: {
-      margin: theme.spacing(3),
+      margin: theme.spacing(2),
     },
     content: {
       flexGrow: 1,
-      padding: theme.spacing(3),
+      padding: theme.spacing(1),
     },
   })
 );
@@ -66,7 +64,7 @@ export const Sidebar = () => {
 
   const checked = (code: string) => investigatorSelection.includes(code);
 
-  const error = investigatorSelection.length > 3;
+  const error = investigatorSelection.length >= 3;
 
   return (
     <div className={classes.root}>
@@ -85,18 +83,23 @@ export const Sidebar = () => {
             component="fieldset"
             className={classes.formControl}
           >
-            <FormLabel component="legend">Pick two</FormLabel>
+            {/* <FormLabel component="legend">Pick two</FormLabel> */}
             <FormGroup>
-              {investigatorList.map((inv: InvestigatorListItem) => (
+              {investigatorList
+              .sort((a,b) => 
+                a.name < b.name ? -1 : a.name > b.name ? 1 :0)
+              .map((inv: InvestigatorListItem) => (
                 <FormControlLabel
                   control={
-                    <Checkbox
+                    <CustomCheckbox
                       checked={checked(inv.code)}
                       onChange={handleSelection}
                       name={inv.code}
+                      disabled={!checked(inv.code) && error}
                     />
                   }
                   label={inv.name}
+                  style={{color: lookupInvestigator(inv.code).color}}
                   className={classes.fcLabel}
                 />
               ))}
@@ -106,8 +109,7 @@ export const Sidebar = () => {
         </div>
       </Drawer>
       <main className={classes.content}>
-        <Toolbar />
-        <InvestigatorComparison investigatorCodes={investigatorSelection}  />
+        <InvestigatorComparison investigatorCodes={investigatorSelection} />
       </main>
     </div>
   );
