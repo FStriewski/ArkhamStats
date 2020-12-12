@@ -23,6 +23,7 @@ export const SingleInvestigator = () =>  {
   const classes = useStyles();
   const [investigatorCode, setInvestigatorCode] = React.useState('01004');
   const [selectedInvestigators, chooseInvestigators] = React.useState<APIResponse>();
+  console.log(selectedInvestigators);
 
   useEffect(
          () => {
@@ -40,23 +41,30 @@ export const SingleInvestigator = () =>  {
   };
 
     return (
-    <div className="App">
-      <FormControl className={classes.formControl}>
-        <InputLabel id="demo-simple-select-label">Investigator</InputLabel>
-        <Select
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
-          value={investigatorCode}
-          onChange={handleChange}
-        >
-          {investigatorList.map( inv => 
-            <MenuItem key={inv.code} value={inv.code}>{inv.name}</MenuItem>
-            )}
-        </Select>
-      </FormControl>
-      Decks per Month
-      <br/>
-        {selectedInvestigators && selectedInvestigators.datapoints &&  <ArkLineChart input={selectedInvestigators}/> }
-    </div>
-  );
+      <div className="App">
+        <FormControl className={classes.formControl}>
+          <InputLabel id="demo-simple-select-label">Investigator</InputLabel>
+          <Select
+            labelId="demo-simple-select-label"
+            id="demo-simple-select"
+            value={investigatorCode}
+            onChange={handleChange}
+          >
+            {investigatorList.map((inv) => (
+              <MenuItem key={inv.code} value={inv.code}>
+                {inv.name}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+        Decks per Month
+        <br />
+        {selectedInvestigators && selectedInvestigators.datapoints && (
+          <ArkLineChart
+            input={selectedInvestigators}
+            ids={[investigatorCode]}
+          />
+        )}
+      </div>
+    );
 }

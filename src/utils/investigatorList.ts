@@ -1,3 +1,20 @@
+
+const investigatorClassColor = {
+	guardian: "#2B80C5",
+	seeker: "#FF8F3F",
+	rogue:"#107116",
+	mystic:"#5D5593",
+	survivor:"#CC3038",
+	neutral:"#808080",
+}
+
+
+export const lookupInvestigator = (code: string) => {
+	const investigator: {[k: string]: any} = investigatorList.find(item => item.code === code);
+	investigator.color = investigatorClassColor[investigator.faction_code]
+	return investigator
+}
+
 export const investigatorList = [
     {
                 "name": "Roland Banks",

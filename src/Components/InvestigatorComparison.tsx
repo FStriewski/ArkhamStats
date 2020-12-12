@@ -36,12 +36,13 @@ export const InvestigatorComparison = ({investigatorCodes}) =>  {
   )
 
     return (
-    <div className="App">
-      <FormControl className={classes.formControl}>
-      </FormControl>
-      Decks per Month
-      <br/>
-      {selectedInvestigators && selectedInvestigators.datapoints &&  <ArkLineChart input={selectedInvestigators}/> }
-    </div>
-  );
+      <div className="App">
+        <FormControl className={classes.formControl}></FormControl>
+        Decks per Month
+        <br />
+        {selectedInvestigators && selectedInvestigators.datapoints && (
+          <ArkLineChart input={selectedInvestigators} ids={investigatorCodes} />
+        )}
+      </div>
+    );
 }
