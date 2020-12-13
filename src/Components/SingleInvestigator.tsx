@@ -19,11 +19,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export const SingleInvestigator = () =>  {
+export const SingleInvestigator = ({year}: {year: number}) =>  {
   const classes = useStyles();
   const [investigatorCode, setInvestigatorCode] = React.useState('01004');
   const [selectedInvestigators, chooseInvestigators] = React.useState<APIResponse>();
-  console.log(selectedInvestigators);
+
+  const selectedYear=year.toString();
 
   useEffect(
          () => {
@@ -61,16 +62,11 @@ export const SingleInvestigator = () =>  {
         <br />
         {selectedInvestigators && selectedInvestigators.datapoints && (
           <>
-          <ArkLineChart
-            input={selectedInvestigators.datapoints['2019']}
-            ids={[investigatorCode]}
-            year='2019'
+            <ArkLineChart
+              input={selectedInvestigators.datapoints[selectedYear]}
+              ids={[investigatorCode]}
+              year={selectedYear}
             />
-          <ArkLineChart
-            input={selectedInvestigators.datapoints['2020']}
-            ids={[investigatorCode]}
-            year='2020'
-          />
           </>
         )}
       </div>

@@ -1,8 +1,6 @@
 import React from "react";
 import { createStyles, Theme, makeStyles } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import FormLabel from "@material-ui/core/FormLabel";
 import FormControl from "@material-ui/core/FormControl";
 import FormGroup from "@material-ui/core/FormGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
@@ -11,6 +9,8 @@ import {CustomCheckbox} from '../UI/Checkbox';
 import { investigatorList, lookupInvestigator } from "../../lookups/investigatorList";
 import { InvestigatorListItem } from "../../types";
 import { InvestigatorComparison } from "../InvestigatorComparison";
+import { YearSlider } from "../../Components/UI/YearSlider";
+import Slide from "@material-ui/core/Slide";
 
 const drawerWidth = 200;
 
@@ -47,7 +47,12 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export const Sidebar = () => {
+type YearSliderProps = {
+  year: number;
+  handleSetYear: (event: any, year: number) => void;
+};
+
+export const Sidebar = ({ handleSetYear, year }: YearSliderProps) => {
   const classes = useStyles();
 
   const [investigatorSelection, setSelection] = React.useState([]);
@@ -57,7 +62,9 @@ export const Sidebar = () => {
     if (!investigatorSelection.includes(investigator)) {
       setSelection([...investigatorSelection, investigator]);
     } else {
-      const newstate = investigatorSelection.filter((item) => item != investigator);
+      const newstate = investigatorSelection.filter(
+        (item) => item != investigator
+      );
       setSelection(newstate);
     }
   };
@@ -68,48 +75,54 @@ export const Sidebar = () => {
 
   return (
     <div className={classes.root}>
-      <CssBaseline />
-      <Drawer
-        className={classes.drawer}
-        variant="permanent"
-        classes={{
-          paper: classes.drawerPaper,
-        }}
-      >
-        <div className={classes.drawerContainer}>
-          <FormControl
-            required
-            error={error}
-            component="fieldset"
-            className={classes.formControl}
-          >
-            {/* <FormLabel component="legend">Pick two</FormLabel> */}
-            <FormGroup>
-              {investigatorList
-              .sort((a,b) => 
-                a.name < b.name ? -1 : a.name > b.name ? 1 :0)
-              .map((inv: InvestigatorListItem) => (
-                <FormControlLabel
-                  control={
-                    <CustomCheckbox
-                      checked={checked(inv.code)}
-                      onChange={handleSelection}
-                      name={inv.code}
-                      disabled={!checked(inv.code) && error}
+      <Slide direction="right" in={true} mountOnEnter unmountOnExit>
+        <Drawer
+          className={classes.drawer}
+          variant="permanent"
+          classes={{
+            paper: classes.drawerPaper,
+          }}
+        >
+          <div className={classes.drawerContainer}>
+            <FormControl
+              required
+              error={error}
+              component="fieldset"
+              className={classes.formControl}
+            >
+              {/* <FormLabel component="legend">Pick two</FormLabel> */}
+              <FormGroup>
+                {investigatorList
+                  .sort((a, b) =>
+                    a.name < b.name ? -1 : a.name > b.name ? 1 : 0
+                  )
+                  .map((inv: InvestigatorListItem) => (
+                    <FormControlLabel
+                      control={
+                        <CustomCheckbox
+                          checked={checked(inv.code)}
+                          onChange={handleSelection}
+                          name={inv.code}
+                          disabled={!checked(inv.code) && error}
+                        />
+                      }
+                      label={inv.name}
+                      style={{ color: lookupInvestigator(inv.code).color }}
+                      className={classes.fcLabel}
                     />
-                  }
-                  label={inv.name}
-                  style={{color: lookupInvestigator(inv.code).color}}
-                  className={classes.fcLabel}
-                />
-              ))}
-            </FormGroup>
-            <FormHelperText>You can display an error</FormHelperText>
-          </FormControl>
-        </div>
-      </Drawer>
+                  ))}
+              </FormGroup>
+              <FormHelperText>You can display an error</FormHelperText>
+            </FormControl>
+          </div>
+        </Drawer>
+      </Slide>
       <main className={classes.content}>
-        <InvestigatorComparison investigatorCodes={investigatorSelection} />
+        <InvestigatorComparison
+          year={year}
+          investigatorCodes={investigatorSelection}
+        />
+        <YearSlider year={year} handleSetYear={handleSetYear} />
       </main>
     </div>
   );

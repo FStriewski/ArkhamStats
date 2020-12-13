@@ -1,13 +1,14 @@
 import React, {useState, useEffect} from 'react';
 import {Sidebar} from './Components/UI/Sidebar';
+import { YearSlider } from "./Components/UI/YearSlider";
 import { SingleInvestigator } from './Components/SingleInvestigator';
 import { makeStyles, Theme } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import Paper from '@material-ui/core/Paper';
+import CssBaseline from "@material-ui/core/CssBaseline";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -39,19 +40,29 @@ const useStyles = makeStyles((theme: Theme) => ({
   root: {
     flexGrow: 1,
   },
+  appBar: {
+    top: "auto",
+    bottom: 0,
+  },
 }));
 
 export const App = () => {
   const classes = useStyles();
-  const [value, setValue] = React.useState(0);
+  const [value, setValue] = React.useState(0); // Current Tab
+  const [year, setYear] = React.useState(2020); // Current Tab
 
   const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
     setValue(newValue);
   };
 
+   const handleSetYear = (event: any, newValue: number | number[]) => {
+     setYear(newValue as number);
+   };
+
   return (
     <div className={classes.root}>
-        <Paper className={classes.root}>
+      <CssBaseline />
+      <Paper className={classes.root}>
         <Tabs
           value={value}
           onChange={handleChange}
@@ -65,11 +76,11 @@ export const App = () => {
         </Tabs>
       </Paper>
       <TabPanel value={value} index={0}>
-        <SingleInvestigator />
+        <SingleInvestigator year={year} />
+        <YearSlider handleSetYear={handleSetYear} year={year} />
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <Sidebar />
-        {/* <InvestigatorComparison/> */}
+        <Sidebar year={year} handleSetYear={handleSetYear} />
       </TabPanel>
       <TabPanel value={value} index={2}>
         Item Three

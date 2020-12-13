@@ -21,15 +21,15 @@ export const ArkLineChart = ({ input, ids, year }: any) => {
   // const data = input.datapoints["2020"];
 
   const releaseEvents = releases.filter(rel => rel.year === year);
-
+  const test = ['1', '2']
   return (
     <div>
       {/* <div>{input.year}</div> */}
       <LineChart
-        width={800}
-        height={300}
+        width={900}
+        height={400}
         data={input}
-        margin={{ top:50, right: 30, left: 20, bottom: 5 }}
+        margin={{ top: 50, right: 30, left: 20, bottom: 5 }}
       >
         <CartesianGrid strokeDasharray="1 1" />
         <XAxis dataKey="date" />
@@ -39,8 +39,7 @@ export const ArkLineChart = ({ input, ids, year }: any) => {
               <Label value={rel.name} offset={10} position="top" />
             </ReferenceLine>
           ))}
-        <YAxis />
-        {/* <ReferenceLine y={12} label="Max" stroke="red" strokeDasharray="3 3" /> */}
+        <YAxis domain={[0, (dataMax) => Math.max(100, dataMax)]} />
         <Tooltip />
         <Legend />
         {ids.map((id: string) => {
