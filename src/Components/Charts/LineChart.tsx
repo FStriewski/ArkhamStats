@@ -34,18 +34,21 @@ export const ArkLineChart = ({ input, ids, entity, yLimit=100 }: any) => {
         <YAxis domain={[0, (dataMax) => Math.max(yLimit, dataMax)]} />
         <Tooltip />
         <Legend />
-        {ids.map((id: string) => {
-          const investigator = entity === 'class' ? investigatorClassColor[id]: lookupInvestigator(id);
-
-          return (
-            <Line
-              name={investigator.name}
+        {ids.map((id: string) => 
+         entity === 'class' 
+         ?   <Line
+              name='class'
               type="monotone"
               dataKey={id}
-              stroke={investigator.color}
+              stroke={id !== 'all' ? investigatorClassColor[id] : '#FFFFFF'}
             />
-          );
-        })}
+          :  <Line
+              name={lookupInvestigator(id).name}
+              type="monotone"
+              dataKey={id}
+              stroke={lookupInvestigator(id).color}
+            />
+        )}
       </LineChart>
     </div>
   );
