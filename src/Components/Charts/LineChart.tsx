@@ -1,4 +1,3 @@
-import { grey } from "@material-ui/core/colors";
 import React from "react";
 import {
   LineChart,
@@ -12,16 +11,9 @@ import {
   ReferenceLine,
 } from "recharts";
 import { releases } from "../../lookups/decks";
-import {lookupInvestigator} from '../../lookups/investigatorList';
+import {lookupInvestigator, investigatorClassColor} from '../../lookups/investigatorList';
 
-export const ArkLineChart = ({ input, ids, year }: any) => {
-  // const metadata = input.meta;
-
-  // const data = input.datapoints
-  // const data = input.datapoints["2020"];
-
-  const releaseEvents = releases.filter(rel => rel.year === year);
-  const test = ['1', '2']
+export const ArkLineChart = ({ input, ids, entity, yLimit=100 }: any) => {
   return (
     <div>
       {/* <div>{input.year}</div> */}
@@ -39,11 +31,11 @@ export const ArkLineChart = ({ input, ids, year }: any) => {
               <Label value={rel.name} offset={10} position="top" />
             </ReferenceLine>
           ))}
-        <YAxis domain={[0, (dataMax) => Math.max(100, dataMax)]} />
+        <YAxis domain={[0, (dataMax) => Math.max(yLimit, dataMax)]} />
         <Tooltip />
         <Legend />
         {ids.map((id: string) => {
-          const investigator = lookupInvestigator(id);
+          const investigator = entity === 'class' ? investigatorClassColor[id]: lookupInvestigator(id);
 
           return (
             <Line

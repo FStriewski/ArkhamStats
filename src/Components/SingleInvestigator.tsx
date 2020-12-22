@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useEffect} from 'react';
 import {ArkLineChart}  from './Charts/LineChart';
 import {getInvestigatorByDate} from '../utils/requests';
 import { APIResponse } from '../types';
@@ -8,6 +8,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import {investigatorList} from '../lookups/investigatorList';
+import {MODE, determineDataTypeMode} from '../types';
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -19,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export const SingleInvestigator = ({year}: {year: number}) =>  {
+export const SingleInvestigator = ({year, mode}: {year: number, mode: MODE}) =>  {
   const classes = useStyles();
   const [investigatorCode, setInvestigatorCode] = React.useState('01004');
   const [selectedInvestigators, chooseInvestigators] = React.useState<APIResponse>();
@@ -40,9 +41,12 @@ export const SingleInvestigator = ({year}: {year: number}) =>  {
   const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
     setInvestigatorCode(event.target.value as string);
   };
+    const dataType = determineDataTypeMode(mode)
+
 
     return (
-      <div className="App">
+      // <div className="App">
+      <>
         <FormControl className={classes.formControl}>
           <InputLabel id="demo-simple-select-label">Investigator</InputLabel>
           <Select
@@ -60,15 +64,15 @@ export const SingleInvestigator = ({year}: {year: number}) =>  {
         </FormControl>
         Decks per Month
         <br />
-        {selectedInvestigators && selectedInvestigators.datapoints && (
+        {selectedInvestigators && selectedInvestigators[dataType] && (
           <>
             <ArkLineChart
-              input={selectedInvestigators.datapoints[selectedYear]}
+              input={selectedInvestigators[dataType][selectedYear]}
               ids={[investigatorCode]}
               year={selectedYear}
             />
           </>
         )}
-      </div>
+      </>
     );
 }

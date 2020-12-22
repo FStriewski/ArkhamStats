@@ -11,6 +11,7 @@ import { InvestigatorListItem } from "../../types";
 import { InvestigatorComparison } from "../InvestigatorComparison";
 import { YearSlider } from "../../Components/UI/YearSlider";
 import Slide from "@material-ui/core/Slide";
+import {MODE, determineDataTypeMode} from '../../types';
 
 const drawerWidth = 200;
 
@@ -50,9 +51,10 @@ const useStyles = makeStyles((theme: Theme) =>
 type YearSliderProps = {
   year: number;
   handleSetYear: (event: any, year: number) => void;
+  mode?: MODE;
 };
 
-export const Sidebar = ({ handleSetYear, year }: YearSliderProps) => {
+export const Sidebar = ({ handleSetYear, year, mode }: YearSliderProps) => {
   const classes = useStyles();
 
   const [investigatorSelection, setSelection] = React.useState([]);
@@ -63,7 +65,7 @@ export const Sidebar = ({ handleSetYear, year }: YearSliderProps) => {
       setSelection([...investigatorSelection, investigator]);
     } else {
       const newstate = investigatorSelection.filter(
-        (item) => item != investigator
+        (item) => item !== investigator
       );
       setSelection(newstate);
     }
@@ -121,6 +123,7 @@ export const Sidebar = ({ handleSetYear, year }: YearSliderProps) => {
         <InvestigatorComparison
           year={year}
           investigatorCodes={investigatorSelection}
+          mode={mode}
         />
         <YearSlider year={year} handleSetYear={handleSetYear} />
       </main>

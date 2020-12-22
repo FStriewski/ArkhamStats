@@ -27,8 +27,6 @@ export type DatePoint = {
     y: number;
 }
 
-//{"datapoints":{"2016":[{"date":"2016-01","value":0},{"date":"2020-12","value":0}]},"meta":{"investigator":"1004","total":896}}
-
 export type APIResponse = {
     meta: {
         investigator: string[];
@@ -57,3 +55,10 @@ export type LineHistogram = {
     labels: string[];
     datasets: Set[];
 }
+
+export enum MODE {
+    ABSOLUTE = "ABSOLUTE",
+    RELATIVE = "RELATIVE",
+}
+
+export const determineDataTypeMode = (mode: MODE) =>  mode === MODE.ABSOLUTE ? 'datapoints_absolute' : 'datapoints_relative';

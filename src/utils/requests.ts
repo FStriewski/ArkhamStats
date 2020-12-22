@@ -12,6 +12,18 @@ export const getInvestigatorByDate = async (icode: string) => {
     )
     return result
 }
+export const getCountsByClass = async (iclass: string) => {
+    const route = `/decks/total/${iclass}`
+    const result = await fetch(route, {
+        method: 'GET',
+        mode: 'no-cors',
+        cache: 'no-cache',
+        referrerPolicy: 'same-origin'
+    }).then(
+        response => response.json()
+    )
+    return result
+}
 
 export const getInvestigatorComparisonByDate = async (icodes: string[]) => {
 

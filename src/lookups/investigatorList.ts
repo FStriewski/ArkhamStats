@@ -1,5 +1,6 @@
 
-const investigatorClassColor = {
+export const investigatorClassColor = {
+	all: '#ffffff',
 	guardian: "#2B80C5",
 	seeker: "#FF8F3F",
 	rogue:"#107116",
@@ -8,12 +9,23 @@ const investigatorClassColor = {
 	neutral:"#808080",
 }
 
+export const investigatorByFaction = {
+	'guardian' : ["01001", "02001", "03001", "04001", "98010", "06001", "07001", "60101"],
+	'seeker':  ["01002", "02002", "03002", "04002", "05002", "06002", "07002", "98007", "60201"],
+	'rogue': ["01003", "02003", "03003", "04003", "05003", "06003", "07003", "60301"],
+	'survivor': ["01005", "02005", "03005", "04005", "05005", "06005", "98013", "60501"],
+	'mystic': ["01004", "02004", "03004", "04004", "05004", "05006", "06004", "98016", "60401"],
+	'neutral': ["03006"]
+}
+
 
 export const lookupInvestigator = (code: string) => {
 	const investigator: {[k: string]: any} = investigatorList.find(item => item.code === code);
 	investigator.color = investigatorClassColor[investigator.faction_code]
 	return investigator
 }
+
+
 
 export const investigatorList = [
     {

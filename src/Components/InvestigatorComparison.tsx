@@ -1,21 +1,10 @@
-import React, {useState, useEffect} from 'react';
+import React, {useEffect} from 'react';
 import {ArkLineChart}  from './Charts/LineChart';
 import { getInvestigatorComparisonByDate} from '../utils/requests';
 import {APIResponse} from '../types';
-import { makeStyles } from '@material-ui/core/styles';
+import {MODE, determineDataTypeMode} from '../types';
 
-const useStyles = makeStyles((theme) => ({
-  formControl: {
-    margin: theme.spacing(1),
-    minWidth: 120,
-  },
-  selectEmpty: {
-    marginTop: theme.spacing(2),
-  },
-}));
-
-export const InvestigatorComparison = ({investigatorCodes, year}: {investigatorCodes: string[], year: number}) =>  {
-  const classes = useStyles();
+export const InvestigatorComparison = ({investigatorCodes, year, mode}: {investigatorCodes: string[], year: number, mode: MODE}) =>  {
   const [selectedInvestigators, chooseInvestigators] = React.useState<APIResponse>();
 
   useEffect(
@@ -30,15 +19,15 @@ export const InvestigatorComparison = ({investigatorCodes, year}: {investigatorC
   )
 
   const selectedYear = year.toString();
-
+  const dataType = determineDataTypeMode(mode)
 
     return (
       <div className="App">
         {/* <FormControl className={classes.formControl}></FormControl> */}
-        {selectedInvestigators && selectedInvestigators.datapoints && (
+        {selectedInvestigators && selectedInvestigators[dataType] && (
           <>
             <ArkLineChart
-              input={selectedInvestigators.datapoints[selectedYear]}
+              input={selectedInvestigators[dataType][selectedYear]}
               ids={investigatorCodes}
               year={selectedYear}
             />
