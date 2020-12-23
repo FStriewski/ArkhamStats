@@ -43,6 +43,7 @@ export const TotalCount = ({year, mode}: {year: number, mode: MODE}) =>  {
   };
   const investigatorClassList = Object.keys(investigatorClassColor).map(entry => ({name: entry, color: investigatorClassColor[entry]}))
   const dataType = determineDataTypeMode(mode)
+  const color = investigatorClass === 'all' ? '#000000' : investigatorClassColor[investigatorClass]
 
     return (
       <div className="App">
@@ -69,8 +70,8 @@ export const TotalCount = ({year, mode}: {year: number, mode: MODE}) =>  {
               input={selectedClass[dataType][selectedYear]}
               ids={[investigatorClass]}
               year={selectedYear}
-              yLimit={1000}
-              entity='class'
+              color={color}
+              yLimit={300}
             />
           </>
         )}

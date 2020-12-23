@@ -61,4 +61,10 @@ export enum MODE {
     RELATIVE = "RELATIVE",
 }
 
+export enum ENTITY {
+    CLASSCOUNT = 'CLASSCOUNT',
+    SINGLEINV = 'SINGLEINV',
+    INVCOMP = 'INVCOMP'
+}
+
 export const determineDataTypeMode = (mode: MODE) =>  mode === MODE.ABSOLUTE ? 'datapoints_absolute' : 'datapoints_relative';

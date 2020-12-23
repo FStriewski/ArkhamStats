@@ -3,6 +3,7 @@ import {ArkLineChart}  from './Charts/LineChart';
 import { getInvestigatorComparisonByDate} from '../utils/requests';
 import {APIResponse} from '../types';
 import {MODE, determineDataTypeMode} from '../types';
+import {ENTITY} from '../types';
 
 export const InvestigatorComparison = ({investigatorCodes, year, mode}: {investigatorCodes: string[], year: number, mode: MODE}) =>  {
   const [selectedInvestigators, chooseInvestigators] = React.useState<APIResponse>();
@@ -30,6 +31,7 @@ export const InvestigatorComparison = ({investigatorCodes, year, mode}: {investi
               input={selectedInvestigators[dataType][selectedYear]}
               ids={investigatorCodes}
               year={selectedYear}
+              entity={ENTITY.INVCOMP}
             />
           </>
         )}

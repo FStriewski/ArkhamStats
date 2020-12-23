@@ -9,6 +9,7 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import {investigatorList} from '../lookups/investigatorList';
 import {MODE, determineDataTypeMode} from '../types';
+import {ENTITY} from '../types';
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -70,6 +71,7 @@ export const SingleInvestigator = ({year, mode}: {year: number, mode: MODE}) => 
               input={selectedInvestigators[dataType][selectedYear]}
               ids={[investigatorCode]}
               year={selectedYear}
+              entity={ENTITY.SINGLEINV}
             />
           </>
         )}

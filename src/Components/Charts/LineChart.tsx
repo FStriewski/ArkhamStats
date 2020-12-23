@@ -12,8 +12,9 @@ import {
 } from "recharts";
 import { releases } from "../../lookups/decks";
 import {lookupInvestigator, investigatorClassColor} from '../../lookups/investigatorList';
+import {ENTITY} from '../../types';
 
-export const ArkLineChart = ({ input, ids, entity, yLimit=100 }: any) => {
+export const ArkLineChart = ({ input, ids, entity, yLimit=100, color }: any) => {
   return (
     <div>
       {/* <div>{input.year}</div> */}
@@ -31,24 +32,23 @@ export const ArkLineChart = ({ input, ids, entity, yLimit=100 }: any) => {
               <Label value={rel.name} offset={10} position="top" />
             </ReferenceLine>
           ))}
-        <YAxis domain={[0, (dataMax) => Math.max(yLimit, dataMax)]} />
+        {entity === ENTITY.CLASSCOUNT ? <YAxis domain={[0, (dataMax) => Math.max(300, dataMax)]} />: <YAxis domain={[0, (dataMax) => Math.max(yLimit, dataMax)]} />}
         <Tooltip />
         <Legend />
-        {ids.map((id: string) => 
-         entity === 'class' 
+        {ids.length ===1  
          ?   <Line
               name='class'
               type="monotone"
-              dataKey={id}
-              stroke={id !== 'all' ? investigatorClassColor[id] : '#FFFFFF'}
+              dataKey={ids[0]}
+              stroke={color}
             />
-          :  <Line
+          :  ids.map(id => <Line
               name={lookupInvestigator(id).name}
               type="monotone"
               dataKey={id}
               stroke={lookupInvestigator(id).color}
-            />
-        )}
+            />)
+        }
       </LineChart>
     </div>
   );
