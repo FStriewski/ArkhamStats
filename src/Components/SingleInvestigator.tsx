@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import {ArkLineChart}  from './Charts/LineChart';
+import {InvestigatorLineChart}  from './Charts/LineChart';
 import {getInvestigatorByDate} from '../utils/requests';
 import { APIResponse } from '../types';
 import { makeStyles } from '@material-ui/core/styles';
@@ -65,11 +65,10 @@ export const SingleInvestigator = ({year, mode}: {year: number, mode: boolean}) 
         </FormControl>
         {selectedInvestigators && selectedInvestigators[dataType] && (
           <>
-            <ArkLineChart
+            <InvestigatorLineChart
               input={selectedInvestigators[dataType][selectedYear]}
               ids={[investigatorCode]}
               year={selectedYear}
-              entity={ENTITY.SINGLEINV}
               mode={mode}
             />
           </>

@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import {ArkLineChart}  from './Charts/LineChart';
+import {ClassLineChart}  from './Charts/LineChart';
 import {getCountsByClass} from '../utils/requests';
 import { APIResponse, ENTITY } from '../types';
 import { makeStyles } from '@material-ui/core/styles';
@@ -66,13 +66,11 @@ export const TotalCount = ({year, mode}: {year: number, mode: boolean}) =>  {
         <br />
         {selectedClass && selectedClass[dataType] && (
           <>
-            <ArkLineChart
+            <ClassLineChart
               input={selectedClass[dataType][selectedYear]}
               ids={[investigatorClass]}
               year={selectedYear}
               color={color}
-              yLimit={300}
-              entity={ENTITY.CLASSCOUNT}
               mode={mode}
             />
           </>

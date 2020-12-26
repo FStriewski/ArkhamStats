@@ -49,10 +49,10 @@ const useStyles = makeStyles((theme: Theme) =>
 export const Sidebar = (props) => {
   const classes = useStyles();
 
-  const [investigatorSelection, setSelection] = React.useState([]);
+  const [investigatorSelection, setSelection] = React.useState<string[]>([]);
 
   const handleSelection = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const investigator = event.target.name;
+    const investigator = event.target.id;
     if (!investigatorSelection.includes(investigator)) {
       setSelection([...investigatorSelection, investigator]);
     } else {
@@ -64,7 +64,6 @@ export const Sidebar = (props) => {
   };
 
   const checked = (code: string) => investigatorSelection.includes(code);
-
   const error = investigatorSelection.length >= 3;
 
   return (
@@ -97,6 +96,7 @@ export const Sidebar = (props) => {
                           checked={checked(inv.code)}
                           onChange={handleSelection}
                           name={inv.name}
+                          id={inv.code}
                           disabled={!checked(inv.code) && error}
                         />
                       }

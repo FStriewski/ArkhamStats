@@ -1,9 +1,8 @@
 import React, {useEffect} from 'react';
-import {ArkLineChart}  from './Charts/LineChart';
+import {InvestigatorLineChart}  from './Charts/LineChart';
 import { getInvestigatorComparisonByDate} from '../utils/requests';
 import {APIResponse} from '../types';
 import {determineDataTypeMode} from '../types';
-import {ENTITY} from '../types';
 
 export const InvestigatorComparison = ({investigatorCodes, year, mode}: {investigatorCodes: string[], year: number, mode: boolean}) =>  {
   const [selectedInvestigators, chooseInvestigators] = React.useState<APIResponse>();
@@ -25,11 +24,10 @@ export const InvestigatorComparison = ({investigatorCodes, year, mode}: {investi
     return (
       <div>
         {selectedInvestigators && selectedInvestigators[dataType] && (
-            <ArkLineChart
+            <InvestigatorLineChart
               input={selectedInvestigators[dataType][selectedYear]}
               ids={investigatorCodes}
               year={selectedYear}
-              entity={ENTITY.INVCOMP}
               mode={mode}
             />
         )}

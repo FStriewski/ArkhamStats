@@ -21,8 +21,8 @@ export const investigatorByFaction = {
 }
 
 
-export const lookupInvestigator = (code: string) => {
-	const investigator: InvestigatorListEntry = investigatorList.find(item => item.code === code);
+export const lookupInvestigator = (id: string) => {
+	const investigator: InvestigatorListEntry = investigatorList.find(item => item.code === id);
 	investigator.color = investigatorClassColor[investigator.faction_code]
 	return investigator
 }
