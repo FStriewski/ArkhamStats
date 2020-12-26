@@ -43,6 +43,9 @@ const useStyles = makeStyles((theme: Theme) => ({
   root: {
     flexGrow: 1,
   },
+  wrapper: {
+    justifyContent: 'center'
+  },
   appBar: {
     top: "auto",
     bottom: 0,
@@ -83,28 +86,35 @@ export const App = () => {
         </Tabs>
       </Paper>
       <TabPanel value={value} index={0}>
-        <ModeSwitch mode={mode} setRelMode={setMode}/>
-        <SingleInvestigator year={year} mode={mode} />
-        <YearSlider handleSetYear={handleSetYear} year={year} />
+        <div className={classes.wrapper}>
+          <ModeSwitch mode={mode} setRelMode={setMode}/>
+          <SingleInvestigator year={year} mode={mode} />
+          <YearSlider handleSetYear={handleSetYear} year={year} />
+        </div>
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <Sidebar>
-          {(investigatorSelection: string[]) =>
-          <>
-          <ModeSwitch mode={mode} setRelMode={setMode}/>
-          <InvestigatorComparison
-          year={year}
-          investigatorCodes={investigatorSelection}
-          mode={mode}
-        />
-        <YearSlider year={year} handleSetYear={handleSetYear} />
-        </>}
-        </Sidebar>
+        <div className={classes.wrapper}>
+          <Sidebar>
+            {(investigatorSelection: string[]) =>
+            <>
+            <ModeSwitch mode={mode} setRelMode={setMode}/>
+            <InvestigatorComparison
+            year={year}
+            investigatorCodes={investigatorSelection}
+            mode={mode}
+            />
+          <YearSlider year={year} handleSetYear={handleSetYear} />
+          </>}
+          </Sidebar>
+        </div>
       </TabPanel>
       <TabPanel value={value} index={2}>
-        <ModeSwitch mode={mode} setRelMode={setMode}/>
-        <TotalCount year={year} mode={mode}/>
-        <YearSlider handleSetYear={handleSetYear} year={year} /></TabPanel>
+        <div className={classes.wrapper}>
+          <ModeSwitch mode={mode} setRelMode={setMode}/>
+          <TotalCount year={year} mode={mode}/>
+          <YearSlider handleSetYear={handleSetYear} year={year} />
+        </div>
+      </TabPanel>
     </div>
   );
 }

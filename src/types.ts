@@ -7,6 +7,14 @@ export type Investigator = {
     investigator_name: string;
     slots: any;
 } 
+export type InvestigatorListEntry = {
+    code: string;
+    name: string;
+    faction_code: string;
+    color?: string;
+    deck_options: {[key: string]: any }[];
+}
+
 export type InvestigatorListItem = {
     name: string;
     code: string;

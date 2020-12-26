@@ -32,6 +32,7 @@ export const InvestigatorComparison = ({investigatorCodes, year, mode}: {investi
               ids={investigatorCodes}
               year={selectedYear}
               entity={ENTITY.INVCOMP}
+              mode={mode}
             />
           </>
         )}

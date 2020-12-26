@@ -1,4 +1,6 @@
 
+import {InvestigatorListEntry} from '../types';
+
 export const investigatorClassColor = {
 	all: '#ffffff',
 	guardian: "#2B80C5",
@@ -20,7 +22,7 @@ export const investigatorByFaction = {
 
 
 export const lookupInvestigator = (code: string) => {
-	const investigator: {[k: string]: any} = investigatorList.find(item => item.code === code);
+	const investigator: InvestigatorListEntry = investigatorList.find(item => item.code === code);
 	investigator.color = investigatorClassColor[investigator.faction_code]
 	return investigator
 }

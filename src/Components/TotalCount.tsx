@@ -72,6 +72,7 @@ export const TotalCount = ({year, mode}: {year: number, mode: boolean}) =>  {
               year={selectedYear}
               color={color}
               yLimit={300}
+              mode={mode}
             />
           </>
         )}

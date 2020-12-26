@@ -47,15 +47,12 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
       paper: {
       width: '200px',
-      height: '50px',
+      height: '40px',
       display: "flex",
       padding: '10px',
       justifyContent: "center",
-      position: 'absolute',
-      top: '120px',
-      right: '40px',
+      float: 'right'
     },
-
   })
 );
 type Props = {mode: boolean; setRelMode: (event: React.ChangeEvent<HTMLInputElement>, checked: boolean) => void;}

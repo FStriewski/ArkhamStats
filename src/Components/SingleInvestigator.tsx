@@ -64,8 +64,6 @@ export const SingleInvestigator = ({year, mode}: {year: number, mode: boolean}) 
             ))}
           </Select>
         </FormControl>
-        Decks per Month
-        <br />
         {selectedInvestigators && selectedInvestigators[dataType] && (
           <>
             <ArkLineChart
@@ -73,6 +71,7 @@ export const SingleInvestigator = ({year, mode}: {year: number, mode: boolean}) 
               ids={[investigatorCode]}
               year={selectedYear}
               entity={ENTITY.SINGLEINV}
+              mode={mode}
             />
           </>
         )}
