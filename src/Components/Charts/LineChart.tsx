@@ -27,9 +27,11 @@ export const ArkLineChart = ({ input, ids, entity, mode, yLimit=100, color }: an
         <XAxis dataKey="date" />
         {releases &&
           releases.map((rel) => (
+            <span key={rel.name}>
             <ReferenceLine x={rel.date} stroke="green" strokeWidth={2}>
               <Label value={rel.name} offset={10} position="top" />
             </ReferenceLine>
+            </span>
           ))}
         {
         entity === ENTITY.CLASSCOUNT
@@ -54,6 +56,7 @@ export const ArkLineChart = ({ input, ids, entity, mode, yLimit=100, color }: an
               stroke={color}
               />
               :  ids.map((id: string) => <Line
+              key={id}
               name={mode? `${lookupInvestigator(id).name} [%]`:`${lookupInvestigator(id).name}`}
               type="monotone"
               dataKey={id}

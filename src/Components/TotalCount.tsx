@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import {ArkLineChart}  from './Charts/LineChart';
 import {getCountsByClass} from '../utils/requests';
-import { APIResponse } from '../types';
+import { APIResponse, ENTITY } from '../types';
 import { makeStyles } from '@material-ui/core/styles';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -46,7 +46,7 @@ export const TotalCount = ({year, mode}: {year: number, mode: boolean}) =>  {
   const color = investigatorClass === 'all' ? '#000000' : investigatorClassColor[investigatorClass]
 
     return (
-      <div className="App">
+      <div>
         <FormControl className={classes.formControl}>
           <InputLabel id="demo-simple-select-label">Class</InputLabel>
           <Select
@@ -72,6 +72,7 @@ export const TotalCount = ({year, mode}: {year: number, mode: boolean}) =>  {
               year={selectedYear}
               color={color}
               yLimit={300}
+              entity={ENTITY.CLASSCOUNT}
               mode={mode}
             />
           </>

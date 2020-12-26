@@ -23,10 +23,8 @@ export const InvestigatorComparison = ({investigatorCodes, year, mode}: {investi
   const dataType = determineDataTypeMode(mode)
 
     return (
-      <div className="App">
-        {/* <FormControl className={classes.formControl}></FormControl> */}
+      <div>
         {selectedInvestigators && selectedInvestigators[dataType] && (
-          <>
             <ArkLineChart
               input={selectedInvestigators[dataType][selectedYear]}
               ids={investigatorCodes}
@@ -34,7 +32,6 @@ export const InvestigatorComparison = ({investigatorCodes, year, mode}: {investi
               entity={ENTITY.INVCOMP}
               mode={mode}
             />
-          </>
         )}
       </div>
     );

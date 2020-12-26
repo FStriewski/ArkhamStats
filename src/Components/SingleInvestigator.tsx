@@ -47,7 +47,6 @@ export const SingleInvestigator = ({year, mode}: {year: number, mode: boolean}) 
 
 
     return (
-      // <div className="App">
       <>
         <FormControl className={classes.formControl}>
           <InputLabel id="demo-simple-select-label">Investigator</InputLabel>

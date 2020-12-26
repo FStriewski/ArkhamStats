@@ -96,11 +96,12 @@ export const Sidebar = (props) => {
                         <CustomCheckbox
                           checked={checked(inv.code)}
                           onChange={handleSelection}
-                          name={inv.code}
+                          name={inv.name}
                           disabled={!checked(inv.code) && error}
                         />
                       }
                       label={inv.name}
+                      key={inv.code}
                       style={{ color: lookupInvestigator(inv.code).color }}
                       className={classes.fcLabel}
                     />
