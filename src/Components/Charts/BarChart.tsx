@@ -13,7 +13,14 @@ import {
 import { releases } from "../../lookups/decks";
 import {lookupInvestigator, investigatorClassColor} from '../../lookups/investigatorList';
 
-export const InvestigatorBarChart = ({ input, ids, mode }: any) => {
+type Props = {
+  input: any;
+  ids: string[];
+  mode: boolean;
+  color: string;
+}
+
+export const InvestigatorBarChart = ({ input, ids, mode, color }: Props) => {
   return (
     <div style={{width: '100%', display: 'flex', justifyContent: 'center'}}>
       <BarChart

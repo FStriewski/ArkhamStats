@@ -1,6 +1,7 @@
 import React, {useEffect} from 'react';
 import {ClassLineChart}  from './Charts/LineChart';
 import {ClassBarChart}  from './Charts/BarChart';
+import {ClassAreaChart}  from './Charts/AreaChart';
 import {getCountsByClass} from '../utils/requests';
 import {APIResponse, CHARTTYPE} from '../types';
 import { makeStyles } from '@material-ui/core/styles';
@@ -74,14 +75,19 @@ export const TotalCount = ({year, mode, chartType}: Props) =>  {
           ? <ClassBarChart
               input={selectedClass[dataType][selectedYear]}
               ids={[investigatorClass]}
-              year={selectedYear}
               color={color}
               mode={mode}
               />
-              :  <ClassLineChart
+          :   chartType === CHARTTYPE.LINE
+          ? <ClassLineChart
               input={selectedClass[dataType][selectedYear]}
               ids={[investigatorClass]}
-              year={selectedYear}
+              color={color}
+              mode={mode}
+            />
+          : <ClassAreaChart
+              input={selectedClass[dataType][selectedYear]}
+              ids={[investigatorClass]}
               color={color}
               mode={mode}
             />

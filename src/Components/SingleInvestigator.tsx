@@ -1,6 +1,7 @@
 import React, {useEffect} from 'react';
 import {InvestigatorLineChart}  from './Charts/LineChart';
 import {InvestigatorBarChart}  from './Charts/BarChart';
+import {InvestigatorAreaChart}  from './Charts/AreaChart';
 import {getInvestigatorByDate} from '../utils/requests';
 import {APIResponse, CHARTTYPE} from '../types';
 import { makeStyles } from '@material-ui/core/styles';
@@ -51,8 +52,7 @@ export const SingleInvestigator = ({year, mode, chartType}: Props) =>  {
     setInvestigatorCode(event.target.value as string);
   };
     const dataType = determineDataTypeMode(mode)
-
-
+    const color = null;
     return (
       <>
         <FormControl className={classes.formControl}>
@@ -75,14 +75,22 @@ export const SingleInvestigator = ({year, mode, chartType}: Props) =>  {
           ? <InvestigatorBarChart
               input={selectedInvestigators[dataType][selectedYear]}
               ids={[investigatorCode]}
-              year={selectedYear}
               mode={mode}
+              color={color}
             />
-          :  <InvestigatorLineChart
+          :  chartType === CHARTTYPE.LINE
+          ? <InvestigatorLineChart
               input={selectedInvestigators[dataType][selectedYear]}
               ids={[investigatorCode]}
-              year={selectedYear}
               mode={mode}
+              color={color}
+
+            />
+          : <InvestigatorAreaChart
+              input={selectedInvestigators[dataType][selectedYear]}
+              ids={[investigatorCode]}
+              mode={mode}
+              color={color}
             />
         )}
       </>

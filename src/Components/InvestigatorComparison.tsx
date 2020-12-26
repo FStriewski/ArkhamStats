@@ -1,6 +1,7 @@
 import React, {useEffect} from 'react';
 import {InvestigatorLineChart}  from './Charts/LineChart';
 import {InvestigatorBarChart}  from './Charts/BarChart';
+import {InvestigatorAreaChart}  from './Charts/AreaChart';
 import { getInvestigatorComparisonByDate} from '../utils/requests';
 import {APIResponse, CHARTTYPE} from '../types';
 import {determineDataTypeMode} from '../types';
@@ -28,6 +29,7 @@ export const InvestigatorComparison = ({investigatorCodes, year, mode, chartType
 
   const selectedYear = year.toString();
   const dataType = determineDataTypeMode(mode)
+  const color = null;
 
     return (
       <div>
@@ -36,14 +38,21 @@ export const InvestigatorComparison = ({investigatorCodes, year, mode, chartType
           ? <InvestigatorBarChart
               input={selectedInvestigators[dataType][selectedYear]}
               ids={investigatorCodes}
-              year={selectedYear}
               mode={mode}
+              color={color}
             />
-          :  <InvestigatorLineChart
+          :  chartType === CHARTTYPE.LINE
+            ? <InvestigatorLineChart
               input={selectedInvestigators[dataType][selectedYear]}
               ids={investigatorCodes}
-              year={selectedYear}
               mode={mode}
+              color={color}
+            />
+            : <InvestigatorAreaChart
+              input={selectedInvestigators[dataType][selectedYear]}
+              ids={investigatorCodes}
+              mode={mode}
+              color={color}
             />
         )}
       </div>

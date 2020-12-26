@@ -1,7 +1,7 @@
 import React from "react";
 import {
-  LineChart,
-  Line,
+  AreaChart,
+  Area,
   Label,
   XAxis,
   YAxis,
@@ -20,15 +20,23 @@ type Props = {
   color: string;
 }
 
-export const InvestigatorLineChart = ({ input, ids, mode }: Props) => {
+export const InvestigatorAreaChart = ({ input, ids, mode, color }: Props) => {
   return (
     <div style={{width: '100%', display: 'flex', justifyContent: 'center'}}>
-      <LineChart
+      <AreaChart
         width={1000}
         height={500}
         data={input}
         margin={{ top: 25, right: 25, left: 25, bottom: 25 }}
         >
+        <defs>
+          { ids.map(id =>
+            <linearGradient id={id} x1="0" y1="0" x2="0" y2="1">
+          <stop offset="5%" stopColor={lookupInvestigator(id).color} stopOpacity={0.8}/>
+          <stop offset="95%" stopColor={lookupInvestigator(id).color} stopOpacity={0}/>
+        </linearGradient>
+          )}
+        </defs>
         <CartesianGrid strokeDasharray="1 1" />
         <XAxis dataKey="date" />
         {releases &&
@@ -46,7 +54,7 @@ export const InvestigatorLineChart = ({ input, ids, mode }: Props) => {
         <Tooltip />
         <Legend />
         {ids.length ===1  
-         ?   <Line
+         ?   <Area
               name={mode 
                     ? `${lookupInvestigator(ids[0]).name} [%]`
                     :`${lookupInvestigator(ids[0]).name}`
@@ -54,30 +62,40 @@ export const InvestigatorLineChart = ({ input, ids, mode }: Props) => {
               type="monotone"
               dataKey={ids[0]}
               stroke={lookupInvestigator(ids[0]).color}
+              fillOpacity={1} 
+              fill={`url(${ids[0]})`}
               />
-              :  ids.map((id: string) => <Line
+              :  ids.map((id: string) => <Area
               key={id}
               name={mode
                 ?`${lookupInvestigator(id).name} [%]`
                 :`${lookupInvestigator(id).name}`}
-              type="monotone"
-              dataKey={id}
-              stroke={lookupInvestigator(id).color}
-            />)
-        }
-      </LineChart>
+                type="monotone"
+                dataKey={id}
+                stroke={lookupInvestigator(id).color}
+                fillOpacity={1} 
+                fill={`url(${id})`}
+                />)
+              }
+      </AreaChart>
       </div>
   );
 };
-export const ClassLineChart = ({ input, ids, mode, color }: Props) => {
+export const ClassAreaChart = ({ input, ids, mode, color }: Props) => {
   return (
     <div style={{width: '100%', display: 'flex', justifyContent: 'center'}}>
-      <LineChart
+      <AreaChart
         width={1000}
         height={500}
         data={input}
         margin={{ top: 25, right: 25, left: 25, bottom: 25 }}
         >
+        <defs>
+        <linearGradient id={ids[0]} x1="0" y1="0" x2="0" y2="1">
+          <stop offset="5%" stopColor={color} stopOpacity={0.8}/>
+          <stop offset="95%" stopColor={color} stopOpacity={0}/>
+        </linearGradient>
+        </defs>
         <CartesianGrid strokeDasharray="1 1" />
         <XAxis dataKey="date" />
         {releases &&
@@ -94,13 +112,15 @@ export const ClassLineChart = ({ input, ids, mode, color }: Props) => {
         }
         <Tooltip />
         <Legend />
-          <Line
+          <Area
               name={ mode? `${ids[0]} [%]`:`${ids[0]}`}
               type="monotone"
               dataKey={ids[0]}
               stroke={color}
+              fillOpacity={1} 
+              fill={`url(${ids[0]})`}
               />
-      </LineChart>
+      </AreaChart>
       </div>
   );
 };
