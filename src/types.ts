@@ -67,4 +67,4 @@ export enum ENTITY {
     INVCOMP = 'INVCOMP'
 }
 
-export const determineDataTypeMode = (mode: MODE) =>  mode === MODE.ABSOLUTE ? 'datapoints_absolute' : 'datapoints_relative';
+export const determineDataTypeMode = (mode: boolean) =>  mode ? 'datapoints_relative': 'datapoints_absolute';

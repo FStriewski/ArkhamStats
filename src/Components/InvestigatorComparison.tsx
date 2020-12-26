@@ -2,10 +2,10 @@ import React, {useEffect} from 'react';
 import {ArkLineChart}  from './Charts/LineChart';
 import { getInvestigatorComparisonByDate} from '../utils/requests';
 import {APIResponse} from '../types';
-import {MODE, determineDataTypeMode} from '../types';
+import {determineDataTypeMode} from '../types';
 import {ENTITY} from '../types';
 
-export const InvestigatorComparison = ({investigatorCodes, year, mode}: {investigatorCodes: string[], year: number, mode: MODE}) =>  {
+export const InvestigatorComparison = ({investigatorCodes, year, mode}: {investigatorCodes: string[], year: number, mode: boolean}) =>  {
   const [selectedInvestigators, chooseInvestigators] = React.useState<APIResponse>();
 
   useEffect(

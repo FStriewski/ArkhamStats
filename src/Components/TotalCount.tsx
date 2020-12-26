@@ -8,7 +8,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import {investigatorClassColor} from '../lookups/investigatorList';
-import {MODE, determineDataTypeMode} from '../types';
+import { determineDataTypeMode} from '../types';
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export const TotalCount = ({year, mode}: {year: number, mode: MODE}) =>  {
+export const TotalCount = ({year, mode}: {year: number, mode: boolean}) =>  {
   const classes = useStyles();
   const [investigatorClass, setInvestigatorClass] = React.useState('all');
   const [selectedClass, chooseClass] = React.useState<APIResponse>();

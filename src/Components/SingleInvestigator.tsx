@@ -8,8 +8,9 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import {investigatorList} from '../lookups/investigatorList';
-import {MODE, determineDataTypeMode} from '../types';
 import {ENTITY} from '../types';
+import { determineDataTypeMode} from '../types';
+
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -21,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export const SingleInvestigator = ({year, mode}: {year: number, mode: MODE}) =>  {
+export const SingleInvestigator = ({year, mode}: {year: number, mode: boolean}) =>  {
   const classes = useStyles();
   const [investigatorCode, setInvestigatorCode] = React.useState('01004');
   const [selectedInvestigators, chooseInvestigators] = React.useState<APIResponse>();
