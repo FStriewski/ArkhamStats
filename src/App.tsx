@@ -7,11 +7,11 @@ import { TotalCount } from './Components/TotalCount';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
-import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import Paper from '@material-ui/core/Paper';
 import CssBaseline from "@material-ui/core/CssBaseline";
-import { ModeSwitch } from './Components/UI/ModeSwitch';
+import { Controls } from './Components/UI/Controls';
+import { CHARTTYPE } from './types';
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -57,6 +57,7 @@ export const App = () => {
   const [value, setValue] = React.useState(0); // Current Tab
   const [year, setYear] = React.useState(2020);
   const [mode, setRelMode] = React.useState<boolean>(true);
+  const [chartType, setChartType] = React.useState<CHARTTYPE>(CHARTTYPE.LINE);
 
   const setMode = (event: React.ChangeEvent<HTMLInputElement>, checked: boolean) => {
     setRelMode(!mode);
@@ -87,8 +88,8 @@ export const App = () => {
       </Paper>
       <TabPanel value={value} index={0}>
         <div className={classes.wrapper}>
-          <ModeSwitch mode={mode} setRelMode={setMode}/>
-          <SingleInvestigator year={year} mode={mode} />
+          <Controls mode={mode} setRelMode={setMode} chartType={chartType} setChartType={setChartType}/>
+          <SingleInvestigator year={year} mode={mode} chartType={chartType} />
           <YearSlider handleSetYear={handleSetYear} year={year} />
         </div>
       </TabPanel>
@@ -97,11 +98,12 @@ export const App = () => {
           <Sidebar>
             {(investigatorSelection: string[]) =>
             <>
-            <ModeSwitch mode={mode} setRelMode={setMode}/>
+            <Controls mode={mode} setRelMode={setMode} chartType={chartType} setChartType={setChartType}/>
             <InvestigatorComparison
             year={year}
             investigatorCodes={investigatorSelection}
             mode={mode}
+            chartType={chartType}
             />
           <YearSlider year={year} handleSetYear={handleSetYear} />
           </>}
@@ -110,8 +112,8 @@ export const App = () => {
       </TabPanel>
       <TabPanel value={value} index={2}>
         <div className={classes.wrapper}>
-          <ModeSwitch mode={mode} setRelMode={setMode}/>
-          <TotalCount year={year} mode={mode}/>
+          <Controls mode={mode} setRelMode={setMode} chartType={chartType} setChartType={setChartType}/>
+          <TotalCount year={year} mode={mode} chartType={chartType}/>
           <YearSlider handleSetYear={handleSetYear} year={year} />
         </div>
       </TabPanel>

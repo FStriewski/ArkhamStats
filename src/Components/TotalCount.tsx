@@ -1,7 +1,8 @@
 import React, {useEffect} from 'react';
 import {ClassLineChart}  from './Charts/LineChart';
+import {ClassBarChart}  from './Charts/BarChart';
 import {getCountsByClass} from '../utils/requests';
-import { APIResponse, ENTITY } from '../types';
+import {APIResponse, CHARTTYPE} from '../types';
 import { makeStyles } from '@material-ui/core/styles';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -20,7 +21,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export const TotalCount = ({year, mode}: {year: number, mode: boolean}) =>  {
+type Props = {
+  year: number;
+  mode: boolean;
+  chartType: CHARTTYPE;
+}
+
+export const TotalCount = ({year, mode, chartType}: Props) =>  {
   const classes = useStyles();
   const [investigatorClass, setInvestigatorClass] = React.useState('all');
   const [selectedClass, chooseClass] = React.useState<APIResponse>();
@@ -62,18 +69,22 @@ export const TotalCount = ({year, mode}: {year: number, mode: boolean}) =>  {
             ))}
           </Select>
         </FormControl>
-        Total decks per Month
-        <br />
         {selectedClass && selectedClass[dataType] && (
-          <>
-            <ClassLineChart
+          chartType === CHARTTYPE.BAR
+          ? <ClassBarChart
+              input={selectedClass[dataType][selectedYear]}
+              ids={[investigatorClass]}
+              year={selectedYear}
+              color={color}
+              mode={mode}
+              />
+              :  <ClassLineChart
               input={selectedClass[dataType][selectedYear]}
               ids={[investigatorClass]}
               year={selectedYear}
               color={color}
               mode={mode}
             />
-          </>
         )}
       </div>
     );

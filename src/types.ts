@@ -74,5 +74,10 @@ export enum ENTITY {
     SINGLEINV = 'SINGLEINV',
     INVCOMP = 'INVCOMP'
 }
+export enum CHARTTYPE {
+    BAR = 'BAR',
+    LINE = 'LINE',
+    AREA = 'AREA'
+}
 
 export const determineDataTypeMode = (mode: boolean) =>  mode ? 'datapoints_relative': 'datapoints_absolute';

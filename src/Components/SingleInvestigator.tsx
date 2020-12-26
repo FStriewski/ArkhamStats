@@ -1,14 +1,14 @@
 import React, {useEffect} from 'react';
 import {InvestigatorLineChart}  from './Charts/LineChart';
+import {InvestigatorBarChart}  from './Charts/BarChart';
 import {getInvestigatorByDate} from '../utils/requests';
-import { APIResponse } from '../types';
+import {APIResponse, CHARTTYPE} from '../types';
 import { makeStyles } from '@material-ui/core/styles';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import {investigatorList} from '../lookups/investigatorList';
-import {ENTITY} from '../types';
 import { determineDataTypeMode} from '../types';
 
 
@@ -22,7 +22,14 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export const SingleInvestigator = ({year, mode}: {year: number, mode: boolean}) =>  {
+type Props = {
+  year: number;
+  mode: boolean;
+  chartType: CHARTTYPE;
+}
+
+
+export const SingleInvestigator = ({year, mode, chartType}: Props) =>  {
   const classes = useStyles();
   const [investigatorCode, setInvestigatorCode] = React.useState('01004');
   const [selectedInvestigators, chooseInvestigators] = React.useState<APIResponse>();
@@ -64,14 +71,19 @@ export const SingleInvestigator = ({year, mode}: {year: number, mode: boolean}) 
           </Select>
         </FormControl>
         {selectedInvestigators && selectedInvestigators[dataType] && (
-          <>
-            <InvestigatorLineChart
+          chartType === CHARTTYPE.BAR
+          ? <InvestigatorBarChart
               input={selectedInvestigators[dataType][selectedYear]}
               ids={[investigatorCode]}
               year={selectedYear}
               mode={mode}
             />
-          </>
+          :  <InvestigatorLineChart
+              input={selectedInvestigators[dataType][selectedYear]}
+              ids={[investigatorCode]}
+              year={selectedYear}
+              mode={mode}
+            />
         )}
       </>
     );
