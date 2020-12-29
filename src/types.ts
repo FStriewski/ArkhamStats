@@ -64,9 +64,9 @@ export type LineHistogram = {
     datasets: Set[];
 }
 
-export enum MODE {
-    ABSOLUTE = "ABSOLUTE",
-    RELATIVE = "RELATIVE",
+export enum NUMMODE {
+    SUM = "SUM",
+    DIST = "DIST",
 }
 
 export enum ENTITY {
@@ -80,4 +80,4 @@ export enum CHARTTYPE {
     AREA = 'AREA'
 }
 
-export const determineDataTypeMode = (mode: boolean) =>  mode ? 'datapoints_relative': 'datapoints_absolute';
+export const determineDataTypeMode = (dataMode: boolean) =>  dataMode ? 'datapoints_relative': 'datapoints_absolute';

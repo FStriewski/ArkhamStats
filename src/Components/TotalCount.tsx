@@ -2,8 +2,8 @@ import React, {useEffect} from 'react';
 import {ClassLineChart}  from './Charts/LineChart';
 import {ClassBarChart}  from './Charts/BarChart';
 import {ClassAreaChart}  from './Charts/AreaChart';
-import {getCountsByClass} from '../utils/requests';
-import {APIResponse, CHARTTYPE} from '../types';
+import {getClassByDistribution} from '../utils/requests';
+import {APIResponse, CHARTTYPE, NUMMODE} from '../types';
 import { makeStyles } from '@material-ui/core/styles';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -24,11 +24,12 @@ const useStyles = makeStyles((theme) => ({
 
 type Props = {
   year: number;
-  mode: boolean;
+  dataMode: boolean;
   chartType: CHARTTYPE;
+  numMode: NUMMODE;
 }
 
-export const TotalCount = ({year, mode, chartType}: Props) =>  {
+export const TotalCount = ({year, dataMode, chartType, numMode}: Props) =>  {
   const classes = useStyles();
   const [investigatorClass, setInvestigatorClass] = React.useState('all');
   const [selectedClass, chooseClass] = React.useState<APIResponse>();
@@ -38,7 +39,7 @@ export const TotalCount = ({year, mode, chartType}: Props) =>  {
   useEffect(
          () => {
           const fetchData = async() => { 
-            const result: APIResponse = await getCountsByClass(investigatorClass)
+            const result: APIResponse = await getClassByDistribution(investigatorClass)
             chooseClass(result)
          }
          fetchData()
@@ -50,7 +51,7 @@ export const TotalCount = ({year, mode, chartType}: Props) =>  {
     setInvestigatorClass(event.target.value as string);
   };
   const investigatorClassList = Object.keys(investigatorClassColor).map(entry => ({name: entry, color: investigatorClassColor[entry]}))
-  const dataType = determineDataTypeMode(mode)
+  const dataType = determineDataTypeMode(dataMode)
   const color = investigatorClass === 'all' ? '#000000' : investigatorClassColor[investigatorClass]
 
     return (
@@ -76,20 +77,23 @@ export const TotalCount = ({year, mode, chartType}: Props) =>  {
               input={selectedClass[dataType][selectedYear]}
               ids={[investigatorClass]}
               color={color}
-              mode={mode}
+              dataMode={dataMode}
+              numMode={numMode}
               />
-          :   chartType === CHARTTYPE.LINE
-          ? <ClassLineChart
+              :   chartType === CHARTTYPE.LINE
+              ? <ClassLineChart
               input={selectedClass[dataType][selectedYear]}
               ids={[investigatorClass]}
               color={color}
-              mode={mode}
-            />
-          : <ClassAreaChart
+              dataMode={dataMode}
+              numMode={numMode}
+              />
+              : <ClassAreaChart
               input={selectedClass[dataType][selectedYear]}
               ids={[investigatorClass]}
               color={color}
-              mode={mode}
+              dataMode={dataMode}
+              numMode={numMode}
             />
         )}
       </div>

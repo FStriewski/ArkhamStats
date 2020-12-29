@@ -49,7 +49,7 @@ const useStyles = makeStyles((theme: Theme) =>
 export const Sidebar = (props) => {
   const classes = useStyles();
 
-  const [investigatorSelection, setSelection] = React.useState<string[]>([]);
+  const [investigatorSelection, setSelection] = React.useState<string[]>(['01004']);
 
   const handleSelection = (event: React.ChangeEvent<HTMLInputElement>) => {
     const investigator = event.target.id;

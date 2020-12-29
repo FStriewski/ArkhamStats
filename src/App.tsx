@@ -11,7 +11,7 @@ import Box from '@material-ui/core/Box';
 import Paper from '@material-ui/core/Paper';
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { Controls } from './Components/UI/Controls';
-import { CHARTTYPE } from './types';
+import { CHARTTYPE, NUMMODE } from './types';
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -56,11 +56,11 @@ export const App = () => {
   const classes = useStyles();
   const [value, setValue] = React.useState(0); // Current Tab
   const [year, setYear] = React.useState(2020);
-  const [mode, setRelMode] = React.useState<boolean>(true);
+  const [dataMode, setRelMode] = React.useState<boolean>(true);
   const [chartType, setChartType] = React.useState<CHARTTYPE>(CHARTTYPE.LINE);
 
   const setMode = (event: React.ChangeEvent<HTMLInputElement>, checked: boolean) => {
-    setRelMode(!mode);
+    setRelMode(!dataMode);
   };
   const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
     setValue(newValue);
@@ -81,15 +81,16 @@ export const App = () => {
           textColor="primary"
           centered
         >
-          <Tab label="Scope" />
+          <Tab label="Single Investigator" />
           <Tab label="Comparison" />
-          <Tab label="Totals" />
+          <Tab label="Class Totals" />
+          <Tab label="Sums" />
         </Tabs>
       </Paper>
       <TabPanel value={value} index={0}>
         <div className={classes.wrapper}>
-          <Controls mode={mode} setRelMode={setMode} chartType={chartType} setChartType={setChartType}/>
-          <SingleInvestigator year={year} mode={mode} chartType={chartType} />
+          <Controls dataMode={dataMode} setRelMode={setMode} chartType={chartType} setChartType={setChartType}/>
+          <SingleInvestigator year={year} dataMode={dataMode} chartType={chartType} numMode={NUMMODE.DIST} />
           <YearSlider handleSetYear={handleSetYear} year={year} />
         </div>
       </TabPanel>
@@ -98,12 +99,13 @@ export const App = () => {
           <Sidebar>
             {(investigatorSelection: string[]) =>
             <>
-            <Controls mode={mode} setRelMode={setMode} chartType={chartType} setChartType={setChartType}/>
+            <Controls dataMode={dataMode} setRelMode={setMode} chartType={chartType} setChartType={setChartType}/>
             <InvestigatorComparison
             year={year}
             investigatorCodes={investigatorSelection}
-            mode={mode}
+            dataMode={dataMode}
             chartType={chartType}
+            numMode={NUMMODE.DIST}
             />
           <YearSlider year={year} handleSetYear={handleSetYear} />
           </>}
@@ -112,8 +114,15 @@ export const App = () => {
       </TabPanel>
       <TabPanel value={value} index={2}>
         <div className={classes.wrapper}>
-          <Controls mode={mode} setRelMode={setMode} chartType={chartType} setChartType={setChartType}/>
-          <TotalCount year={year} mode={mode} chartType={chartType}/>
+          <Controls dataMode={dataMode} setRelMode={setMode} chartType={chartType} setChartType={setChartType}/>
+          <TotalCount year={year} dataMode={dataMode} chartType={chartType} numMode={NUMMODE.DIST}/>
+          <YearSlider handleSetYear={handleSetYear} year={year} />
+        </div>
+      </TabPanel>
+      <TabPanel value={value} index={3}>
+        <div className={classes.wrapper}>
+          <Controls dataMode={dataMode} setRelMode={setMode} chartType={chartType} setChartType={setChartType}/>
+            <SingleInvestigator year={year} dataMode={dataMode} chartType={chartType} numMode={NUMMODE.SUM}/>
           <YearSlider handleSetYear={handleSetYear} year={year} />
         </div>
       </TabPanel>

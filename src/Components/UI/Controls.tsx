@@ -23,13 +23,13 @@ const useStyles = makeStyles(() =>
   })
 );
 type Props = {
-  mode: boolean; 
+  dataMode: boolean; 
   setRelMode: (event: React.ChangeEvent<HTMLInputElement>, checked: boolean) => void;
   chartType:  CHARTTYPE;
   setChartType: (type: CHARTTYPE) => void;
 }
 
-export const Controls = ({mode, setRelMode, chartType, setChartType}: Props) => {
+export const Controls = ({dataMode, setRelMode, chartType, setChartType}: Props) => {
   const classes = useStyles();
 
   return (
@@ -41,12 +41,12 @@ export const Controls = ({mode, setRelMode, chartType, setChartType}: Props) => 
         <Button className={classes.button} size='small'  variant={chartType === CHARTTYPE.LINE ? "contained" : "outlined"} color="primary" onClick={()=> setChartType(CHARTTYPE.LINE)}>
         Line
         </Button>
-        <Button className={classes.button} size='small'  variant={chartType === CHARTTYPE.AREA ? "contained" : "outlined"} color="primary" onClick={()=> setChartType(CHARTTYPE.AREA)}>
+        <Button className={classes.button} size='small' variant={chartType === CHARTTYPE.AREA ? "contained" : "outlined"} color="primary" onClick={()=> setChartType(CHARTTYPE.AREA)}>
         Area
         </Button>
       </div>
       <div>
-      <ModeSwitch mode={mode} setRelMode={setRelMode} />
+      <ModeSwitch dataMode={dataMode} setRelMode={setRelMode} />
       </div>
     </Paper>
   );

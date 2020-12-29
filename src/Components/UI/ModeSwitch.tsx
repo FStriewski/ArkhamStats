@@ -11,9 +11,9 @@ const useStyles = makeStyles(() => ({
     },
 }));
 
-type Props = {mode: boolean; setRelMode: (event: React.ChangeEvent<HTMLInputElement>, checked: boolean) => void;}
+type Props = {dataMode: boolean; setRelMode: (event: React.ChangeEvent<HTMLInputElement>, checked: boolean) => void;}
 
-export const ModeSwitch = ({mode, setRelMode}: Props) => {
+export const ModeSwitch = ({dataMode, setRelMode}: Props) => {
   const classes = useStyles();
 
   return (
@@ -21,9 +21,9 @@ export const ModeSwitch = ({mode, setRelMode}: Props) => {
       <Grid item>Absolute</Grid>
       <Grid item>
         <Switch
-          checked={mode}
+          checked={dataMode}
           onChange={setRelMode}
-          name="mode"
+          name="dataMode"
           color="primary"
       />
       </Grid>

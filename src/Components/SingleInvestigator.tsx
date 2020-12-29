@@ -2,7 +2,7 @@ import React, {useEffect} from 'react';
 import {InvestigatorLineChart}  from './Charts/LineChart';
 import {InvestigatorBarChart}  from './Charts/BarChart';
 import {InvestigatorAreaChart}  from './Charts/AreaChart';
-import {getInvestigatorByDate} from '../utils/requests';
+import {getInvestigatorDistributionByDate, getInvestigatorSumByDate} from '../utils/requests';
 import {APIResponse, CHARTTYPE} from '../types';
 import { makeStyles } from '@material-ui/core/styles';
 import InputLabel from '@material-ui/core/InputLabel';
@@ -10,7 +10,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import {investigatorList} from '../lookups/investigatorList';
-import { determineDataTypeMode} from '../types';
+import { determineDataTypeMode, NUMMODE} from '../types';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -25,12 +25,13 @@ const useStyles = makeStyles((theme) => ({
 
 type Props = {
   year: number;
-  mode: boolean;
+  dataMode: boolean;
   chartType: CHARTTYPE;
+  numMode: NUMMODE;
 }
 
 
-export const SingleInvestigator = ({year, mode, chartType}: Props) =>  {
+export const SingleInvestigator = ({year, dataMode, chartType, numMode}: Props) =>  {
   const classes = useStyles();
   const [investigatorCode, setInvestigatorCode] = React.useState('01004');
   const [selectedInvestigators, chooseInvestigators] = React.useState<APIResponse>();
@@ -40,7 +41,9 @@ export const SingleInvestigator = ({year, mode, chartType}: Props) =>  {
   useEffect(
          () => {
           const fetchData = async() => { 
-            const result: APIResponse = await getInvestigatorByDate(investigatorCode)
+            const result: APIResponse = numMode === NUMMODE.DIST 
+            ?  await getInvestigatorDistributionByDate(investigatorCode) 
+            : await getInvestigatorSumByDate(investigatorCode) 
             chooseInvestigators(result)
          }
          fetchData()
@@ -51,7 +54,7 @@ export const SingleInvestigator = ({year, mode, chartType}: Props) =>  {
   const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
     setInvestigatorCode(event.target.value as string);
   };
-    const dataType = determineDataTypeMode(mode)
+    const dataType = determineDataTypeMode(dataMode)
     const color = null;
     return (
       <>
@@ -75,22 +78,25 @@ export const SingleInvestigator = ({year, mode, chartType}: Props) =>  {
           ? <InvestigatorBarChart
               input={selectedInvestigators[dataType][selectedYear]}
               ids={[investigatorCode]}
-              mode={mode}
+              dataMode={dataMode}
               color={color}
-            />
-          :  chartType === CHARTTYPE.LINE
-          ? <InvestigatorLineChart
+              numMode={numMode}
+              />
+              :  chartType === CHARTTYPE.LINE
+              ? <InvestigatorLineChart
               input={selectedInvestigators[dataType][selectedYear]}
               ids={[investigatorCode]}
-              mode={mode}
+              dataMode={dataMode}
               color={color}
-
-            />
-          : <InvestigatorAreaChart
+              numMode={numMode}
+              
+              />
+              : <InvestigatorAreaChart
               input={selectedInvestigators[dataType][selectedYear]}
               ids={[investigatorCode]}
-              mode={mode}
+              dataMode={dataMode}
               color={color}
+              numMode={numMode}
             />
         )}
       </>
