@@ -2,7 +2,7 @@ import React, {useEffect} from 'react';
 import {InvestigatorLineChart}  from './Charts/LineChart';
 import {InvestigatorBarChart}  from './Charts/BarChart';
 import {InvestigatorAreaChart}  from './Charts/AreaChart';
-import { getMultipleInvestigatorDistributionByDate} from '../utils/requests';
+import { getMultipleInvestigatorDistributionByDate, getMultipleInvestigatorSumByDate} from '../utils/requests';
 import {determineDataTypeMode, APIResponse, CHARTTYPE, NUMMODE} from '../types';
 
 type Props = {
@@ -19,7 +19,9 @@ export const InvestigatorComparison = ({investigatorCodes, year, dataMode, chart
   useEffect(
          () => {
           const fetchData = async() => { 
-            const result: APIResponse = await getMultipleInvestigatorDistributionByDate(investigatorCodes)
+            const result: APIResponse = numMode === NUMMODE.DIST 
+            ? await getMultipleInvestigatorDistributionByDate(investigatorCodes)
+            : await getMultipleInvestigatorSumByDate(investigatorCodes)
             chooseInvestigators(result)
          }
          fetchData()

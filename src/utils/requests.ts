@@ -42,6 +42,23 @@ export const getMultipleInvestigatorDistributionByDate = async (icodes: string[]
     )
     return result
 }
+export const getMultipleInvestigatorSumByDate = async (icodes: string[]) => {
+    const params = {}
+    icodes.forEach((code, index) => params[`i${index}`] = code);
+    console.log(params)
+
+    const queryString =  new URLSearchParams(params)
+    const route = `/investigators/sum?${queryString}`
+    const result = await fetch(route, {
+        method: 'GET',
+        mode: 'no-cors',
+        cache: 'no-cache',
+        referrerPolicy: 'same-origin'
+    }).then(
+        response => response.json()
+    )
+    return result
+}
 
 export const getClassByDistribution = async (iclass: string) => {
     const route = `/class/dist/${iclass}`

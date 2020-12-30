@@ -25,11 +25,13 @@ type Props = {
 const setYAxis = (dataMode, numMode) => {
   if(numMode === NUMMODE.DIST){
     return  dataMode
-          ? <YAxis domain={[0, (dataMax) => Math.max(20, dataMax)]} label={{ value: '[%] of all decks', angle: -90, position: 'center', fontSize: '20px' }} /> // RELATIVE
-          : <YAxis domain={[0, (dataMax) => Math.max(100, dataMax)]} label={{ value: 'Number of decks', angle: -90,  position: 'center', fontSize: '20px'  }}  /> // ABSOLUTE
+    ? <YAxis domain={[0, (dataMax) => Math.max(20, dataMax)]} label={{ value: '[%] of all decks', angle: -90, position: 'center', fontSize: '20px' }} /> // RELATIVE
+    : <YAxis domain={[0, (dataMax) => Math.max(100, dataMax)]} label={{ value: 'Number of decks', angle: -90,  position: 'center', fontSize: '20px'  }}  /> // ABSOLUTE
   }
   if(numMode === NUMMODE.SUM){
-      return <YAxis domain={[0, (dataMax) => Math.max(dataMax)]} label={{ value: 'Running sum of decks', angle: -90, position: 'center', fontSize: '20px' }} /> // RELATIVE
+    return  dataMode
+      ? <YAxis domain={[0, (dataMax) => Math.round((dataMax + Number.EPSILON) * 100) / 100]}  label={{ value: 'Running sum of decks', angle: -90, position: 'center', fontSize: '20px' }} /> // RELATIVE
+      : <YAxis domain={[0, (dataMax) => Math.max(dataMax)]} label={{ value: 'Running sum of decks', angle: -90, position: 'center', fontSize: '20px' }} /> // RELATIVE
   }
 }
 

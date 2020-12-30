@@ -52,6 +52,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
+
 export const App = () => {
   const classes = useStyles();
   const [value, setValue] = React.useState(0); // Current Tab
@@ -69,7 +70,7 @@ export const App = () => {
    const handleSetYear = (event: any, newValue: number | number[]) => {
      setYear(newValue as number);
    };
-
+   
   return (
     <div className={classes.root}>
       <CssBaseline />
@@ -85,9 +86,10 @@ export const App = () => {
           <Tab label="Comparison" />
           <Tab label="Class Totals" />
           <Tab label="Sums" />
+          <Tab label="Sums Multiple" />
         </Tabs>
       </Paper>
-      <TabPanel value={value} index={0}>
+      <TabPanel value={value} index={0} >
         <div className={classes.wrapper}>
           <Controls dataMode={dataMode} setRelMode={setMode} chartType={chartType} setChartType={setChartType}/>
           <SingleInvestigator year={year} dataMode={dataMode} chartType={chartType} numMode={NUMMODE.DIST} />
@@ -124,6 +126,18 @@ export const App = () => {
           <Controls dataMode={dataMode} setRelMode={setMode} chartType={chartType} setChartType={setChartType}/>
             <SingleInvestigator year={year} dataMode={dataMode} chartType={chartType} numMode={NUMMODE.SUM}/>
           <YearSlider handleSetYear={handleSetYear} year={year} />
+        </div>
+      </TabPanel>
+      <TabPanel value={value} index={4}>
+        <div className={classes.wrapper}>
+            <Sidebar>
+            {(investigatorSelection: string[]) =>
+            <>
+          <Controls dataMode={dataMode} setRelMode={setMode} chartType={chartType} setChartType={setChartType}/>
+            <InvestigatorComparison year={year} investigatorCodes={investigatorSelection} dataMode={dataMode} chartType={chartType} numMode={NUMMODE.SUM}/>
+          <YearSlider handleSetYear={handleSetYear} year={year} />
+                    </>}
+          </Sidebar>
         </div>
       </TabPanel>
     </div>
