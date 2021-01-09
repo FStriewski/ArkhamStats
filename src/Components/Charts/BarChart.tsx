@@ -13,6 +13,7 @@ import {
 import { releases } from "../../lookups/decks";
 import {lookupInvestigator, investigatorClassColor} from '../../lookups/investigatorList';
 import { NUMMODE } from "../../types";
+import {setYAxis, setClassYAxis} from './Shared';
 
 type Props = {
   input: any;
@@ -20,19 +21,6 @@ type Props = {
   dataMode: boolean;
   color: string;
   numMode: NUMMODE;
-}
-
-const setYAxis = (dataMode, numMode) => {
-  if(numMode === NUMMODE.DIST){
-    return  dataMode
-    ? <YAxis domain={[0, (dataMax) => Math.max(20, dataMax)]} label={{ value: '[%] of all decks', angle: -90, position: 'center', fontSize: '20px' }} /> // RELATIVE
-    : <YAxis domain={[0, (dataMax) => Math.max(100, dataMax)]} label={{ value: 'Number of decks', angle: -90,  position: 'center', fontSize: '20px'  }}  /> // ABSOLUTE
-  }
-  if(numMode === NUMMODE.SUM){
-    return  dataMode
-      ? <YAxis domain={[0, (dataMax) => Math.round((dataMax + Number.EPSILON) * 100) / 100]}  label={{ value: 'Running sum of decks', angle: -90, position: 'center', fontSize: '20px' }} /> // RELATIVE
-      : <YAxis domain={[0, (dataMax) => Math.max(dataMax)]} label={{ value: 'Running sum of decks', angle: -90, position: 'center', fontSize: '20px' }} /> // RELATIVE
-  }
 }
 
 export const InvestigatorBarChart = ({ input, ids, dataMode, numMode, color }: Props) => {
@@ -80,7 +68,8 @@ export const InvestigatorBarChart = ({ input, ids, dataMode, numMode, color }: P
       </div>
   );
 };
-export const ClassBarChart = ({ input, ids, dataMode, color }: any) => {
+
+export const ClassBarChart = ({ input, ids, dataMode, color, numMode }: Props) => {
   return (
     <div style={{width: '100%', display: 'flex', justifyContent: 'center'}}>
       <BarChart
@@ -99,10 +88,7 @@ export const ClassBarChart = ({ input, ids, dataMode, color }: any) => {
             </ReferenceLine>
             </span>
           ))}
-        { dataMode
-          ? <YAxis domain={[0, (dataMax) => Math.max(45, dataMax)]} label={{ value: '[%] of all classes', angle: -90, position: 'center', fontSize: '16px', stroke: '#d5000' }}/>// RELATIVE
-          : <YAxis domain={[0, (dataMax) => Math.max(300, dataMax)]} label={{ value: 'Number of decks in this class', angle: -90,  position: 'center', fontSize: '20px'  }}  /> // ABSOLUTE
-        }
+        {setClassYAxis(dataMode, numMode)}
         <Tooltip />
         <Legend />
           <Bar

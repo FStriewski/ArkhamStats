@@ -2,7 +2,7 @@ import React, {useEffect} from 'react';
 import {ClassLineChart}  from './Charts/LineChart';
 import {ClassBarChart}  from './Charts/BarChart';
 import {ClassAreaChart}  from './Charts/AreaChart';
-import {getClassByDistribution} from '../utils/requests';
+import {getClassDistributionByDate, getClassSumByDate} from '../utils/requests';
 import {APIResponse, CHARTTYPE, NUMMODE} from '../types';
 import { makeStyles } from '@material-ui/core/styles';
 import InputLabel from '@material-ui/core/InputLabel';
@@ -39,7 +39,9 @@ export const TotalCount = ({year, dataMode, chartType, numMode}: Props) =>  {
   useEffect(
          () => {
           const fetchData = async() => { 
-            const result: APIResponse = await getClassByDistribution(investigatorClass)
+            const result: APIResponse = numMode === NUMMODE.DIST 
+            ? await getClassDistributionByDate(investigatorClass)
+            : await getClassSumByDate(investigatorClass)
             chooseClass(result)
          }
          fetchData()

@@ -60,8 +60,21 @@ export const getMultipleInvestigatorSumByDate = async (icodes: string[]) => {
     return result
 }
 
-export const getClassByDistribution = async (iclass: string) => {
+export const getClassDistributionByDate = async (iclass: string) => {
     const route = `/class/dist/${iclass}`
+    const result = await fetch(route, {
+        method: 'GET',
+        mode: 'no-cors',
+        cache: 'no-cache',
+        referrerPolicy: 'same-origin'
+    }).then(
+        response => response.json()
+    )
+    return result
+}
+
+export const getClassSumByDate = async (iclass: string) => {
+    const route = `/class/sum/${iclass}`
     const result = await fetch(route, {
         method: 'GET',
         mode: 'no-cors',
