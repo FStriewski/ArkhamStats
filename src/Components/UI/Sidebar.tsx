@@ -1,55 +1,59 @@
-import React from "react";
-import { createStyles, Theme, makeStyles } from "@material-ui/core/styles";
-import Drawer from "@material-ui/core/Drawer";
-import FormControl from "@material-ui/core/FormControl";
-import FormGroup from "@material-ui/core/FormGroup";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import FormHelperText from "@material-ui/core/FormHelperText";
-import {CustomCheckbox} from '../UI/Checkbox';
-import { investigatorList, lookupInvestigator } from "../../lookups/investigatorList";
-import { InvestigatorListItem } from "../../types";
-import Slide from "@material-ui/core/Slide";
+import React from 'react';
+import { createStyles, Theme, makeStyles } from '@material-ui/core/styles';
+import Drawer from '@material-ui/core/Drawer';
+import FormControl from '@material-ui/core/FormControl';
+import FormGroup from '@material-ui/core/FormGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import { CustomCheckbox } from '../UI/Checkbox';
+import {
+  investigatorList,
+  lookupInvestigator
+} from '../../lookups/investigatorList';
+import { InvestigatorListItem } from '../../types';
+import Slide from '@material-ui/core/Slide';
 
-const drawerWidth = 200;
+const drawerWidth = 220;
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      display: "flex",
+      display: 'flex'
     },
     appBar: {
-      zIndex: theme.zIndex.drawer + 1,
+      zIndex: theme.zIndex.drawer + 1
     },
     drawer: {
       width: drawerWidth,
-      flexShrink: 0,
+      flexShrink: 0
     },
     drawerPaper: {
       width: drawerWidth,
-      marginTop: "50px",
+      marginTop: '140px'
     },
     drawerContainer: {
-      overflow: "auto",
+      overflow: 'auto'
     },
     fcLabel: {
-      color: "#6C6A6A",
-      fontSize: "10px",
+      color: '#6C6A6A',
+      fontSize: '10px'
     },
     formControl: {
-      margin: theme.spacing(2),
+      margin: theme.spacing(2)
     },
     content: {
       flexGrow: 1,
-      padding: theme.spacing(1),
-    },
+      padding: theme.spacing(1)
+    }
   })
 );
-
 
 export const Sidebar = (props) => {
   const classes = useStyles();
 
-  const [investigatorSelection, setSelection] = React.useState<string[]>(['01004']);
+  const [investigatorSelection, setSelection] = React.useState<string[]>([
+    '01004'
+  ]);
 
   const handleSelection = (event: React.ChangeEvent<HTMLInputElement>) => {
     const investigator = event.target.id;
@@ -68,19 +72,19 @@ export const Sidebar = (props) => {
 
   return (
     <div className={classes.root}>
-      <Slide direction="right" in={true} mountOnEnter unmountOnExit>
+      <Slide direction='right' in mountOnEnter unmountOnExit>
         <Drawer
           className={classes.drawer}
-          variant="permanent"
+          variant='permanent'
           classes={{
-            paper: classes.drawerPaper,
+            paper: classes.drawerPaper
           }}
         >
           <div className={classes.drawerContainer}>
             <FormControl
               required
               error={error}
-              component="fieldset"
+              component='fieldset'
               className={classes.formControl}
             >
               {/* <FormLabel component="legend">Pick two</FormLabel> */}
@@ -113,7 +117,7 @@ export const Sidebar = (props) => {
         </Drawer>
       </Slide>
       <main className={classes.content}>
-      {props.children(investigatorSelection)}
+        {props.children(investigatorSelection)}
       </main>
     </div>
   );

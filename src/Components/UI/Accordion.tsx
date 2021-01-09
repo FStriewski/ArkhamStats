@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   test: {},
   tabLikeButton: {
-    padding: theme.spacing(2),
+    padding: theme.spacing(1),
     border: '1px solid #c0c0c0',
     flex: 1
   }

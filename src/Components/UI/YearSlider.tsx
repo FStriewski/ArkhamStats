@@ -1,7 +1,7 @@
-import React from "react";
-import Paper from "@material-ui/core/Paper";
-import Slider from "@material-ui/core/Slider";
-import { createStyles, Theme, makeStyles } from "@material-ui/core/styles";
+import React from 'react';
+import Paper from '@material-ui/core/Paper';
+import Slider from '@material-ui/core/Slider';
+import { createStyles, Theme, makeStyles } from '@material-ui/core/styles';
 
 type YearSliderProps = {
   year: number;
@@ -13,17 +13,17 @@ const useStyles = makeStyles((theme: Theme) =>
     paper: {
       width: '400px',
       // maxWidth: "400px",
-      display: "flex",
-      justifyContent: "center",
+      display: 'flex',
+      justifyContent: 'center',
       position: 'absolute',
       bottom: '20px',
-      right: '40px',
+      right: '40px'
     },
     slider: {
-      maxWidth: "350px",
-      marginBottom: "30px",
+      maxWidth: '350px',
+      marginBottom: '30px',
       position: 'relative'
-    },
+    }
   })
 );
 
@@ -33,28 +33,28 @@ export const YearSlider = ({ handleSetYear, year }: YearSliderProps) => {
   const marks = [
     {
       value: 2016,
-      label: "2016",
+      label: '2016'
     },
     {
       value: 2017,
-      label: "2017",
+      label: '2017'
     },
     {
       value: 2018,
-      label: "2018",
+      label: '2018'
     },
     {
       value: 2019,
-      label: "2019",
+      label: '2019'
     },
     {
       value: 2020,
-      label: "2020",
+      label: '2020'
     },
     {
       value: 2021,
-      label: "2021",
-    },
+      label: '2021'
+    }
   ];
   return (
     <Paper className={classes.paper}>
