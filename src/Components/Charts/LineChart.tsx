@@ -36,8 +36,8 @@ export const InvestigatorLineChart = ({
   return (
     <div style={{ width: '100%', display: 'flex' }}>
       <LineChart
-        width={1000}
-        height={500}
+        width={800}
+        height={400}
         data={input}
         margin={{ top: 25, right: 25, left: 25, bottom: 25 }}
       >
@@ -95,8 +95,8 @@ export const ClassLineChart = ({
   return (
     <div style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
       <LineChart
-        width={1000}
-        height={500}
+        width={800}
+        height={400}
         data={input}
         margin={{ top: 25, right: 25, left: 25, bottom: 25 }}
       >

@@ -36,8 +36,8 @@ export const InvestigatorBarChart = ({
   return (
     <div style={{ width: '100%', display: 'flex' }}>
       <BarChart
-        width={1000}
-        height={500}
+        width={800}
+        height={400}
         data={input}
         margin={{ top: 25, right: 25, left: 25, bottom: 25 }}
       >

@@ -64,9 +64,8 @@ const useStyles = makeStyles((theme: Theme) => ({
     bottom: 0
   },
   chartBundle: {
-    width: '1000px',
-    justify: 'right',
-    float: 'right'
+    width: '800px',
+    justify: 'right'
   },
   formControl: {
     margin: theme.spacing(1),
@@ -94,15 +93,12 @@ export const App = () => {
     setRelMode(!dataMode);
   };
   const handleChange1 = (event: React.ChangeEvent, newTab: number) => {
-    console.log(newTab);
     setTab1(newTab);
   };
   const switchToTotalTab = (event: React.ChangeEvent, newTab: number) => {
-    console.log(newTab);
     setTotalTab(newTab);
   };
   const handleChange3 = (event: React.ChangeEvent, newTab: number) => {
-    console.log(newTab);
     setTab3(newTab);
   };
 
@@ -155,7 +151,7 @@ export const App = () => {
           </TabPanel>
           <TabPanel value={tab1} index={1}>
             <div className={classes.viewWrapper}>
-              <Sidebar>
+              <InvestigatorPicker pickerType={PICKERSELECTION.MULTI}>
                 {(investigatorSelection: string[]) => (
                   <div className={classes.chartBundle}>
                     <Controls
@@ -175,7 +171,7 @@ export const App = () => {
                     <YearSlider year={year} handleSetYear={handleSetYear} />
                   </div>
                 )}
-              </Sidebar>
+              </InvestigatorPicker>
             </div>
           </TabPanel>
         </>

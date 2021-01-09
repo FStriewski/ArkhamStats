@@ -39,8 +39,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   chartBundle: {
     width: '1000px',
-    justify: 'right',
-    float: 'right'
+    justify: 'right'
   },
   formControl: {
     margin: theme.spacing(1),
@@ -86,21 +85,6 @@ export const InvestigatorPortrait = ({
   return (
     <div className={classes.viewWrapper}>
       <Title content='Investigator Portrait' />
-      {/* <FormControl className={classes.formControl}>
-        <InputLabel id='demo-simple-select-label'>Investigator</InputLabel>
-        <Select
-          labelId='demo-simple-select-label'
-          id='demo-simple-select'
-          value={investigatorCode}
-          onChange={handleDropdown}
-        >
-          {investigatorList.map((inv) => (
-            <MenuItem key={inv.code} value={inv.code}>
-              {inv.name}
-            </MenuItem>
-          ))}
-        </Select>
-      </FormControl> */}
       <div className={classes.chartBundle}>
         <Controls
           dataMode={dataMode}
