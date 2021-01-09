@@ -35,6 +35,9 @@ type Props = {
   dataMode: boolean;
   chartType: CHARTTYPE;
   numMode: NUMMODE;
+  investigatorClass: string;
+  dataType: any;
+  color: string;
 };
 
 export const TotalCount = ({
@@ -42,10 +45,13 @@ export const TotalCount = ({
   handleSetYear,
   dataMode,
   chartType,
-  numMode
+  numMode,
+  investigatorClass,
+  dataType,
+  color
 }: Props): React.ReactElement => {
   const classes = useStyles();
-  const [investigatorClass, setInvestigatorClass] = React.useState('all');
+  // const [investigatorClass, setInvestigatorClass] = React.useState('all');
   const [selectedClass, chooseClass] = React.useState<APIResponse>();
 
   const selectedYear = year.toString();
@@ -61,21 +67,21 @@ export const TotalCount = ({
     fetchData();
   }, [investigatorClass]);
 
-  const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
-    setInvestigatorClass(event.target.value as string);
-  };
-  const investigatorClassList = Object.keys(
-    investigatorClassColor
-  ).map((entry) => ({ name: entry, color: investigatorClassColor[entry] }));
-  const dataType = determineDataTypeMode(dataMode);
-  const color =
-    investigatorClass === 'all'
-      ? '#000000'
-      : investigatorClassColor[investigatorClass];
+  // const changeInvestigatorClass = (event: React.ChangeEvent<{ value: unknown }>) => {
+  //   setInvestigatorClass(event.target.value as string);
+  // };
+  // const investigatorClassList = Object.keys(
+  //   investigatorClassColor
+  // ).map((entry) => ({ name: entry, color: investigatorClassColor[entry] }));
+  // const dataType = determineDataTypeMode(dataMode);
+  // const color =
+  //   investigatorClass === 'all'
+  //     ? '#000000'
+  //     : investigatorClassColor[investigatorClass];
 
   return (
     <div>
-      <FormControl className={classes.formControl}>
+      {/* <FormControl className={classes.formControl}>
         <InputLabel id='demo-simple-select-label'>Class</InputLabel>
         <Select
           labelId='demo-simple-select-label'
@@ -89,7 +95,7 @@ export const TotalCount = ({
             </MenuItem>
           ))}
         </Select>
-      </FormControl>
+      </FormControl> */}
       {selectedClass &&
         selectedClass[dataType] &&
         (chartType === CHARTTYPE.BAR ? (

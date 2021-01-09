@@ -11,14 +11,17 @@ import Box from '@material-ui/core/Box';
 import Paper from '@material-ui/core/Paper';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { Controls } from './Components/UI/Controls';
-import { CHARTTYPE, NUMMODE } from './types';
+import { CHARTTYPE, NUMMODE, determineDataTypeMode } from './types';
 import { CustomizedAccordions } from './Components/UI/Accordion';
 import { Typography } from '@material-ui/core';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
-import { investigatorList } from './lookups/investigatorList';
+import {
+  investigatorList,
+  investigatorClassColor
+} from './lookups/investigatorList';
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -107,6 +110,22 @@ export const App = () => {
     setInvestigatorCode(event.target.value as string);
   };
 
+  const [investigatorClass, setInvestigatorClass] = React.useState('all');
+  const changeInvestigatorClass = (
+    event: React.ChangeEvent<{ value: unknown }>
+  ) => {
+    setInvestigatorClass(event.target.value as string);
+  };
+
+  const investigatorClassList = Object.keys(
+    investigatorClassColor
+  ).map((entry) => ({ name: entry, color: investigatorClassColor[entry] }));
+  const dataType = determineDataTypeMode(dataMode);
+  const color =
+    investigatorClass === 'all'
+      ? '#000000'
+      : investigatorClassColor[investigatorClass];
+
   const handleSetYear = (event: any, year: number) => {
     setYear(year);
   };
@@ -176,7 +195,7 @@ export const App = () => {
             <div className={classes.viewWrapper}>
               <Sidebar>
                 {(investigatorSelection: string[]) => (
-                  <div>
+                  <div className={classes.chartBundle}>
                     <Controls
                       dataMode={dataMode}
                       setRelMode={setMode}
@@ -216,38 +235,63 @@ export const App = () => {
           </Paper>
           <TabPanel value={tab2} index={0}>
             <div className={classes.viewWrapper}>
-              <Controls
-                dataMode={dataMode}
-                setRelMode={setMode}
-                chartType={chartType}
-                setChartType={setChartType}
-              />
-              <TotalCount
-                year={year}
-                dataMode={dataMode}
-                chartType={chartType}
-                numMode={NUMMODE.DIST}
-                handleSetYear={handleSetYear}
-              />
-              <YearSlider handleSetYear={handleSetYear} year={year} />
+              <FormControl className={classes.formControl}>
+                <InputLabel id='demo-simple-select-label'>Class</InputLabel>
+                <Select
+                  labelId='demo-simple-select-label'
+                  id='demo-simple-select'
+                  value={investigatorClass}
+                  onChange={changeInvestigatorClass}
+                >
+                  {investigatorClassList.map((cls) => (
+                    <MenuItem key={cls.name} value={cls.name}>
+                      {cls.name}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+              <div className={classes.chartBundle}>
+                <Controls
+                  dataMode={dataMode}
+                  setRelMode={setMode}
+                  chartType={chartType}
+                  setChartType={setChartType}
+                />
+                <TotalCount
+                  year={year}
+                  dataMode={dataMode}
+                  chartType={chartType}
+                  numMode={NUMMODE.DIST}
+                  handleSetYear={handleSetYear}
+                  investigatorClass={investigatorClass}
+                  dataType={dataType}
+                  color={color}
+                />
+                <YearSlider handleSetYear={handleSetYear} year={year} />
+              </div>
             </div>
           </TabPanel>
           <TabPanel value={tab2} index={1}>
             <div className={classes.viewWrapper}>
-              <Controls
-                dataMode={dataMode}
-                setRelMode={setMode}
-                chartType={chartType}
-                setChartType={setChartType}
-              />
-              <TotalCount
-                year={year}
-                dataMode={dataMode}
-                chartType={chartType}
-                numMode={NUMMODE.SUM}
-                handleSetYear={handleSetYear}
-              />
-              <YearSlider handleSetYear={handleSetYear} year={year} />
+              <div className={classes.chartBundle}>
+                <Controls
+                  dataMode={dataMode}
+                  setRelMode={setMode}
+                  chartType={chartType}
+                  setChartType={setChartType}
+                />
+                <TotalCount
+                  year={year}
+                  dataMode={dataMode}
+                  chartType={chartType}
+                  numMode={NUMMODE.SUM}
+                  handleSetYear={handleSetYear}
+                  investigatorClass={investigatorClass}
+                  dataType={dataType}
+                  color={color}
+                />
+                <YearSlider handleSetYear={handleSetYear} year={year} />
+              </div>
             </div>
           </TabPanel>
         </div>
@@ -287,20 +331,22 @@ export const App = () => {
                   ))}
                 </Select>
               </FormControl>
-              <Controls
-                dataMode={dataMode}
-                setRelMode={setMode}
-                chartType={chartType}
-                setChartType={setChartType}
-              />
-              <SingleInvestigator
-                year={year}
-                dataMode={dataMode}
-                chartType={chartType}
-                numMode={NUMMODE.SUM}
-                handleSetYear={handleSetYear}
-                investigatorCode={investigatorCode}
-              />
+              <div className={classes.chartBundle}>
+                <Controls
+                  dataMode={dataMode}
+                  setRelMode={setMode}
+                  chartType={chartType}
+                  setChartType={setChartType}
+                />
+                <SingleInvestigator
+                  year={year}
+                  dataMode={dataMode}
+                  chartType={chartType}
+                  numMode={NUMMODE.SUM}
+                  handleSetYear={handleSetYear}
+                  investigatorCode={investigatorCode}
+                />
+              </div>
               <YearSlider handleSetYear={handleSetYear} year={year} />
             </div>
           </TabPanel>
@@ -308,7 +354,7 @@ export const App = () => {
             <div className={classes.viewWrapper}>
               <Sidebar>
                 {(investigatorSelection: string[]) => (
-                  <div>
+                  <div className={classes.chartBundle}>
                     <Controls
                       dataMode={dataMode}
                       setRelMode={setMode}
