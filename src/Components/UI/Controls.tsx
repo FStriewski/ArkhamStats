@@ -13,16 +13,20 @@ import { CHARTTYPE } from '../../types';
 const useStyles = makeStyles(() =>
   createStyles({
     paper: {
-      width: '500px',
+      cursor: 'pointer',
+      backgroundColor: 'white',
+      width: '350px',
       display: 'flex',
       flexDirection: 'row',
       justifyContent: 'space-around',
       alignItems: 'center',
-      padding: '10px'
-      // float: 'right'
+      padding: '5px',
+      marginLeft: 'auto',
+      marginRight: '25px',
+      marginBottom: '-25px'
     },
     button: {
-      margin: '0 10px'
+      margin: '0 5px'
     }
   })
 );
