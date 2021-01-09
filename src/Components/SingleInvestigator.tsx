@@ -73,22 +73,6 @@ export const SingleInvestigator = ({
   const color = null;
   return (
     <>
-      {/* <FormControl className={classes.formControl}>
-        <InputLabel id='demo-simple-select-label'>Investigator</InputLabel>
-        <Select
-          labelId='demo-simple-select-label'
-          id='demo-simple-select'
-          value={investigatorCode}
-          onChange={handleChange}
-        >
-          {investigatorList.map((inv) => (
-            <MenuItem key={inv.code} value={inv.code}>
-              {inv.name}
-            </MenuItem>
-          ))}
-        </Select>
-      </FormControl> */}
-
       {selectedInvestigators &&
         selectedInvestigators[dataType] &&
         (chartType === CHARTTYPE.BAR ? (

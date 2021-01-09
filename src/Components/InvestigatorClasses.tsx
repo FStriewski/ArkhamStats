@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
-import { Sidebar } from './UI/Sidebar';
 import { YearSlider } from './UI/YearSlider';
+import { Title, SubTitle } from './UI/Title';
 import { ClassLineChart } from './Charts/LineChart';
 import { ClassBarChart } from './Charts/BarChart';
 import { ClassAreaChart } from './Charts/AreaChart';
@@ -41,10 +41,6 @@ const useStyles = makeStyles((theme: Theme) => ({
   viewWrapper: {
     // justifyContent: 'center'
   },
-  appBar: {
-    top: 'auto',
-    bottom: 0
-  },
   chartBundle: {
     width: '1000px',
     justify: 'right',
@@ -56,9 +52,6 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   control: {
     marginLeft: 'auto'
-  },
-  selectEmpty: {
-    marginTop: theme.spacing(2)
   }
 }));
 function TabPanel(props: TabPanelProps) {
@@ -96,7 +89,7 @@ type Props = {
   switchToTotalTab: (event: React.ChangeEvent, newTab: number) => void;
 };
 
-export const TotalCount = ({
+export const InvestigatorClasses = ({
   dataMode,
   chartType,
   setChartType,
@@ -166,6 +159,8 @@ export const TotalCount = ({
       </Paper>
       <TabPanel value={totalTab} index={0}>
         <div className={classes.viewWrapper}>
+          <Title content='Classes' />
+          <SubTitle content='Now think about |x| > 2. To show x on the number line' />
           <FormControl className={classes.formControl}>
             <InputLabel id='demo-simple-select-label'>Class</InputLabel>
             <Select

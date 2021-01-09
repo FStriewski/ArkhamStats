@@ -3,7 +3,8 @@ import { Sidebar } from './Components/UI/Sidebar';
 import { YearSlider } from './Components/UI/YearSlider';
 import { SingleInvestigator } from './Components/SingleInvestigator';
 import { InvestigatorComparison } from './Components/InvestigatorComparison';
-import { TotalCount } from './Components/TotalCount';
+import { InvestigatorPortrait } from './Components/InvestigatorPortrait';
+import { InvestigatorClasses } from './Components/InvestigatorClasses';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
@@ -110,22 +111,6 @@ export const App = () => {
     setInvestigatorCode(event.target.value as string);
   };
 
-  // const [investigatorClass, setInvestigatorClass] = React.useState('all');
-  // const changeInvestigatorClass = (
-  //   event: React.ChangeEvent<{ value: unknown }>
-  // ) => {
-  //   setInvestigatorClass(event.target.value as string);
-  // };
-
-  // const investigatorClassList = Object.keys(
-  //   investigatorClassColor
-  // ).map((entry) => ({ name: entry, color: investigatorClassColor[entry] }));
-  // const dataType = determineDataTypeMode(dataMode);
-  // const color =
-  //   investigatorClass === 'all'
-  //     ? '#000000'
-  //     : investigatorClassColor[investigatorClass];
-
   const handleSetYear = (event: any, year: number) => {
     setYear(year);
   };
@@ -147,49 +132,21 @@ export const App = () => {
               textColor='primary'
               centered
             >
-              <Tab label='Single Investigator' />
-              <Tab label='Comparison' />
+              <Tab label='Investigator Portrait' />
+              <Tab label='Investigator Comparison' />
             </Tabs>
           </Paper>
 
           <TabPanel value={tab1} index={0}>
-            <div className={classes.viewWrapper}>
-              <Typography>BLABLA</Typography>
-              <FormControl className={classes.formControl}>
-                <InputLabel id='demo-simple-select-label'>
-                  Investigator
-                </InputLabel>
-                <Select
-                  labelId='demo-simple-select-label'
-                  id='demo-simple-select'
-                  value={investigatorCode}
-                  onChange={handleDropdown}
-                >
-                  {investigatorList.map((inv) => (
-                    <MenuItem key={inv.code} value={inv.code}>
-                      {inv.name}
-                    </MenuItem>
-                  ))}
-                </Select>
-              </FormControl>
-              <div className={classes.chartBundle}>
-                <Controls
-                  dataMode={dataMode}
-                  setRelMode={setMode}
-                  chartType={chartType}
-                  setChartType={setChartType}
-                />
-                <SingleInvestigator
-                  year={year}
-                  dataMode={dataMode}
-                  chartType={chartType}
-                  numMode={NUMMODE.DIST}
-                  handleSetYear={handleSetYear}
-                  investigatorCode={investigatorCode}
-                />
-              </div>
-              <YearSlider handleSetYear={handleSetYear} year={year} />
-            </div>
+            <InvestigatorPortrait
+              dataMode={dataMode}
+              chartType={chartType}
+              setChartType={setChartType}
+              setMode={setMode}
+              year={year}
+              handleSetYear={handleSetYear}
+              investigatorCode={investigatorCode}
+            />
           </TabPanel>
           <TabPanel value={tab1} index={1}>
             <div className={classes.viewWrapper}>
@@ -219,94 +176,18 @@ export const App = () => {
         </>
       )}
 
-      {
-        headerOpen.open && headerOpen.id === '1' && (
-          <TotalCount
-            dataMode={dataMode}
-            chartType={chartType}
-            setChartType={setChartType}
-            setMode={setMode}
-            totalTab={totalTab}
-            switchToTotalTab={switchToTotalTab}
-            year={year}
-            handleSetYear={handleSetYear}
-          />
-        )
-        //   <Paper className={classes.root}>
-        //     <Tabs
-        //       value={tab2}
-        //       onChange={handleChange2}
-        //       indicatorColor='primary'
-        //       textColor='primary'
-        //       centered
-        //     >
-        //       <Tab label='Class Totals' />
-        //       <Tab label='Class Sum' />
-        //     </Tabs>
-        //   </Paper>
-        //   <TabPanel value={tab2} index={0}>
-        //     <div className={classes.viewWrapper}>
-        //       <FormControl className={classes.formControl}>
-        //         <InputLabel id='demo-simple-select-label'>Class</InputLabel>
-        //         <Select
-        //           labelId='demo-simple-select-label'
-        //           id='demo-simple-select'
-        //           value={investigatorClass}
-        //           onChange={changeInvestigatorClass}
-        //         >
-        //           {investigatorClassList.map((cls) => (
-        //             <MenuItem key={cls.name} value={cls.name}>
-        //               {cls.name}
-        //             </MenuItem>
-        //           ))}
-        //         </Select>
-        //       </FormControl>
-        //       <div className={classes.chartBundle}>
-        //         <Controls
-        //           dataMode={dataMode}
-        //           setRelMode={setMode}
-        //           chartType={chartType}
-        //           setChartType={setChartType}
-        //         />
-        //         <TotalCount
-        //           year={year}
-        //           dataMode={dataMode}
-        //           chartType={chartType}
-        //           numMode={NUMMODE.DIST}
-        //           handleSetYear={handleSetYear}
-        //           investigatorClass={investigatorClass}
-        //           dataType={dataType}
-        //           color={color}
-        //         />
-        //         <YearSlider handleSetYear={handleSetYear} year={year} />
-        //       </div>
-        //     </div>
-        //   </TabPanel>
-        //   <TabPanel value={tab2} index={1}>
-        //     <div className={classes.viewWrapper}>
-        //       <div className={classes.chartBundle}>
-        //         <Controls
-        //           dataMode={dataMode}
-        //           setRelMode={setMode}
-        //           chartType={chartType}
-        //           setChartType={setChartType}
-        //         />
-        //         <TotalCount
-        //           year={year}
-        //           dataMode={dataMode}
-        //           chartType={chartType}
-        //           numMode={NUMMODE.SUM}
-        //           handleSetYear={handleSetYear}
-        //           investigatorClass={investigatorClass}
-        //           dataType={dataType}
-        //           color={color}
-        //         />
-        //         <YearSlider handleSetYear={handleSetYear} year={year} />
-        //       </div>
-        //     </div>
-        //   </TabPanel>
-        // </div>
-      }
+      {headerOpen.open && headerOpen.id === '1' && (
+        <InvestigatorClasses
+          dataMode={dataMode}
+          chartType={chartType}
+          setChartType={setChartType}
+          setMode={setMode}
+          totalTab={totalTab}
+          switchToTotalTab={switchToTotalTab}
+          year={year}
+          handleSetYear={handleSetYear}
+        />
+      )}
 
       {headerOpen.open && headerOpen.id === '2' && (
         <div>
