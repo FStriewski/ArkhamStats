@@ -67,6 +67,10 @@ export enum NUMMODE {
   SUM = 'SUM',
   DIST = 'DIST'
 }
+export enum PICKERSELECTION {
+  SINGLE = 'SINGLE',
+  MULTI = 'MULTI'
+}
 
 export enum ENTITY {
   CLASSCOUNT = 'CLASSCOUNT',

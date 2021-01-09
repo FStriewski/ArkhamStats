@@ -67,6 +67,8 @@ export const InvestigatorPortrait = ({
     chooseInvestigators
   ] = React.useState<APIResponse>();
 
+  // const investigatorCode = investigatorSelection[0]; // RESTRICT to single selection
+
   const selectedYear = year.toString();
 
   useEffect(() => {
@@ -78,7 +80,6 @@ export const InvestigatorPortrait = ({
     };
     fetchData().catch((e) => console.log(e));
   }, [investigatorCode]);
-
   const dataType = determineDataTypeMode(dataMode);
   const color: string = null;
 
@@ -134,15 +135,6 @@ export const InvestigatorPortrait = ({
               numMode={NUMMODE.DIST}
             />
           ))}
-        {/* <SingleInvestigator
-          year={year}
-          dataMode={dataMode}
-          chartType={chartType}
-          numMode={NUMMODE.DIST}
-          handleSetYear={handleSetYear}
-          investigatorCode={investigatorCode}
-        />
-      </div> */}
         <YearSlider handleSetYear={handleSetYear} year={year} />
       </div>
     </div>

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Sidebar } from './Components/UI/Sidebar';
+import { InvestigatorPicker } from './Components/UI/InvestigatorPicker';
 import { YearSlider } from './Components/UI/YearSlider';
 import { SingleInvestigator } from './Components/SingleInvestigator';
 import { InvestigatorComparison } from './Components/InvestigatorComparison';
@@ -12,7 +13,7 @@ import Box from '@material-ui/core/Box';
 import Paper from '@material-ui/core/Paper';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { Controls } from './Components/UI/Controls';
-import { CHARTTYPE, NUMMODE, determineDataTypeMode } from './types';
+import { CHARTTYPE, NUMMODE, PICKERSELECTION } from './types';
 import { CustomizedAccordions } from './Components/UI/Accordion';
 import { Typography } from '@material-ui/core';
 import InputLabel from '@material-ui/core/InputLabel';
@@ -138,15 +139,19 @@ export const App = () => {
           </Paper>
 
           <TabPanel value={tab1} index={0}>
-            <InvestigatorPortrait
-              dataMode={dataMode}
-              chartType={chartType}
-              setChartType={setChartType}
-              setMode={setMode}
-              year={year}
-              handleSetYear={handleSetYear}
-              investigatorCode={investigatorCode}
-            />
+            <InvestigatorPicker pickerType={PICKERSELECTION.SINGLE}>
+              {(investigatorSelection: string[]) => (
+                <InvestigatorPortrait
+                  dataMode={dataMode}
+                  chartType={chartType}
+                  setChartType={setChartType}
+                  setMode={setMode}
+                  year={year}
+                  handleSetYear={handleSetYear}
+                  investigatorCode={investigatorSelection[0]}
+                />
+              )}
+            </InvestigatorPicker>
           </TabPanel>
           <TabPanel value={tab1} index={1}>
             <div className={classes.viewWrapper}>

@@ -21,8 +21,8 @@ const useStyles = makeStyles(() =>
       justifyContent: 'space-around',
       alignItems: 'center',
       padding: '5px',
-      marginLeft: 'auto',
-      marginRight: '25px',
+      marginRight: 'auto',
+      marginLeft: '85px',
       marginBottom: '-25px'
     },
     button: {

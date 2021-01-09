@@ -83,7 +83,7 @@ export const CustomizedAccordions = ({
           className={classes.tabLikeButton}
           onClick={() => handleHeaderClick({ id: '2' })}
         >
-          n/a
+          Sums
         </Button>
       </div>
     </>

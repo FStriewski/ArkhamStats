@@ -43,6 +43,7 @@ export const InvestigatorLineChart = ({
       >
         <CartesianGrid strokeDasharray='1 1' />
         <XAxis dataKey='date' />
+        {setYAxis(dataMode, numMode)}
         {releases &&
           releases.map((rel) => (
             <span key={rel.name}>
@@ -51,7 +52,6 @@ export const InvestigatorLineChart = ({
               </ReferenceLine>
             </span>
           ))}
-        {setYAxis(dataMode, numMode)}
         <Tooltip />
         <Legend />
         {ids.length === 1 ? (
@@ -102,6 +102,7 @@ export const ClassLineChart = ({
       >
         <CartesianGrid strokeDasharray='1 1' />
         <XAxis dataKey='date' />
+        {setClassYAxis(dataMode, numMode)}
         {releases &&
           releases.map((rel) => (
             <span key={rel.name}>
@@ -110,7 +111,6 @@ export const ClassLineChart = ({
               </ReferenceLine>
             </span>
           ))}
-        {setClassYAxis(dataMode, numMode)}
         <Tooltip />
         <Legend />
         <Line
