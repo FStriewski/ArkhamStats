@@ -69,7 +69,7 @@ export const InvestigatorPicker = (props: any): React.ReactElement => {
   const [expanded, setExpanded] = React.useState<string | false>(false);
 
   const handleChange = (panel: string) => (
-    event: React.ChangeEvent<{}>,
+    event: React.ChangeEvent,
     isExpanded: boolean
   ) => {
     setExpanded(isExpanded ? panel : false);
@@ -169,6 +169,7 @@ export const InvestigatorPicker = (props: any): React.ReactElement => {
         </div>
       </Drawer>
       <main className={classes.content}>
+        {/* eslint-disable-next-line @typescript-eslint/no-unsafe-member-access,  @typescript-eslint/no-unsafe-call */}
         {props.children(investigatorSelection)}
       </main>
     </div>

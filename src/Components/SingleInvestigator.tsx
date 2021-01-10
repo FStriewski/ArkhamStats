@@ -63,14 +63,13 @@ export const SingleInvestigator = ({
           : await getInvestigatorSumByDate(investigatorCode);
       chooseInvestigators(result);
     };
-    fetchData();
+    fetchData().catch((e) => console.log(e));
   }, [investigatorCode]);
 
   // const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
   //   setInvestigatorCode(event.target.value as string);
   // };
   const dataType = determineDataTypeMode(dataMode);
-  const color = null;
   return (
     <>
       {selectedInvestigators &&
@@ -80,7 +79,6 @@ export const SingleInvestigator = ({
             input={selectedInvestigators[dataType][selectedYear]}
             ids={[investigatorCode]}
             dataMode={dataMode}
-            color={color}
             numMode={numMode}
           />
         ) : chartType === CHARTTYPE.LINE ? (
@@ -88,7 +86,6 @@ export const SingleInvestigator = ({
             input={selectedInvestigators[dataType][selectedYear]}
             ids={[investigatorCode]}
             dataMode={dataMode}
-            color={color}
             numMode={numMode}
           />
         ) : (
@@ -96,7 +93,6 @@ export const SingleInvestigator = ({
             input={selectedInvestigators[dataType][selectedYear]}
             ids={[investigatorCode]}
             dataMode={dataMode}
-            color={color}
             numMode={numMode}
           />
         ))}

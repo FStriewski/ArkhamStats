@@ -22,7 +22,10 @@ type Props = {
   ) => void;
 };
 
-export const ModeSwitch = ({ dataMode, setRelMode }: Props) => {
+export const ModeSwitch = ({
+  dataMode,
+  setRelMode
+}: Props): React.ReactElement => {
   const classes = useStyles();
 
   return (

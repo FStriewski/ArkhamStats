@@ -22,7 +22,6 @@ type Props = {
   input: any;
   ids: string[];
   dataMode: boolean;
-  color: string;
   numMode: NUMMODE;
 };
 
@@ -85,13 +84,21 @@ export const InvestigatorLineChart = ({
   );
 };
 
+type Props2 = {
+  input: any;
+  ids: string[];
+  dataMode: boolean;
+  numMode: NUMMODE;
+  color: string;
+};
+
 export const ClassLineChart = ({
   input,
   ids,
   dataMode,
   color,
   numMode
-}: Props) => {
+}: Props2): React.ReactElement => {
   return (
     <div style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
       <LineChart

@@ -99,7 +99,6 @@ export const InvestigatorPortrait = ({
               input={selectedInvestigators[dataType][selectedYear]}
               ids={[investigatorCode]}
               dataMode={dataMode}
-              color={color}
               numMode={NUMMODE.DIST}
             />
           ) : chartType === CHARTTYPE.LINE ? (
@@ -107,7 +106,6 @@ export const InvestigatorPortrait = ({
               input={selectedInvestigators[dataType][selectedYear]}
               ids={[investigatorCode]}
               dataMode={dataMode}
-              color={color}
               numMode={NUMMODE.DIST}
             />
           ) : (
@@ -115,7 +113,6 @@ export const InvestigatorPortrait = ({
               input={selectedInvestigators[dataType][selectedYear]}
               ids={[investigatorCode]}
               dataMode={dataMode}
-              color={color}
               numMode={NUMMODE.DIST}
             />
           ))}

@@ -18,6 +18,7 @@
     "@typescript-eslint/eslint-plugin": "^4.8.2",
     "@typescript-eslint/parser": "^4.12.0",
     "canvasjs": "^1.8.3",
+    "create-react-app": "^4.0.1",
     "eslint-config-prettier": "^7.0.0",
     "eslint-config-standard": "^14.1.1",
     "eslint-config-standard-react": "^9.2.0",
@@ -33,7 +34,7 @@
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "3.4.3",
+    "react-scripts": "4.0.1",
     "recharts": "^1.8.5",
     "typescript": "^3.9.7"
   },

@@ -22,7 +22,6 @@ type Props = {
   input: any;
   ids: string[];
   dataMode: boolean;
-  color: string;
   numMode: NUMMODE;
 };
 
@@ -30,8 +29,7 @@ export const InvestigatorBarChart = ({
   input,
   ids,
   dataMode,
-  numMode,
-  color
+  numMode
 }: Props): React.ReactElement => {
   return (
     <div style={{ width: '100%', display: 'flex' }}>
@@ -83,13 +81,21 @@ export const InvestigatorBarChart = ({
   );
 };
 
+type Props2 = {
+  input: any;
+  ids: string[];
+  dataMode: boolean;
+  numMode: NUMMODE;
+  color: string;
+};
+
 export const ClassBarChart = ({
   input,
   ids,
   dataMode,
   color,
   numMode
-}: Props) => {
+}: Props2): React.ReactElement => {
   return (
     <div style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
       <BarChart

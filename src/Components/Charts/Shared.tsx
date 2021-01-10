@@ -31,7 +31,8 @@ export const setYAxis = (dataMode: boolean, numMode: NUMMODE) => {
       <YAxis
         domain={[
           0,
-          (dataMax) => Math.round((dataMax + Number.EPSILON) * 100) / 100
+          (dataMax: number) =>
+            Math.round((dataMax + Number.EPSILON) * 100) / 100
         ]}
         label={{
           value: 'Running sum of decks',
@@ -83,7 +84,8 @@ export const setClassYAxis = (dataMode: boolean, numMode: NUMMODE) => {
       <YAxis
         domain={[
           0,
-          (dataMax) => Math.round((dataMax + Number.EPSILON) * 100) / 100
+          (dataMax: number) =>
+            Math.round((dataMax + Number.EPSILON) * 100) / 100
         ]}
         label={{
           value: 'Running sum of class decks [%]',

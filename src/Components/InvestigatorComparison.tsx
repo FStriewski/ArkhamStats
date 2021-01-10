@@ -29,7 +29,7 @@ export const InvestigatorComparison = ({
   dataMode,
   chartType,
   numMode
-}: Props) => {
+}: Props): React.ReactElement => {
   const [
     selectedInvestigators,
     chooseInvestigators
@@ -43,7 +43,7 @@ export const InvestigatorComparison = ({
           : await getMultipleInvestigatorSumByDate(investigatorCodes);
       chooseInvestigators(result);
     };
-    fetchData();
+    fetchData().catch((e) => console.log(e));
   }, [investigatorCodes]);
 
   const selectedYear = year.toString();
@@ -59,7 +59,6 @@ export const InvestigatorComparison = ({
             input={selectedInvestigators[dataType][selectedYear]}
             ids={investigatorCodes}
             dataMode={dataMode}
-            color={color}
             numMode={numMode}
           />
         ) : chartType === CHARTTYPE.LINE ? (
@@ -67,7 +66,6 @@ export const InvestigatorComparison = ({
             input={selectedInvestigators[dataType][selectedYear]}
             ids={investigatorCodes}
             dataMode={dataMode}
-            color={color}
             numMode={numMode}
           />
         ) : (

@@ -27,7 +27,10 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export const YearSlider = ({ handleSetYear, year }: YearSliderProps) => {
+export const YearSlider = ({
+  handleSetYear,
+  year
+}: YearSliderProps): React.ReactElement => {
   const classes = useStyles();
 
   const marks = [

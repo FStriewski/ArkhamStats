@@ -48,7 +48,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export const Sidebar = (props) => {
+export const Sidebar = (props: any): React.ReactElement => {
   const classes = useStyles();
 
   const [investigatorSelection, setSelection] = React.useState<string[]>([
@@ -117,6 +117,7 @@ export const Sidebar = (props) => {
         </Drawer>
       </Slide>
       <main className={classes.content}>
+        {/* eslint-disable-next-line @typescript-eslint/no-unsafe-member-access,  @typescript-eslint/no-unsafe-call */}
         {props.children(investigatorSelection)}
       </main>
     </div>
