@@ -5,7 +5,9 @@ import {
   CHARTTYPE,
   NUMMODE,
   determineDataTypeMode,
-  APIResponse
+  APIResponse,
+  SingleInvestigator,
+  DataPoints
 } from '../types';
 import { InvestigatorLineChart } from './Charts/LineChart';
 import { InvestigatorBarChart } from './Charts/BarChart';
@@ -65,19 +67,23 @@ export const InvestigatorPortrait = ({
     selectedInvestigators,
     chooseInvestigators
   ] = React.useState<APIResponse>();
+  console.log(selectedInvestigators);
 
   const selectedYear = year.toString();
 
   useEffect(() => {
     const fetchData = async () => {
-      const result: APIResponse = (await getInvestigatorDistributionByDate(
+      const result: APIResponse = await getInvestigatorDistributionByDate(
         investigatorCode
-      )) as APIResponse;
+      );
       chooseInvestigators(result);
     };
     fetchData().catch((e) => console.log(e));
   }, [investigatorCode]);
   const dataType = determineDataTypeMode(dataMode);
+
+  // datapoints_absolute: {
+  //   2016: [{date: "2016-01", 01004: 0}
 
   return (
     <div className={classes.viewWrapper}>
@@ -90,7 +96,7 @@ export const InvestigatorPortrait = ({
           setChartType={setChartType}
         />
         {selectedInvestigators &&
-          selectedInvestigators[dataType] &&
+          (selectedInvestigators[dataType] as DataPoints) &&
           (chartType === CHARTTYPE.BAR ? (
             <InvestigatorBarChart
               input={selectedInvestigators[dataType][selectedYear]}

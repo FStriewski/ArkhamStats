@@ -23,24 +23,23 @@ export type InvestigatorListItem = {
 };
 
 export type SingleInvestigator = {
-  [index: string]: DataPoint[];
+  [index: string]: Tick[];
 };
 
-export type DataPoint = {
+export type Tick = {
   x: string;
   y: number;
 };
-export type DatePoint = {
-  x: Date;
-  y: number;
-};
+
+export type DataPoints = { [year: string]: SingleInvestigator };
 
 export type APIResponse = {
   meta: {
     investigator: string[];
     total: number;
   };
-  datapoints: { [index: string]: SingleInvestigator };
+  datapoints_absolut: DataPoints;
+  datapoints_relative: DataPoints;
 };
 
 export type HeatHistogram = {

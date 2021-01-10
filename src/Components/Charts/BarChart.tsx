@@ -15,11 +15,11 @@ import {
   lookupInvestigator,
   investigatorClassColor
 } from '../../lookups/investigatorList';
-import { NUMMODE } from '../../types';
+import { NUMMODE, SingleInvestigator, DataPoints } from '../../types';
 import { setYAxis, setClassYAxis } from './Shared';
 
 type Props = {
-  input: any;
+  input: SingleInvestigator[];
   ids: string[];
   dataMode: boolean;
   numMode: NUMMODE;
