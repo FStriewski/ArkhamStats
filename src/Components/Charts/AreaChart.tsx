@@ -31,6 +31,19 @@ export const InvestigatorAreaChart = ({
   dataMode,
   numMode
 }: Props): React.ReactElement => {
+  if (!ids[0])
+    return (
+      <AreaChart
+        width={800}
+        height={400}
+        data={input}
+        margin={{ top: 25, right: 25, left: 25, bottom: 25 }}
+      >
+        <CartesianGrid strokeDasharray='1 1' />
+        <XAxis dataKey='date' />
+        {setYAxis(dataMode, numMode)}
+      </AreaChart>
+    );
   return (
     <div style={{ width: '100%', display: 'flex' }}>
       <AreaChart
@@ -40,7 +53,7 @@ export const InvestigatorAreaChart = ({
         margin={{ top: 25, right: 25, left: 25, bottom: 25 }}
       >
         <defs>
-          {ids &&
+          {ids.length &&
             ids.map((id) => (
               <linearGradient id={`${id}`} key={id} x1='0' y1='0' x2='0' y2='1'>
                 <stop
@@ -69,7 +82,7 @@ export const InvestigatorAreaChart = ({
         {setYAxis(dataMode, numMode)}
         <Tooltip />
         <Legend />
-        {ids &&
+        {ids.length &&
           ids.map((id: string) => (
             <Area
               key={id}
@@ -105,6 +118,19 @@ export const ClassAreaChart = ({
   color,
   numMode
 }: Props2): React.ReactElement => {
+  if (!ids[0])
+    return (
+      <AreaChart
+        width={800}
+        height={400}
+        data={input}
+        margin={{ top: 25, right: 25, left: 25, bottom: 25 }}
+      >
+        <CartesianGrid strokeDasharray='1 1' />
+        <XAxis dataKey='date' />
+        {setYAxis(dataMode, numMode)}
+      </AreaChart>
+    );
   return (
     <div style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
       <AreaChart

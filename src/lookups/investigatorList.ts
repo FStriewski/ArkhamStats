@@ -67,6 +67,8 @@ export const investigatorByFaction = {
 };
 
 export const lookupInvestigator = (id: string) => {
+  if (!id) return;
+
   const investigator: InvestigatorListEntry = investigatorList.find(
     (item) => item.code === id
   );

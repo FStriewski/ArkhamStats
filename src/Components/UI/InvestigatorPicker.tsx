@@ -16,6 +16,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import List from '@material-ui/core/List';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import { CustomCheckbox } from '../UI/Checkbox';
+import { SidebarControls } from '../UI/SidebarControls';
 
 const drawerWidth = 220;
 
@@ -108,8 +109,11 @@ export const InvestigatorPicker = (props: any): React.ReactElement => {
           paper: classes.drawerPaper
         }}
       >
+        <SidebarControls
+          selectCount={investigatorSelection.length}
+          setSelection={setSelection}
+        />
         <div className={classes.drawerContainer}>
-          <div>controls</div>
           <FormGroup>
             <div className={classes.root2}>
               {drawers.map((invClass, index) => (
@@ -132,34 +136,35 @@ export const InvestigatorPicker = (props: any): React.ReactElement => {
                       component='nav'
                       aria-label='secondary mailbox folders'
                     >
-                      {investigatorList
-                        .filter((investigator) =>
-                          (investigatorByFaction[
-                            invClass
-                          ] as string[]).includes(investigator.code)
-                        )
-                        .sort((a, b) =>
-                          a.name < b.name ? -1 : a.name > b.name ? 1 : 0
-                        )
-                        .map((inv) => (
-                          <FormControlLabel
-                            control={
-                              <CustomCheckbox
-                                checked={checked(inv.code)}
-                                onChange={handleSelection}
-                                name={inv.name}
-                                id={inv.code}
-                                disabled={!checked(inv.code) && error}
-                              />
-                            }
-                            label={inv.name}
-                            key={inv.code}
-                            style={{
-                              color: lookupInvestigator(inv.code).color
-                            }}
-                            className={classes.fcLabel}
-                          />
-                        ))}
+                      {investigatorList.length &&
+                        investigatorList
+                          .filter((investigator) =>
+                            (investigatorByFaction[
+                              invClass
+                            ] as string[]).includes(investigator.code)
+                          )
+                          .sort((a, b) =>
+                            a.name < b.name ? -1 : a.name > b.name ? 1 : 0
+                          )
+                          .map((inv) => (
+                            <FormControlLabel
+                              control={
+                                <CustomCheckbox
+                                  checked={checked(inv.code)}
+                                  onChange={handleSelection}
+                                  name={inv.name}
+                                  id={inv.code}
+                                  disabled={!checked(inv.code) && error}
+                                />
+                              }
+                              label={inv.name}
+                              key={inv.code}
+                              style={{
+                                color: lookupInvestigator(inv.code).color
+                              }}
+                              className={classes.fcLabel}
+                            />
+                          ))}
                     </List>
                   </AccordionDetails>
                 </Accordion>

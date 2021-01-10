@@ -31,7 +31,19 @@ export const InvestigatorLineChart = ({
   dataMode,
   numMode
 }: Props): React.ReactElement => {
-  console.log(releases);
+  if (!ids[0])
+    return (
+      <LineChart
+        width={800}
+        height={400}
+        data={input}
+        margin={{ top: 25, right: 25, left: 25, bottom: 25 }}
+      >
+        <CartesianGrid strokeDasharray='1 1' />
+        <XAxis dataKey='date' />
+        {setYAxis(dataMode, numMode)}
+      </LineChart>
+    );
   return (
     <div style={{ width: '100%', display: 'flex' }}>
       <LineChart
@@ -99,6 +111,19 @@ export const ClassLineChart = ({
   color,
   numMode
 }: Props2): React.ReactElement => {
+  if (!ids[0])
+    return (
+      <LineChart
+        width={800}
+        height={400}
+        data={input}
+        margin={{ top: 25, right: 25, left: 25, bottom: 25 }}
+      >
+        <CartesianGrid strokeDasharray='1 1' />
+        <XAxis dataKey='date' />
+        {setYAxis(dataMode, numMode)}
+      </LineChart>
+    );
   return (
     <div style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
       <LineChart
