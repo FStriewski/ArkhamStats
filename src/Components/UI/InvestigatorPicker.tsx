@@ -66,7 +66,6 @@ export const InvestigatorPicker = (props: any): React.ReactElement => {
   const [investigatorSelection, setSelection] = React.useState<string[]>([
     '01004'
   ]);
-  console.log(investigatorSelection);
   const [expanded, setExpanded] = React.useState<string | false>(false);
 
   const handleChange = (panel: string) => (
@@ -110,6 +109,7 @@ export const InvestigatorPicker = (props: any): React.ReactElement => {
         }}
       >
         <div className={classes.drawerContainer}>
+          <div>controls</div>
           <FormGroup>
             <div className={classes.root2}>
               {drawers.map((invClass, index) => (

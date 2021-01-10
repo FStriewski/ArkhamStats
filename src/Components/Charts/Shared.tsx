@@ -6,7 +6,7 @@ export const setYAxis = (dataMode: boolean, numMode: NUMMODE) => {
   if (numMode === NUMMODE.DIST) {
     return dataMode ? (
       <YAxis
-        domain={[0, (dataMax) => Math.max(20, dataMax)]}
+        domain={[0, (dataMax) => Math.max(16, dataMax)]}
         label={{
           value: '[%] of all decks',
           angle: -90,
