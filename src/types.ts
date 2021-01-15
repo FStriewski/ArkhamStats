@@ -1,3 +1,5 @@
+import { MetaHTMLAttributes } from 'react';
+
 export type Investigator = {
   id: number;
   name: string;
@@ -33,11 +35,15 @@ export type Tick = {
 
 export type DataPoints = { [year: string]: SingleInvestigator };
 
+export type Meta = {
+  investigators: string[];
+  numDecks: number;
+  allDeckTotal: number;
+  factionTotal: { [key: string]: number };
+};
+
 export type APIResponse = {
-  meta: {
-    investigator: string[];
-    total: number;
-  };
+  meta: Meta;
   datapoints_absolut: DataPoints;
   datapoints_relative: DataPoints;
 };

@@ -9,6 +9,10 @@ import {
   SingleInvestigator,
   DataPoints
 } from '../types';
+import {
+  InvestigatorPerFactionPieChart,
+  InvestigatorPerTotalPieChart
+} from './Charts/PieChart';
 import { InvestigatorLineChart } from './Charts/LineChart';
 import { InvestigatorBarChart } from './Charts/BarChart';
 import { InvestigatorAreaChart } from './Charts/AreaChart';
@@ -64,10 +68,9 @@ export const InvestigatorPortrait = ({
   const classes = useStyles();
 
   const [
-    selectedInvestigators,
+    selectedInvestigator,
     chooseInvestigators
   ] = React.useState<APIResponse>();
-  console.log(selectedInvestigators);
 
   const selectedYear = year.toString();
 
@@ -95,30 +98,42 @@ export const InvestigatorPortrait = ({
           chartType={chartType}
           setChartType={setChartType}
         />
-        {selectedInvestigators &&
-          (selectedInvestigators[dataType] as DataPoints) &&
+        {selectedInvestigator &&
+          (selectedInvestigator[dataType] as DataPoints) &&
           (chartType === CHARTTYPE.BAR ? (
             <InvestigatorBarChart
-              input={selectedInvestigators[dataType][selectedYear]}
+              input={selectedInvestigator[dataType][selectedYear]}
               ids={[investigatorCode]}
               dataMode={dataMode}
               numMode={NUMMODE.DIST}
             />
           ) : chartType === CHARTTYPE.LINE ? (
             <InvestigatorLineChart
-              input={selectedInvestigators[dataType][selectedYear]}
+              input={selectedInvestigator[dataType][selectedYear]}
               ids={[investigatorCode]}
               dataMode={dataMode}
               numMode={NUMMODE.DIST}
             />
           ) : (
             <InvestigatorAreaChart
-              input={selectedInvestigators[dataType][selectedYear]}
+              input={selectedInvestigator[dataType][selectedYear]}
               ids={[investigatorCode]}
               dataMode={dataMode}
               numMode={NUMMODE.DIST}
             />
           ))}
+        {selectedInvestigator && (
+          <>
+            <InvestigatorPerTotalPieChart
+              meta={selectedInvestigator.meta}
+              ids={[investigatorCode]}
+            />
+            <InvestigatorPerFactionPieChart
+              meta={selectedInvestigator.meta}
+              ids={[investigatorCode]}
+            />
+          </>
+        )}
         <YearSlider handleSetYear={handleSetYear} year={year} />
       </div>
     </div>
