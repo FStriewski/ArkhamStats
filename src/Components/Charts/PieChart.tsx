@@ -13,20 +13,26 @@ type Props = {
   factionCode: string;
 };
 
-export const InvestigatorPerTotalPieChart = ({
+export const InvestigatorPerFactionPieChart = ({
   meta,
   ids,
   factionCode
 }: Props): React.ReactElement => {
-  const COLORS = [investigatorClassColor[factionCode], '#F0F0F0'];
   const data = [
-    { name: 'Decks', value: meta.numDecks[ids[0]] },
-    { name: 'All Decks', value: meta.allDeckTotal }
+    {
+      name: 'Decks',
+      value: Math.floor(
+        (meta.numDecks[ids[0]] / meta.factionTotal.facCnt_abs[factionCode]) *
+          100
+      )
+    },
+    { name: 'In Faction', value: 100 }
   ];
+  const COLORS = [investigatorClassColor[factionCode], '#F0F0F0'];
   return (
     <>
       <Typography style={{ textAlign: 'center' }} variant='h6'>
-        Compared to all decks:
+        Compared to faction [%]:
       </Typography>
       <PieChart width={300} height={300}>
         <Pie
@@ -50,20 +56,24 @@ export const InvestigatorPerTotalPieChart = ({
     </>
   );
 };
-export const InvestigatorPerFactionPieChart = ({
+
+export const InvestigatorPerTotalPieChart = ({
   meta,
   ids,
   factionCode
 }: Props): React.ReactElement => {
-  const data = [
-    { name: 'Decks', value: meta.numDecks[ids[0]] },
-    { name: 'Faction', value: meta.factionTotal[factionCode] }
-  ];
   const COLORS = [investigatorClassColor[factionCode], '#F0F0F0'];
+  const data = [
+    {
+      name: 'Decks',
+      value: Math.floor((meta.numDecks[ids[0]] / meta.allDeckTotal) * 100)
+    },
+    { name: 'All Decks', value: 100 }
+  ];
   return (
     <>
       <Typography style={{ textAlign: 'center' }} variant='h6'>
-        Compared to faction:
+        Compared to all decks [%]:
       </Typography>
       <PieChart width={300} height={300}>
         <Pie

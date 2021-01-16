@@ -8,7 +8,6 @@ import {
   NUMMODE,
   determineDataTypeMode,
   APIResponse,
-  SingleInvestigator,
   DataPoints
 } from '../types';
 import {
@@ -18,16 +17,10 @@ import {
 import { InvestigatorLineChart } from './Charts/LineChart';
 import { InvestigatorBarChart } from './Charts/BarChart';
 import { InvestigatorAreaChart } from './Charts/AreaChart';
-import {
-  getInvestigatorDistributionByDate,
-  getInvestigatorSumByDate
-} from '../utils/requests';
+import { getInvestigatorDistributionByDate } from '../utils/requests';
 import { YearSlider } from './UI/YearSlider';
-import { Title, SubTitle } from './UI/Title';
-import {
-  lookupInvestigator,
-  investigatorClassColor
-} from '../lookups/investigatorList';
+import { Title } from './UI/Title';
+import { lookupInvestigator } from '../lookups/investigatorList';
 
 type Props = {
   dataMode: boolean;
@@ -46,11 +39,10 @@ const useStyles = makeStyles((theme: Theme) => ({
   root: {},
   viewWrapper: {
     flexGrow: 1
-    // justifyContent: 'center'
   },
-  chartBundle: {
-    // width: '1000px'
-    // justify: 'right'
+  pieChartBundle: {
+    display: 'flex',
+    flexDirection: 'column'
   },
   formControl: {
     margin: theme.spacing(1),
@@ -90,88 +82,76 @@ export const InvestigatorPortrait = ({
   }, [investigatorCode]);
   const dataType = determineDataTypeMode(dataMode);
 
-  // datapoints_absolute: {
-  //   2016: [{date: "2016-01", 01004: 0}
-
   return (
     <div className={classes.viewWrapper}>
-      {/* <div> */}
       <Grid container spacing={3}>
         <Grid item xs={12}>
           <Title content='Investigator Portrait' />
         </Grid>
-        <Grid item xs={7}>
-          <div className={classes.chartBundle}>
-            <Controls
-              dataMode={dataMode}
-              setRelMode={setMode}
-              chartType={chartType}
-              setChartType={setChartType}
-            />
-            {selectedInvestigator &&
-              (selectedInvestigator[dataType] as DataPoints) &&
-              (chartType === CHARTTYPE.BAR ? (
-                <InvestigatorBarChart
-                  input={selectedInvestigator[dataType][selectedYear]}
-                  ids={[investigatorCode]}
-                  dataMode={dataMode}
-                  numMode={NUMMODE.DIST}
-                />
-              ) : chartType === CHARTTYPE.LINE ? (
-                <InvestigatorLineChart
-                  input={selectedInvestigator[dataType][selectedYear]}
-                  ids={[investigatorCode]}
-                  dataMode={dataMode}
-                  numMode={NUMMODE.DIST}
-                />
-              ) : (
-                <InvestigatorAreaChart
-                  input={selectedInvestigator[dataType][selectedYear]}
-                  ids={[investigatorCode]}
-                  dataMode={dataMode}
-                  numMode={NUMMODE.DIST}
-                />
-              ))}
-          </div>
+        <Grid item xs={9}>
+          {selectedInvestigator &&
+            (selectedInvestigator[dataType] as DataPoints) &&
+            (chartType === CHARTTYPE.BAR ? (
+              <InvestigatorBarChart
+                input={selectedInvestigator[dataType][selectedYear]}
+                ids={[investigatorCode]}
+                dataMode={dataMode}
+                numMode={NUMMODE.DIST}
+              />
+            ) : chartType === CHARTTYPE.LINE ? (
+              <InvestigatorLineChart
+                input={selectedInvestigator[dataType][selectedYear]}
+                ids={[investigatorCode]}
+                dataMode={dataMode}
+                numMode={NUMMODE.DIST}
+              />
+            ) : (
+              <InvestigatorAreaChart
+                input={selectedInvestigator[dataType][selectedYear]}
+                ids={[investigatorCode]}
+                dataMode={dataMode}
+                numMode={NUMMODE.DIST}
+              />
+            ))}
         </Grid>
         <Grid
           item
-          xs={5}
+          xs={3}
           style={{
-            marginTop: '20px',
-            marginBottom: '60px',
+            marginTop: '30px',
             marginLeft: '-30px',
             border: '1px solid #e0e0e0'
           }}
         >
-          <Grid container spacing={3}>
+          <Grid container spacing={1}>
             {selectedInvestigator && (
-              <>
-                <Grid item xs={6}>
-                  <InvestigatorPerFactionPieChart
-                    meta={selectedInvestigator.meta}
-                    ids={[investigatorCode]}
-                    factionCode={
-                      lookupInvestigator(investigatorCode).faction_code
-                    }
-                  />
-                </Grid>
-                <Grid item xs={6}>
-                  <InvestigatorPerTotalPieChart
-                    meta={selectedInvestigator.meta}
-                    ids={[investigatorCode]}
-                    factionCode={
-                      lookupInvestigator(investigatorCode).faction_code
-                    }
-                  />
-                </Grid>
-              </>
+              <div className={classes.pieChartBundle}>
+                <InvestigatorPerFactionPieChart
+                  meta={selectedInvestigator.meta}
+                  ids={[investigatorCode]}
+                  factionCode={
+                    lookupInvestigator(investigatorCode).faction_code
+                  }
+                />
+                <InvestigatorPerTotalPieChart
+                  meta={selectedInvestigator.meta}
+                  ids={[investigatorCode]}
+                  factionCode={
+                    lookupInvestigator(investigatorCode).faction_code
+                  }
+                />
+              </div>
             )}
           </Grid>
         </Grid>
       </Grid>
-
       <YearSlider handleSetYear={handleSetYear} year={year} />
+      <Controls
+        dataMode={dataMode}
+        setRelMode={setMode}
+        chartType={chartType}
+        setChartType={setChartType}
+      />
     </div>
   );
 };

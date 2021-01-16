@@ -1,5 +1,3 @@
-import { MetaHTMLAttributes } from 'react';
-
 export type Investigator = {
   id: number;
   name: string;
@@ -39,7 +37,10 @@ export type Meta = {
   investigators: string[];
   numDecks: number;
   allDeckTotal: number;
-  factionTotal: { [key: string]: number };
+  factionTotal: {
+    facCnt_abs: { [key: string]: number };
+    facCnt_rel: { [key: string]: number };
+  };
 };
 
 export type APIResponse = {
@@ -88,5 +89,5 @@ export enum CHARTTYPE {
   AREA = 'AREA'
 }
 
-export const determineDataTypeMode = (dataMode: boolean) =>
+export const determineDataTypeMode = (dataMode: boolean): string =>
   dataMode ? 'datapoints_relative' : 'datapoints_absolute';

@@ -13,6 +13,10 @@ import { CHARTTYPE } from '../../types';
 const useStyles = makeStyles(() =>
   createStyles({
     paper: {
+      bottom: '45px',
+      left: '220px',
+      height: '60px',
+      position: 'absolute',
       cursor: 'pointer',
       backgroundColor: 'white',
       width: '350px',
@@ -45,40 +49,38 @@ export const Controls = ({
   setRelMode,
   chartType,
   setChartType
-}: Props) => {
+}: Props): React.ReactElement => {
   const classes = useStyles();
 
   return (
     <Paper className={classes.paper}>
-      <div>
-        <Button
-          className={classes.button}
-          size='small'
-          variant={chartType === CHARTTYPE.BAR ? 'contained' : 'outlined'}
-          color='primary'
-          onClick={() => setChartType(CHARTTYPE.BAR)}
-        >
-          Bar
-        </Button>
-        <Button
-          className={classes.button}
-          size='small'
-          variant={chartType === CHARTTYPE.LINE ? 'contained' : 'outlined'}
-          color='primary'
-          onClick={() => setChartType(CHARTTYPE.LINE)}
-        >
-          Line
-        </Button>
-        <Button
-          className={classes.button}
-          size='small'
-          variant={chartType === CHARTTYPE.AREA ? 'contained' : 'outlined'}
-          color='primary'
-          onClick={() => setChartType(CHARTTYPE.AREA)}
-        >
-          Area
-        </Button>
-      </div>
+      <Button
+        className={classes.button}
+        size='small'
+        variant={chartType === CHARTTYPE.BAR ? 'contained' : 'outlined'}
+        color='primary'
+        onClick={() => setChartType(CHARTTYPE.BAR)}
+      >
+        Bar
+      </Button>
+      <Button
+        className={classes.button}
+        size='small'
+        variant={chartType === CHARTTYPE.LINE ? 'contained' : 'outlined'}
+        color='primary'
+        onClick={() => setChartType(CHARTTYPE.LINE)}
+      >
+        Line
+      </Button>
+      <Button
+        className={classes.button}
+        size='small'
+        variant={chartType === CHARTTYPE.AREA ? 'contained' : 'outlined'}
+        color='primary'
+        onClick={() => setChartType(CHARTTYPE.AREA)}
+      >
+        Area
+      </Button>
       <div>
         <ModeSwitch dataMode={dataMode} setRelMode={setRelMode} />
       </div>

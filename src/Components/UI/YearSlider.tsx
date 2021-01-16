@@ -12,12 +12,11 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     paper: {
       width: '400px',
-      // maxWidth: "400px",
       display: 'flex',
       justifyContent: 'center',
       position: 'absolute',
       bottom: '20px',
-      right: '40px'
+      left: '680px'
     },
     slider: {
       maxWidth: '350px',
