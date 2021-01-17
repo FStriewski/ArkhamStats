@@ -11,8 +11,10 @@ export const Title = ({
   <Typography
     style={{
       width: '400px',
+      height: '100px',
       textAlign: 'center',
       padding: '10px',
+      lineHeight: '100px',
       border: '1px solid grey',
       backgroundColor: 'white',
       color: `${color}`

@@ -2,17 +2,17 @@ import React from 'react';
 import {
   LineChart,
   Line,
-  Label,
   XAxis,
   Legend,
   Tooltip,
-  CartesianGrid,
-  ReferenceLine
+  Label,
+  ReferenceLine,
+  CartesianGrid
 } from 'recharts';
-import { releases } from '../../lookups/decks';
 import { lookupInvestigator } from '../../lookups/helpers';
 import { NUMMODE, SingleInvestigator } from '../../types';
 import { setYAxis, setClassYAxis } from './Shared';
+import { releases } from '../../lookups/decks';
 
 type Props = {
   input: SingleInvestigator[];
@@ -27,8 +27,6 @@ export const InvestigatorLineChart = ({
   dataMode,
   numMode
 }: Props): React.ReactElement => {
-  console.log(releases);
-  console.log(input);
   if (!ids[0])
     return (
       <LineChart
@@ -52,23 +50,22 @@ export const InvestigatorLineChart = ({
       >
         <CartesianGrid strokeDasharray='1 1' />
         <XAxis dataKey='date' />
-        {releases &&
-          releases.map((rel) => (
-            <ReferenceLine
-              key={rel.date}
-              x={rel.date}
-              strokeDasharray='3 3'
-              stroke='#a0a0a0'
-              strokeWidth={2}
-            >
-              <Label
-                value={rel.name}
-                offset={10}
-                position='insideLeft'
-                angle={-90}
-              />
-            </ReferenceLine>
-          ))}
+        {releases.map((rel) => (
+          <ReferenceLine
+            key={rel.name}
+            x={rel.date}
+            stroke='grey'
+            strokeDasharray='3 3'
+            strokeWidth={2}
+          >
+            <Label
+              value={rel.name}
+              offset={10}
+              position='insideLeft'
+              angle={-90}
+            />
+          </ReferenceLine>
+        ))}{' '}
         {setYAxis(dataMode, numMode)}
         <Tooltip />
         <Legend />
@@ -142,14 +139,22 @@ export const ClassLineChart = ({
         <CartesianGrid strokeDasharray='1 1' />
         <XAxis dataKey='date' />
         {setClassYAxis(dataMode, numMode)}
-        {releases &&
-          releases.map((rel) => (
-            <span key={rel.name}>
-              <ReferenceLine x={rel.date} stroke='green' strokeWidth={2}>
-                <Label value={rel.name} offset={10} position='top' />
-              </ReferenceLine>
-            </span>
-          ))}
+        {releases.map((rel) => (
+          <ReferenceLine
+            key={rel.name}
+            x={rel.date}
+            stroke='grey'
+            strokeDasharray='3 3'
+            strokeWidth={2}
+          >
+            <Label
+              value={rel.name}
+              offset={10}
+              position='insideLeft'
+              angle={-90}
+            />
+          </ReferenceLine>
+        ))}{' '}
         <Tooltip />
         <Legend />
         <Line

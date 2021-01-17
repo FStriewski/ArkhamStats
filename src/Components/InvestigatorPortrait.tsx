@@ -51,6 +51,11 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   control: {
     marginLeft: 'auto'
+  },
+  pieContainer: {
+    marginTop: '10px',
+    marginLeft: '-50px',
+    border: '1px solid grey'
   }
 }));
 
@@ -88,24 +93,15 @@ export const InvestigatorPortrait = ({
     (selectedInvestigator[dataType] as DataPoints) &&
     (selectedInvestigator[dataType][selectedYear] as SingleInvestigator[]);
   const meta = selectedInvestigator && selectedInvestigator.meta;
-  const name =
-    selectedInvestigator && lookupInvestigator(investigatorCode).name;
-  const color =
-    selectedInvestigator && lookupInvestigator(investigatorCode).color;
 
   return (
     <div className={classes.viewWrapper}>
+      <FactBoxes meta={meta} id={investigatorCode} />
       <Grid container spacing={3}>
-        <Grid item xs={12}>
-          <Title content={`${name}`} color={color} />
-        </Grid>
-
+        <Grid item xs={12} />
         {selectedInvestigator && (
           <>
-            <Grid item xs={9}>
-              <Grid container spacing={3}>
-                <FactBoxes meta={meta} id={investigatorCode} />
-              </Grid>
+            <Grid item xs={9} style={{ justifyContent: 'left' }}>
               {selectedInvestigator &&
                 (selectedInvestigator[dataType] as DataPoints) &&
                 (chartType === CHARTTYPE.BAR ? (
@@ -131,15 +127,7 @@ export const InvestigatorPortrait = ({
                   />
                 ))}
             </Grid>
-            <Grid
-              item
-              xs={3}
-              style={{
-                marginTop: '10px',
-                marginLeft: '-50px',
-                border: '1px solid #e0e0e0'
-              }}
-            >
+            <Grid item xs={3} className={classes.pieContainer}>
               <Grid container spacing={1}>
                 {selectedInvestigator && (
                   <div className={classes.pieChartBundle}>

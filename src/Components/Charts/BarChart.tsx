@@ -2,17 +2,17 @@ import React from 'react';
 import {
   BarChart,
   Bar,
-  Label,
   XAxis,
   Legend,
   Tooltip,
   CartesianGrid,
+  Label,
   ReferenceLine
 } from 'recharts';
-import { releases } from '../../lookups/decks';
 import { lookupInvestigator } from '../../lookups/helpers';
 import { NUMMODE, SingleInvestigator } from '../../types';
 import { setYAxis, setClassYAxis } from './Shared';
+import { releases } from '../../lookups/decks';
 
 type Props = {
   input: SingleInvestigator[];
@@ -50,14 +50,22 @@ export const InvestigatorBarChart = ({
       >
         <CartesianGrid strokeDasharray='1 1' />
         <XAxis dataKey='date' />
-        {releases &&
-          releases.map((rel) => (
-            <span key={rel.name}>
-              <ReferenceLine x={rel.date} stroke='green' strokeWidth={2}>
-                <Label value={rel.name} offset={10} position='top' />
-              </ReferenceLine>
-            </span>
-          ))}
+        {releases.map((rel) => (
+          <ReferenceLine
+            key={rel.name}
+            x={rel.date}
+            stroke='grey'
+            strokeDasharray='3 3'
+            strokeWidth={2}
+          >
+            <Label
+              value={rel.name}
+              offset={10}
+              position='insideLeft'
+              angle={-90}
+            />
+          </ReferenceLine>
+        ))}{' '}
         {setYAxis(dataMode, numMode)}
         <Tooltip />
         <Legend />
@@ -128,14 +136,22 @@ export const ClassBarChart = ({
       >
         <CartesianGrid strokeDasharray='1 1' />
         <XAxis dataKey='date' />
-        {releases &&
-          releases.map((rel) => (
-            <span key={rel.name}>
-              <ReferenceLine x={rel.date} stroke='green' strokeWidth={2}>
-                <Label value={rel.name} offset={10} position='top' />
-              </ReferenceLine>
-            </span>
-          ))}
+        {releases.map((rel) => (
+          <ReferenceLine
+            key={rel.name}
+            x={rel.date}
+            stroke='grey'
+            strokeDasharray='3 3'
+            strokeWidth={2}
+          >
+            <Label
+              value={rel.name}
+              offset={10}
+              position='insideLeft'
+              angle={-90}
+            />
+          </ReferenceLine>
+        ))}{' '}
         {setClassYAxis(dataMode, numMode)}
         <Tooltip />
         <Legend />

@@ -11,7 +11,7 @@ import { lookupInvestigator } from '../../lookups/helpers';
 import { InvestigatorListEntry } from '../../types';
 import Slide from '@material-ui/core/Slide';
 
-const drawerWidth = 220;
+const drawerWidth = 250;
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -88,7 +88,6 @@ export const Sidebar = ({ children }: Props): React.ReactElement => {
               component='fieldset'
               className={classes.formControl}
             >
-              {/* <FormLabel component="legend">Pick two</FormLabel> */}
               <FormGroup>
                 {investigatorList
                   .sort((a, b) =>
