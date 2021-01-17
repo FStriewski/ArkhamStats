@@ -90,12 +90,14 @@ export const InvestigatorPortrait = ({
   const meta = selectedInvestigator && selectedInvestigator.meta;
   const name =
     selectedInvestigator && lookupInvestigator(investigatorCode).name;
+  const color =
+    selectedInvestigator && lookupInvestigator(investigatorCode).color;
 
   return (
     <div className={classes.viewWrapper}>
       <Grid container spacing={3}>
         <Grid item xs={12}>
-          <Title content={`${name}`} />
+          <Title content={`${name}`} color={color} />
         </Grid>
 
         {selectedInvestigator && (

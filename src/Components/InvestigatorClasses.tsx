@@ -157,7 +157,7 @@ export const InvestigatorClasses = ({
       </Paper>
       <TabPanel value={totalTab} index={0}>
         <div className={classes.viewWrapper}>
-          <Title content='Classes' />
+          <Title content='Classes' color='#000000' />
           <SubTitle content='Now think about |x| > 2. To show x on the number line' />
           <FormControl className={classes.formControl}>
             <InputLabel id='demo-simple-select-label'>Class</InputLabel>
