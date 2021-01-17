@@ -88,12 +88,14 @@ export const InvestigatorPortrait = ({
     (selectedInvestigator[dataType] as DataPoints) &&
     (selectedInvestigator[dataType][selectedYear] as SingleInvestigator[]);
   const meta = selectedInvestigator && selectedInvestigator.meta;
+  const name =
+    selectedInvestigator && lookupInvestigator(investigatorCode).name;
 
   return (
     <div className={classes.viewWrapper}>
       <Grid container spacing={3}>
         <Grid item xs={12}>
-          <Title content='Investigator Portrait' />
+          <Title content={`${name}`} />
         </Grid>
 
         {selectedInvestigator && (

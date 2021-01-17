@@ -27,11 +27,13 @@ export const InvestigatorLineChart = ({
   dataMode,
   numMode
 }: Props): React.ReactElement => {
+  console.log(releases);
+  console.log(input);
   if (!ids[0])
     return (
       <LineChart
-        width={800}
-        height={400}
+        width={900}
+        height={450}
         data={input}
         margin={{ top: 25, right: 10, left: 25, bottom: 25 }}
       >
@@ -50,15 +52,24 @@ export const InvestigatorLineChart = ({
       >
         <CartesianGrid strokeDasharray='1 1' />
         <XAxis dataKey='date' />
-        {setYAxis(dataMode, numMode)}
         {releases &&
           releases.map((rel) => (
-            <span key={rel.name}>
-              <ReferenceLine x={rel.date} stroke='green' strokeWidth={2}>
-                <Label value={rel.name} offset={10} position='top' />
-              </ReferenceLine>
-            </span>
+            <ReferenceLine
+              key={rel.date}
+              x={rel.date}
+              strokeDasharray='3 3'
+              stroke='#a0a0a0'
+              strokeWidth={2}
+            >
+              <Label
+                value={rel.name}
+                offset={10}
+                position='insideLeft'
+                angle={-90}
+              />
+            </ReferenceLine>
           ))}
+        {setYAxis(dataMode, numMode)}
         <Tooltip />
         <Legend />
         {ids.length === 1 ? (
@@ -110,8 +121,8 @@ export const ClassLineChart = ({
   if (!ids[0])
     return (
       <LineChart
-        width={800}
-        height={400}
+        width={900}
+        height={450}
         data={input}
         margin={{ top: 25, right: 25, left: 25, bottom: 25 }}
       >
@@ -123,8 +134,8 @@ export const ClassLineChart = ({
   return (
     <div style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
       <LineChart
-        width={800}
-        height={400}
+        width={900}
+        height={450}
         data={input}
         margin={{ top: 25, right: 25, left: 25, bottom: 25 }}
       >

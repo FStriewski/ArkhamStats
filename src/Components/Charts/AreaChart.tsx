@@ -30,8 +30,8 @@ export const InvestigatorAreaChart = ({
   if (!ids[0])
     return (
       <AreaChart
-        width={800}
-        height={400}
+        width={900}
+        height={450}
         data={input}
         margin={{ top: 25, right: 25, left: 25, bottom: 25 }}
       >
@@ -43,8 +43,8 @@ export const InvestigatorAreaChart = ({
   return (
     <div style={{ width: '100%', display: 'flex' }}>
       <AreaChart
-        width={800}
-        height={400}
+        width={900}
+        height={450}
         data={input}
         margin={{ top: 25, right: 25, left: 25, bottom: 25 }}
       >
@@ -117,8 +117,8 @@ export const ClassAreaChart = ({
   if (!ids[0])
     return (
       <AreaChart
-        width={800}
-        height={400}
+        width={900}
+        height={450}
         data={input}
         margin={{ top: 25, right: 25, left: 25, bottom: 25 }}
       >
@@ -130,8 +130,8 @@ export const ClassAreaChart = ({
   return (
     <div style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
       <AreaChart
-        width={800}
-        height={400}
+        width={900}
+        height={450}
         data={input}
         margin={{ top: 25, right: 25, left: 25, bottom: 25 }}
       >
