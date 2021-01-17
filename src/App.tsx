@@ -2,7 +2,7 @@ import React from 'react';
 import { Sidebar } from './Components/UI/Sidebar';
 import { InvestigatorPicker } from './Components/UI/InvestigatorPicker';
 import { YearSlider } from './Components/UI/YearSlider';
-import { SingleInvestigator } from './Components/SingleInvestigator';
+import { SingleInvestigatorComponent } from './Components/SingleInvestigator';
 import { InvestigatorComparison } from './Components/InvestigatorComparison';
 import { InvestigatorPortrait } from './Components/InvestigatorPortrait';
 import { InvestigatorClasses } from './Components/InvestigatorClasses';
@@ -20,10 +20,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
-import {
-  investigatorList,
-  investigatorClassColor
-} from './lookups/investigatorList';
+import { investigatorList } from './lookups/lists';
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -59,10 +56,6 @@ const useStyles = makeStyles((theme: Theme) => ({
   viewWrapper: {
     // justifyContent: 'center'
   },
-  appBar: {
-    top: 'auto',
-    bottom: 0
-  },
   chartBundle: {
     width: '800px',
     justify: 'right'
@@ -76,7 +69,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   }
 }));
 
-export const App = () => {
+export const App = (): React.ReactElement => {
   const classes = useStyles();
   const [tab1, setTab1] = React.useState(0); // Current Tab
   const [totalTab, setTotalTab] = React.useState(0); // Current Tab
@@ -86,12 +79,8 @@ export const App = () => {
   const [headerOpen, setHeaderOpen] = React.useState({ open: true, id: '0' });
   const [chartType, setChartType] = React.useState<CHARTTYPE>(CHARTTYPE.LINE);
 
-  const setMode = (
-    event: React.ChangeEvent<HTMLInputElement>,
-    checked: boolean
-  ) => {
-    setRelMode(!dataMode);
-  };
+  const setMode = () => setRelMode(!dataMode);
+
   const handleChange1 = (event: React.ChangeEvent, newTab: number) => {
     setTab1(newTab);
   };
@@ -108,7 +97,7 @@ export const App = () => {
     setInvestigatorCode(event.target.value as string);
   };
 
-  const handleSetYear = (event: any, year: number) => {
+  const handleSetYear = (event: React.ChangeEvent, year: number) => {
     setYear(year);
   };
 
@@ -166,7 +155,6 @@ export const App = () => {
                       dataMode={dataMode}
                       chartType={chartType}
                       numMode={NUMMODE.DIST}
-                      handleSetYear={handleSetYear}
                     />
                     <YearSlider year={year} handleSetYear={handleSetYear} />
                   </div>
@@ -231,12 +219,11 @@ export const App = () => {
                   chartType={chartType}
                   setChartType={setChartType}
                 />
-                <SingleInvestigator
+                <SingleInvestigatorComponent
                   year={year}
                   dataMode={dataMode}
                   chartType={chartType}
                   numMode={NUMMODE.SUM}
-                  handleSetYear={handleSetYear}
                   investigatorCode={investigatorCode}
                 />
               </div>
@@ -260,7 +247,6 @@ export const App = () => {
                       dataMode={dataMode}
                       chartType={chartType}
                       numMode={NUMMODE.SUM}
-                      handleSetYear={handleSetYear}
                     />
                     <YearSlider handleSetYear={handleSetYear} year={year} />
                   </div>

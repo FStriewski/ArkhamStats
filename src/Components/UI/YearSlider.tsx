@@ -1,14 +1,14 @@
 import React from 'react';
 import Paper from '@material-ui/core/Paper';
 import Slider from '@material-ui/core/Slider';
-import { createStyles, Theme, makeStyles } from '@material-ui/core/styles';
+import { createStyles, makeStyles } from '@material-ui/core/styles';
 
 type YearSliderProps = {
   year: number;
-  handleSetYear: (event: any, year: number) => void;
+  handleSetYear: (event: React.ChangeEvent, year: number) => void;
 };
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles(() =>
   createStyles({
     paper: {
       width: '400px',

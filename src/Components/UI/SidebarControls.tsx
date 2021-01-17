@@ -1,15 +1,10 @@
 import React from 'react';
-import {
-  withStyles,
-  makeStyles,
-  Theme,
-  createStyles
-} from '@material-ui/core/styles';
+import { makeStyles, createStyles } from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
 import PersonIcon from '@material-ui/icons/Person';
 import PersonAddDisabledIcon from '@material-ui/icons/PersonAddDisabled';
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles(() =>
   createStyles({
     buttonwrapper: {
       cursor: 'pointer',

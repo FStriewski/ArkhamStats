@@ -1,5 +1,3 @@
-import { InvestigatorListEntry } from '../types';
-
 export const investigatorClassColor = {
   all: '#ffffff',
   guardian: '#2B80C5',
@@ -64,16 +62,6 @@ export const investigatorByFaction = {
     '60401'
   ],
   neutral: ['03006']
-};
-
-export const lookupInvestigator = (id: string) => {
-  if (!id) return;
-
-  const investigator: InvestigatorListEntry = investigatorList.find(
-    (item) => item.code === id
-  );
-  investigator.color = investigatorClassColor[investigator.faction_code];
-  return investigator;
 };
 
 export const investigatorList = [

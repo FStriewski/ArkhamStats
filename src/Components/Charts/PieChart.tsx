@@ -1,11 +1,8 @@
 import { Typography } from '@material-ui/core';
 import React from 'react';
-import { PieChart, Pie, Cell, Label, Legend, Tooltip, Text } from 'recharts';
-import {
-  lookupInvestigator,
-  investigatorClassColor
-} from '../../lookups/investigatorList';
-import { Meta, NUMMODE, SingleInvestigator } from '../../types';
+import { PieChart, Pie, Cell, Legend, Tooltip } from 'recharts';
+import { investigatorClassColor } from '../../lookups/lists';
+import { Meta } from '../../types';
 
 type Props = {
   meta: Meta;
@@ -18,23 +15,32 @@ export const InvestigatorPerFactionPieChart = ({
   ids,
   factionCode
 }: Props): React.ReactElement => {
+  const decksPercent = Math.floor(
+    (meta.numDecks[ids[0]] / meta.factionTotal.facCnt_abs[factionCode]) * 100
+  );
   const data = [
     {
-      name: 'Decks',
-      value: Math.floor(
-        (meta.numDecks[ids[0]] / meta.factionTotal.facCnt_abs[factionCode]) *
-          100
-      )
+      name: '% Decks',
+      value: decksPercent
     },
-    { name: 'In Faction', value: 100 }
+    { name: 'In Faction', value: 100 - decksPercent }
   ];
-  const COLORS = [investigatorClassColor[factionCode], '#F0F0F0'];
+  const COLORS = [investigatorClassColor[factionCode], '#E0E0E0'];
   return (
     <>
-      <Typography style={{ textAlign: 'center' }} variant='h6'>
-        Compared to faction [%]:
+      <Typography
+        style={{
+          textAlign: 'center',
+          fontWeight: 600,
+          marginBottom: '-5px',
+          marginTop: '10px',
+          color: '#6a6969'
+        }}
+        variant='subtitle2'
+      >
+        Compared to faction:
       </Typography>
-      <PieChart width={300} height={300}>
+      <PieChart width={300} height={250}>
         <Pie
           data={data}
           dataKey='value'
@@ -47,7 +53,7 @@ export const InvestigatorPerFactionPieChart = ({
           label
         >
           {data.map((entry, index) => (
-            <Cell key={index} fill={COLORS[index]} />
+            <Cell key={index} fill={COLORS[index] as string} />
           ))}
         </Pie>
         <Tooltip />
@@ -62,20 +68,32 @@ export const InvestigatorPerTotalPieChart = ({
   ids,
   factionCode
 }: Props): React.ReactElement => {
-  const COLORS = [investigatorClassColor[factionCode], '#F0F0F0'];
+  const COLORS = [investigatorClassColor[factionCode], '#E0E0E0'];
+  const decksPercent = Math.floor(
+    (meta.numDecks[ids[0]] / meta.allDeckTotal) * 100
+  );
   const data = [
     {
-      name: 'Decks',
-      value: Math.floor((meta.numDecks[ids[0]] / meta.allDeckTotal) * 100)
+      name: '% Decks',
+      value: decksPercent
     },
-    { name: 'All Decks', value: 100 }
+    { name: 'All Decks', value: 100 - decksPercent }
   ];
   return (
     <>
-      <Typography style={{ textAlign: 'center' }} variant='h6'>
-        Compared to all decks [%]:
+      <Typography
+        style={{
+          textAlign: 'center',
+          fontWeight: 600,
+          marginTop: '50px',
+          marginBottom: '-5px',
+          color: '#6a6969'
+        }}
+        variant='subtitle2'
+      >
+        Compared to all decks:
       </Typography>
-      <PieChart width={300} height={300}>
+      <PieChart width={300} height={250}>
         <Pie
           data={data}
           dataKey='value'
@@ -88,7 +106,7 @@ export const InvestigatorPerTotalPieChart = ({
           label
         >
           {data.map((entry, index) => (
-            <Cell key={index} fill={COLORS[index]} />
+            <Cell key={index} fill={COLORS[index] as string} />
           ))}
         </Pie>
         <Tooltip />

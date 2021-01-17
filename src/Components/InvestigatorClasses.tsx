@@ -14,16 +14,14 @@ import {
   CHARTTYPE,
   NUMMODE,
   determineDataTypeMode,
-  APIResponse
+  APIResponse,
+  SingleInvestigator
 } from '../types';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
-import {
-  investigatorList,
-  investigatorClassColor
-} from '../lookups/investigatorList';
+import { investigatorClassColor } from '../lookups/lists';
 import {
   getClassDistributionByDate,
   getClassSumByDate
@@ -38,9 +36,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   root: {
     flexGrow: 1
   },
-  viewWrapper: {
-    // justifyContent: 'center'
-  },
+  viewWrapper: {},
   chartBundle: {
     width: '1000px',
     justify: 'right',
@@ -80,7 +76,7 @@ type Props = {
   chartType: CHARTTYPE;
   setChartType: (type: CHARTTYPE) => void;
   year: number;
-  handleSetYear: (event: any, year: number) => void;
+  handleSetYear: (event: React.ChangeEvent, year: number) => void;
   setMode: (
     event: React.ChangeEvent<HTMLInputElement>,
     checked: boolean
@@ -112,9 +108,9 @@ export const InvestigatorClasses = ({
 
   useEffect(() => {
     const fetchData = async () => {
-      const result: APIResponse = (await getClassDistributionByDate(
+      const result: APIResponse = await getClassDistributionByDate(
         investigatorClass
-      )) as APIResponse;
+      );
       chooseClassDist(result);
     };
     fetchData().catch((e) => console.log(e));
@@ -122,9 +118,7 @@ export const InvestigatorClasses = ({
 
   useEffect(() => {
     const fetchData = async () => {
-      const result: APIResponse = (await getClassSumByDate(
-        investigatorClass
-      )) as APIResponse;
+      const result: APIResponse = await getClassSumByDate(investigatorClass);
       chooseClassSum(result);
     };
     fetchData().catch((e) => console.log(e));
@@ -142,6 +136,10 @@ export const InvestigatorClasses = ({
       ? '#000000'
       : (investigatorClassColor[investigatorClass] as string);
   const classes = useStyles();
+  const input =
+    selectedClassDist &&
+    selectedClassDist[dataType] &&
+    (selectedClassDist[dataType][selectedYear] as SingleInvestigator[]);
 
   return (
     <div>
@@ -187,7 +185,7 @@ export const InvestigatorClasses = ({
               selectedClassDist[dataType] &&
               (chartType === CHARTTYPE.BAR ? (
                 <ClassBarChart
-                  input={selectedClassDist[dataType][selectedYear]}
+                  input={input}
                   ids={[investigatorClass]}
                   color={color}
                   dataMode={dataMode}
@@ -195,7 +193,7 @@ export const InvestigatorClasses = ({
                 />
               ) : chartType === CHARTTYPE.LINE ? (
                 <ClassLineChart
-                  input={selectedClassDist[dataType][selectedYear]}
+                  input={input}
                   ids={[investigatorClass]}
                   color={color}
                   dataMode={dataMode}
@@ -203,7 +201,7 @@ export const InvestigatorClasses = ({
                 />
               ) : (
                 <ClassAreaChart
-                  input={selectedClassDist[dataType][selectedYear]}
+                  input={input}
                   ids={[investigatorClass]}
                   color={color}
                   dataMode={dataMode}
@@ -227,7 +225,7 @@ export const InvestigatorClasses = ({
               selectedClassSum[dataType] &&
               (chartType === CHARTTYPE.BAR ? (
                 <ClassBarChart
-                  input={selectedClassSum[dataType][selectedYear]}
+                  input={input}
                   ids={[investigatorClass]}
                   color={color}
                   dataMode={dataMode}
@@ -235,7 +233,7 @@ export const InvestigatorClasses = ({
                 />
               ) : chartType === CHARTTYPE.LINE ? (
                 <ClassLineChart
-                  input={selectedClassSum[dataType][selectedYear]}
+                  input={input}
                   ids={[investigatorClass]}
                   color={color}
                   dataMode={dataMode}
@@ -243,7 +241,7 @@ export const InvestigatorClasses = ({
                 />
               ) : (
                 <ClassAreaChart
-                  input={selectedClassSum[dataType][selectedYear]}
+                  input={input}
                   ids={[investigatorClass]}
                   color={color}
                   dataMode={dataMode}

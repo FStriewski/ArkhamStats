@@ -4,17 +4,13 @@ import {
   Line,
   Label,
   XAxis,
-  YAxis,
   Legend,
   Tooltip,
   CartesianGrid,
   ReferenceLine
 } from 'recharts';
 import { releases } from '../../lookups/decks';
-import {
-  lookupInvestigator,
-  investigatorClassColor
-} from '../../lookups/investigatorList';
+import { lookupInvestigator } from '../../lookups/helpers';
 import { NUMMODE, SingleInvestigator } from '../../types';
 import { setYAxis, setClassYAxis } from './Shared';
 
@@ -37,7 +33,7 @@ export const InvestigatorLineChart = ({
         width={800}
         height={400}
         data={input}
-        margin={{ top: 25, right: 25, left: 25, bottom: 25 }}
+        margin={{ top: 25, right: 10, left: 25, bottom: 25 }}
       >
         <CartesianGrid strokeDasharray='1 1' />
         <XAxis dataKey='date' />
@@ -45,10 +41,10 @@ export const InvestigatorLineChart = ({
       </LineChart>
     );
   return (
-    <div style={{ width: '100%', display: 'flex' }}>
+    <div>
       <LineChart
-        width={800}
-        height={400}
+        width={900}
+        height={450}
         data={input}
         margin={{ top: 25, right: 25, left: 25, bottom: 25 }}
       >
@@ -97,7 +93,7 @@ export const InvestigatorLineChart = ({
 };
 
 type Props2 = {
-  input: any;
+  input: SingleInvestigator[];
   ids: string[];
   dataMode: boolean;
   numMode: NUMMODE;

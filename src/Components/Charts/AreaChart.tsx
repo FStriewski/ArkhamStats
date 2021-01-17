@@ -4,17 +4,13 @@ import {
   Area,
   Label,
   XAxis,
-  YAxis,
   Legend,
   Tooltip,
   CartesianGrid,
   ReferenceLine
 } from 'recharts';
 import { releases } from '../../lookups/decks';
-import {
-  lookupInvestigator,
-  investigatorClassColor
-} from '../../lookups/investigatorList';
+import { lookupInvestigator } from '../../lookups/helpers';
 import { NUMMODE, SingleInvestigator } from '../../types';
 import { setYAxis, setClassYAxis } from './Shared';
 
@@ -104,7 +100,7 @@ export const InvestigatorAreaChart = ({
 };
 
 type Props2 = {
-  input: any;
+  input: SingleInvestigator[];
   ids: string[];
   dataMode: boolean;
   numMode: NUMMODE;

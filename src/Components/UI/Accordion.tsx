@@ -1,26 +1,7 @@
 import React from 'react';
-import { makeStyles, withStyles, Theme } from '@material-ui/core/styles';
-import MuiAccordion from '@material-ui/core/Accordion';
+import { makeStyles, Theme } from '@material-ui/core/styles';
 import { Button } from '@material-ui/core';
 import { Header } from './Header';
-
-const Accordion = withStyles({
-  root: {
-    flex: 1,
-    border: '1px solid rgba(0, 0, 0, .125)',
-    boxShadow: 'none',
-    '&:not(:last-child)': {
-      borderBottom: 0
-    },
-    '&:before': {
-      display: 'none'
-    },
-    '&$expanded': {
-      margin: 'auto'
-    }
-  },
-  expanded: {}
-})(MuiAccordion);
 
 const useStyles = makeStyles((theme: Theme) => ({
   container: {

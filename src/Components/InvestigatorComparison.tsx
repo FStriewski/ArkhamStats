@@ -10,13 +10,13 @@ import {
   determineDataTypeMode,
   APIResponse,
   CHARTTYPE,
-  NUMMODE
+  NUMMODE,
+  SingleInvestigator
 } from '../types';
 
 type Props = {
   investigatorCodes: string[];
   year: number;
-  handleSetYear: (event: any, year: number) => void;
   dataMode: boolean;
   chartType: CHARTTYPE;
   numMode: NUMMODE;
@@ -25,7 +25,6 @@ type Props = {
 export const InvestigatorComparison = ({
   investigatorCodes,
   year,
-  handleSetYear,
   dataMode,
   chartType,
   numMode
@@ -48,7 +47,10 @@ export const InvestigatorComparison = ({
 
   const selectedYear = year.toString();
   const dataType = determineDataTypeMode(dataMode);
-  const color = '#FF0000';
+  const input =
+    selectedInvestigators &&
+    selectedInvestigators[dataType] &&
+    (selectedInvestigators[dataType][selectedYear] as SingleInvestigator[]);
 
   return (
     <div>
@@ -56,21 +58,21 @@ export const InvestigatorComparison = ({
         selectedInvestigators[dataType] &&
         (chartType === CHARTTYPE.BAR ? (
           <InvestigatorBarChart
-            input={selectedInvestigators[dataType][selectedYear]}
+            input={input}
             ids={investigatorCodes}
             dataMode={dataMode}
             numMode={numMode}
           />
         ) : chartType === CHARTTYPE.LINE ? (
           <InvestigatorLineChart
-            input={selectedInvestigators[dataType][selectedYear]}
+            input={input}
             ids={investigatorCodes}
             dataMode={dataMode}
             numMode={numMode}
           />
         ) : (
           <InvestigatorAreaChart
-            input={selectedInvestigators[dataType][selectedYear]}
+            input={input}
             ids={investigatorCodes}
             dataMode={dataMode}
             numMode={numMode}

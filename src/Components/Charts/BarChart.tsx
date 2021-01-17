@@ -4,18 +4,14 @@ import {
   Bar,
   Label,
   XAxis,
-  YAxis,
   Legend,
   Tooltip,
   CartesianGrid,
   ReferenceLine
 } from 'recharts';
 import { releases } from '../../lookups/decks';
-import {
-  lookupInvestigator,
-  investigatorClassColor
-} from '../../lookups/investigatorList';
-import { NUMMODE, SingleInvestigator, DataPoints } from '../../types';
+import { lookupInvestigator } from '../../lookups/helpers';
+import { NUMMODE, SingleInvestigator } from '../../types';
 import { setYAxis, setClassYAxis } from './Shared';
 
 type Props = {
@@ -95,7 +91,7 @@ export const InvestigatorBarChart = ({
 };
 
 type Props2 = {
-  input: any;
+  input: SingleInvestigator[];
   ids: string[];
   dataMode: boolean;
   numMode: NUMMODE;

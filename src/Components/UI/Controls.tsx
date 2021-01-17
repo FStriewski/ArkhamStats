@@ -1,10 +1,5 @@
 import React from 'react';
-import {
-  withStyles,
-  makeStyles,
-  Theme,
-  createStyles
-} from '@material-ui/core/styles';
+import { makeStyles, createStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import { ModeSwitch } from './ModeSwitch';
 import Button from '@material-ui/core/Button';

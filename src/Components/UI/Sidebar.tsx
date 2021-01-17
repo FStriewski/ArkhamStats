@@ -6,11 +6,9 @@ import FormGroup from '@material-ui/core/FormGroup';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import { CustomCheckbox } from '../UI/Checkbox';
-import {
-  investigatorList,
-  lookupInvestigator
-} from '../../lookups/investigatorList';
-import { InvestigatorListItem } from '../../types';
+import { investigatorList } from '../../lookups/lists';
+import { lookupInvestigator } from '../../lookups/helpers';
+import { InvestigatorListEntry } from '../../types';
 import Slide from '@material-ui/core/Slide';
 
 const drawerWidth = 220;
@@ -47,8 +45,11 @@ const useStyles = makeStyles((theme: Theme) =>
     }
   })
 );
+type Props = {
+  children: React.FC<string[]>;
+};
 
-export const Sidebar = (props: any): React.ReactElement => {
+export const Sidebar = ({ children }: Props): React.ReactElement => {
   const classes = useStyles();
 
   const [investigatorSelection, setSelection] = React.useState<string[]>([
@@ -93,7 +94,7 @@ export const Sidebar = (props: any): React.ReactElement => {
                   .sort((a, b) =>
                     a.name < b.name ? -1 : a.name > b.name ? 1 : 0
                   )
-                  .map((inv: InvestigatorListItem) => (
+                  .map((inv: InvestigatorListEntry) => (
                     <FormControlLabel
                       control={
                         <CustomCheckbox
@@ -116,10 +117,7 @@ export const Sidebar = (props: any): React.ReactElement => {
           </div>
         </Drawer>
       </Slide>
-      <main className={classes.content}>
-        {/* eslint-disable-next-line @typescript-eslint/no-unsafe-member-access,  @typescript-eslint/no-unsafe-call */}
-        {props.children(investigatorSelection)}
-      </main>
+      <main className={classes.content}>{children(investigatorSelection)}</main>
     </div>
   );
 };

@@ -2,16 +2,12 @@ import React from 'react';
 import { createStyles, Theme, makeStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import FormGroup from '@material-ui/core/FormGroup';
-import {
-  investigatorList,
-  lookupInvestigator,
-  investigatorByFaction
-} from '../../lookups/investigatorList';
+import { investigatorList, investigatorByFaction } from '../../lookups/lists';
+import { lookupInvestigator } from '../../lookups/helpers';
 import { PICKERSELECTION } from '../../types';
 import Accordion from '@material-ui/core/Accordion';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import AccordionSummary from '@material-ui/core/AccordionSummary';
-import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import List from '@material-ui/core/List';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
@@ -24,14 +20,6 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       display: 'flex'
-    },
-    root2: {
-      // width: '100%'
-    },
-    heading: {
-      // fontSize: theme.typography.pxToRem(15),
-      // flexBasis: '33.33%',
-      // flexShrink: 0
     },
     appBar: {
       zIndex: theme.zIndex.drawer + 1
@@ -61,7 +49,15 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export const InvestigatorPicker = (props: any): React.ReactElement => {
+type Props = {
+  pickerType: PICKERSELECTION;
+  children: React.FC<string[]>;
+};
+
+export const InvestigatorPicker = ({
+  pickerType,
+  children
+}: Props): React.ReactElement => {
   const classes = useStyles();
 
   const [investigatorSelection, setSelection] = React.useState<string[]>([
@@ -80,7 +76,7 @@ export const InvestigatorPicker = (props: any): React.ReactElement => {
   const handleSelection = (event: React.ChangeEvent<HTMLInputElement>) => {
     const investigator = event.target.id;
 
-    if (props.pickerType === PICKERSELECTION.MULTI) {
+    if (pickerType === PICKERSELECTION.MULTI) {
       if (!investigatorSelection.includes(investigator)) {
         setSelection([...investigatorSelection, investigator]);
       } else {
@@ -90,7 +86,7 @@ export const InvestigatorPicker = (props: any): React.ReactElement => {
         setSelection(newstate);
       }
     }
-    if (props.pickerType === PICKERSELECTION.SINGLE) {
+    if (pickerType === PICKERSELECTION.SINGLE) {
       if (!investigatorSelection.includes(investigator)) {
         setSelection([investigator]);
       }
@@ -115,67 +111,60 @@ export const InvestigatorPicker = (props: any): React.ReactElement => {
         />
         <div className={classes.drawerContainer}>
           <FormGroup>
-            <div className={classes.root2}>
-              {drawers.map((invClass, index) => (
-                <Accordion
-                  key={index}
-                  expanded={expanded === invClass}
-                  onChange={handleChange(invClass)}
+            {drawers.map((invClass, index) => (
+              <Accordion
+                key={index}
+                expanded={expanded === invClass}
+                onChange={handleChange(invClass)}
+              >
+                <AccordionSummary
+                  expandIcon={<ExpandMoreIcon />}
+                  aria-controls='panel1bh-content'
+                  id={`${invClass}-header`}
                 >
-                  <AccordionSummary
-                    expandIcon={<ExpandMoreIcon />}
-                    aria-controls='panel1bh-content'
-                    id={`${invClass}-header`}
-                  >
-                    {/* <Typography className={classes.heading}> */}
-                    {invClass}
-                    {/* </Typography> */}
-                  </AccordionSummary>
-                  <AccordionDetails>
-                    <List
-                      component='nav'
-                      aria-label='secondary mailbox folders'
-                    >
-                      {investigatorList.length &&
-                        investigatorList
-                          .filter((investigator) =>
-                            (investigatorByFaction[
-                              invClass
-                            ] as string[]).includes(investigator.code)
-                          )
-                          .sort((a, b) =>
-                            a.name < b.name ? -1 : a.name > b.name ? 1 : 0
-                          )
-                          .map((inv) => (
-                            <FormControlLabel
-                              control={
-                                <CustomCheckbox
-                                  checked={checked(inv.code)}
-                                  onChange={handleSelection}
-                                  name={inv.name}
-                                  id={inv.code}
-                                  disabled={!checked(inv.code) && error}
-                                />
-                              }
-                              label={inv.name}
-                              key={inv.code}
-                              style={{
-                                color: lookupInvestigator(inv.code).color
-                              }}
-                              className={classes.fcLabel}
-                            />
-                          ))}
-                    </List>
-                  </AccordionDetails>
-                </Accordion>
-              ))}
-            </div>
+                  {invClass}
+                </AccordionSummary>
+                <AccordionDetails>
+                  <List component='nav' aria-label='secondary mailbox folders'>
+                    {investigatorList.length &&
+                      investigatorList
+                        .filter((investigator) =>
+                          (investigatorByFaction[
+                            invClass
+                          ] as string[]).includes(investigator.code)
+                        )
+                        .sort((a, b) =>
+                          a.name < b.name ? -1 : a.name > b.name ? 1 : 0
+                        )
+                        .map((inv) => (
+                          <FormControlLabel
+                            control={
+                              <CustomCheckbox
+                                checked={checked(inv.code)}
+                                onChange={handleSelection}
+                                name={inv.name}
+                                id={inv.code}
+                                disabled={!checked(inv.code) && error}
+                              />
+                            }
+                            label={inv.name}
+                            key={inv.code}
+                            style={{
+                              color: lookupInvestigator(inv.code).color
+                            }}
+                            className={classes.fcLabel}
+                          />
+                        ))}
+                  </List>
+                </AccordionDetails>
+              </Accordion>
+            ))}
           </FormGroup>
         </div>
       </Drawer>
       <main className={classes.content}>
         {/* eslint-disable-next-line @typescript-eslint/no-unsafe-member-access,  @typescript-eslint/no-unsafe-call */}
-        {props.children(investigatorSelection)}
+        {children(investigatorSelection)}
       </main>
     </div>
   );

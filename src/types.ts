@@ -5,20 +5,14 @@ export type Investigator = {
   user_id: number;
   investigator_code: string;
   investigator_name: string;
-  slots: any;
+  slots: GenericObject;
 };
 export type InvestigatorListEntry = {
   code: string;
   name: string;
   faction_code: string;
+  faction?: string;
   color?: string;
-  deck_options: { [key: string]: any }[];
-};
-
-export type InvestigatorListItem = {
-  name: string;
-  code: string;
-  faction_code: string;
   deck_options: any;
 };
 
@@ -42,6 +36,7 @@ export type Meta = {
     facCnt_rel: { [key: string]: number };
   };
 };
+export type GenericObject = { [key: string]: string | number | boolean };
 
 export type APIResponse = {
   meta: Meta;

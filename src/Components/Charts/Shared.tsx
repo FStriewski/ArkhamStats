@@ -2,7 +2,10 @@ import React from 'react';
 import { YAxis } from 'recharts';
 import { NUMMODE } from '../../types';
 
-export const setYAxis = (dataMode: boolean, numMode: NUMMODE) => {
+export const setYAxis = (
+  dataMode: boolean,
+  numMode: NUMMODE
+): React.ReactElement => {
   if (numMode === NUMMODE.DIST) {
     return dataMode ? (
       <YAxis
@@ -55,7 +58,10 @@ export const setYAxis = (dataMode: boolean, numMode: NUMMODE) => {
   }
 };
 
-export const setClassYAxis = (dataMode: boolean, numMode: NUMMODE) => {
+export const setClassYAxis = (
+  dataMode: boolean,
+  numMode: NUMMODE
+): React.ReactElement => {
   if (numMode === NUMMODE.DIST) {
     return dataMode ? (
       <YAxis
