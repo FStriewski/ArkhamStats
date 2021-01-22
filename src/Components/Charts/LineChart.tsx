@@ -30,10 +30,10 @@ export const InvestigatorLineChart = ({
   if (!ids[0])
     return (
       <LineChart
-        width={900}
-        height={450}
+        width={1200}
+        height={600}
         data={input}
-        margin={{ top: 25, right: 10, left: 25, bottom: 25 }}
+        margin={{ top: 50, right: 10, left: 10, bottom: 25 }}
       >
         <CartesianGrid strokeDasharray='1 1' />
         <XAxis dataKey='date' />
@@ -43,10 +43,10 @@ export const InvestigatorLineChart = ({
   return (
     <div>
       <LineChart
-        width={900}
-        height={450}
+        width={1200}
+        height={600}
         data={input}
-        margin={{ top: 25, right: 25, left: 25, bottom: 25 }}
+        margin={{ top: 50, right: 10, left: 10, bottom: 25 }}
       >
         <CartesianGrid strokeDasharray='1 1' />
         <XAxis dataKey='date' />
@@ -65,7 +65,7 @@ export const InvestigatorLineChart = ({
               angle={-90}
             />
           </ReferenceLine>
-        ))}{' '}
+        ))}
         {setYAxis(dataMode, numMode)}
         <Tooltip />
         <Legend />
@@ -77,6 +77,7 @@ export const InvestigatorLineChart = ({
                 : `${lookupInvestigator(ids[0]).name}`
             }
             type='monotone'
+            strokeWidth={1.5}
             dataKey={ids[0]}
             stroke={lookupInvestigator(ids[0]).color}
           />
@@ -84,6 +85,7 @@ export const InvestigatorLineChart = ({
           ids.map((id: string) => (
             <Line
               key={id}
+              strokeWidth={1.5}
               name={
                 dataMode
                   ? `${lookupInvestigator(id).name} [%]`
@@ -118,10 +120,10 @@ export const ClassLineChart = ({
   if (!ids[0])
     return (
       <LineChart
-        width={900}
-        height={450}
+        width={1200}
+        height={600}
         data={input}
-        margin={{ top: 25, right: 25, left: 25, bottom: 25 }}
+        margin={{ top: 50, right: 10, left: 10, bottom: 25 }}
       >
         <CartesianGrid strokeDasharray='1 1' />
         <XAxis dataKey='date' />
@@ -131,10 +133,10 @@ export const ClassLineChart = ({
   return (
     <div style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
       <LineChart
-        width={900}
-        height={450}
+        width={1200}
+        height={600}
         data={input}
-        margin={{ top: 25, right: 25, left: 25, bottom: 25 }}
+        margin={{ top: 50, right: 10, left: 10, bottom: 25 }}
       >
         <CartesianGrid strokeDasharray='1 1' />
         <XAxis dataKey='date' />

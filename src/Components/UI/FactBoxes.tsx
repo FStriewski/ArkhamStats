@@ -1,15 +1,14 @@
 import React from 'react';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
 import { Paper, Typography } from '@material-ui/core';
 import { Meta } from '../../types';
 import { lookupInvestigator } from '../../lookups/helpers';
 
 const useStyles = makeStyles(() =>
   createStyles({
-    root: {
-      // position: 'absolute',
-      // left: '100px'
+    row: {
+      display: 'flex',
+      flexDirection: 'row'
     },
     paper: {
       height: 80,
@@ -36,38 +35,32 @@ export const FactBoxes = ({ id, meta }: Props): React.ReactElement => {
   ];
 
   return (
-    <Grid container className={classes.root} spacing={2}>
-      <Grid item xs={12}>
-        <Grid container justify='flex-start'>
-          {facts.map((fact) => (
-            <Grid key={fact.name} item>
-              <Paper className={classes.paper}>
-                <Typography
-                  variant='subtitle2'
-                  style={{
-                    textAlign: 'left',
-                    paddingTop: '5px',
-                    marginLeft: '-15px',
-                    color: '#6a6969'
-                  }}
-                >
-                  {fact.name}
-                </Typography>
-                <Typography
-                  variant='h5'
-                  style={{
-                    textAlign: 'right',
-                    marginRight: '-15px',
-                    color: investigator.color
-                  }}
-                >
-                  {fact.val}
-                </Typography>
-              </Paper>
-            </Grid>
-          ))}
-        </Grid>
-      </Grid>
-    </Grid>
+    <div className={classes.row}>
+      {facts.map((fact, index) => (
+        <Paper className={classes.paper} key={index}>
+          <Typography
+            variant='subtitle2'
+            style={{
+              textAlign: 'left',
+              paddingTop: '5px',
+              marginLeft: '-15px',
+              color: '#6a6969'
+            }}
+          >
+            {fact.name}
+          </Typography>
+          <Typography
+            variant='h5'
+            style={{
+              textAlign: 'right',
+              marginRight: '-15px',
+              color: investigator.color
+            }}
+          >
+            {fact.val}
+          </Typography>
+        </Paper>
+      ))}
+    </div>
   );
 };

@@ -16,7 +16,7 @@ const useStyles = makeStyles(() =>
       justifyContent: 'center',
       position: 'absolute',
       bottom: '20px',
-      left: '680px'
+      left: '700px'
     },
     slider: {
       maxWidth: '350px',

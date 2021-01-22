@@ -30,10 +30,10 @@ export const InvestigatorAreaChart = ({
   if (!ids[0])
     return (
       <AreaChart
-        width={900}
-        height={450}
+        width={1200}
+        height={600}
         data={input}
-        margin={{ top: 25, right: 25, left: 25, bottom: 25 }}
+        margin={{ top: 50, right: 10, left: 10, bottom: 25 }}
       >
         <CartesianGrid strokeDasharray='1 1' />
         <XAxis dataKey='date' />
@@ -43,10 +43,10 @@ export const InvestigatorAreaChart = ({
   return (
     <div style={{ width: '100%', display: 'flex' }}>
       <AreaChart
-        width={900}
-        height={450}
+        width={1200}
+        height={600}
         data={input}
-        margin={{ top: 25, right: 25, left: 25, bottom: 25 }}
+        margin={{ top: 50, right: 10, left: 10, bottom: 25 }}
       >
         <defs>
           {ids.length &&
@@ -132,10 +132,10 @@ export const ClassAreaChart = ({
   if (!ids[0])
     return (
       <AreaChart
-        width={900}
-        height={450}
+        width={1200}
+        height={600}
         data={input}
-        margin={{ top: 25, right: 25, left: 25, bottom: 25 }}
+        margin={{ top: 50, right: 10, left: 10, bottom: 25 }}
       >
         <CartesianGrid strokeDasharray='1 1' />
         <XAxis dataKey='date' />
@@ -145,10 +145,10 @@ export const ClassAreaChart = ({
   return (
     <div style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
       <AreaChart
-        width={900}
-        height={450}
+        width={1200}
+        height={600}
         data={input}
-        margin={{ top: 25, right: 25, left: 25, bottom: 25 }}
+        margin={{ top: 50, right: 10, left: 10, bottom: 25 }}
       >
         <defs>
           <linearGradient id={ids[0]} x1='0' y1='0' x2='0' y2='1'>

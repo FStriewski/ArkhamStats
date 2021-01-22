@@ -25,18 +25,18 @@ export const InvestigatorPerFactionPieChart = ({
     },
     { name: 'In Faction', value: 100 - decksPercent }
   ];
-  const COLORS = [investigatorClassColor[factionCode], '#E0E0E0'];
+  const COLORS = [investigatorClassColor[factionCode], '#D0D0D0'];
   return (
     <>
       <Typography
         style={{
           textAlign: 'center',
           fontWeight: 600,
-          marginBottom: '-5px',
-          marginTop: '10px',
+          marginBottom: '20px',
+          marginTop: '20px',
           color: '#6a6969'
         }}
-        variant='subtitle2'
+        variant='subtitle1'
       >
         Compared to faction:
       </Typography>
@@ -47,7 +47,7 @@ export const InvestigatorPerFactionPieChart = ({
           nameKey='name'
           cx='50%'
           cy='50%'
-          outerRadius={100}
+          outerRadius={110}
           startAngle={180}
           endAngle={-180}
           label
@@ -68,7 +68,7 @@ export const InvestigatorPerTotalPieChart = ({
   ids,
   factionCode
 }: Props): React.ReactElement => {
-  const COLORS = [investigatorClassColor[factionCode], '#E0E0E0'];
+  const COLORS = [investigatorClassColor[factionCode], '#D0D0D0'];
   const decksPercent = Math.floor(
     (meta.numDecks[ids[0]] / meta.allDeckTotal) * 100
   );
@@ -86,10 +86,10 @@ export const InvestigatorPerTotalPieChart = ({
           textAlign: 'center',
           fontWeight: 600,
           marginTop: '50px',
-          marginBottom: '-5px',
+          marginBottom: '20px',
           color: '#6a6969'
         }}
-        variant='subtitle2'
+        variant='subtitle1'
       >
         Compared to all decks:
       </Typography>
@@ -100,7 +100,7 @@ export const InvestigatorPerTotalPieChart = ({
           nameKey='name'
           cx='50%'
           cy='50%'
-          outerRadius={100}
+          outerRadius={110}
           startAngle={180}
           endAngle={-180}
           label

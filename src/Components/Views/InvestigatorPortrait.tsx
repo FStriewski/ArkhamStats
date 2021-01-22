@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { makeStyles, Theme } from '@material-ui/core/styles';
-import { Controls } from './UI/Controls';
-import Grid from '@material-ui/core/Grid';
+import { Controls } from '../UI/Controls';
+import { ViewWrapper, ViewRow, ViewColumn } from '../UI/ViewWrapper';
 
 import {
   CHARTTYPE,
@@ -10,19 +10,18 @@ import {
   APIResponse,
   DataPoints,
   SingleInvestigator
-} from '../types';
+} from '../../types';
 import {
   InvestigatorPerFactionPieChart,
   InvestigatorPerTotalPieChart
-} from './Charts/PieChart';
-import { InvestigatorLineChart } from './Charts/LineChart';
-import { InvestigatorBarChart } from './Charts/BarChart';
-import { InvestigatorAreaChart } from './Charts/AreaChart';
-import { FactBoxes } from './UI/FactBoxes';
-import { getInvestigatorDistributionByDate } from '../utils/requests';
-import { YearSlider } from './UI/YearSlider';
-import { Title } from './UI/Title';
-import { lookupInvestigator } from '../lookups/helpers';
+} from '../Charts/PieChart';
+import { InvestigatorLineChart } from '../Charts/LineChart';
+import { InvestigatorBarChart } from '../Charts/BarChart';
+import { InvestigatorAreaChart } from '../Charts/AreaChart';
+import { FactBoxes } from '../UI/FactBoxes';
+import { getInvestigatorDistributionByDate } from '../../utils/requests';
+import { YearSlider } from '../UI/YearSlider';
+import { lookupInvestigator } from '../../lookups/helpers';
 
 type Props = {
   dataMode: boolean;
@@ -40,7 +39,7 @@ type Props = {
 const useStyles = makeStyles((theme: Theme) => ({
   root: {},
   viewWrapper: {
-    flexGrow: 1
+    // flexGrow: 1
   },
   pieChartBundle: {
     margin: '0 auto'
@@ -53,9 +52,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     marginLeft: 'auto'
   },
   pieContainer: {
-    marginTop: '10px',
-    marginLeft: '-50px',
-    border: '1px solid grey'
+    marginTop: '50px'
   }
 }));
 
@@ -95,13 +92,14 @@ export const InvestigatorPortrait = ({
   const meta = selectedInvestigator && selectedInvestigator.meta;
 
   return (
-    <div className={classes.viewWrapper}>
-      <FactBoxes meta={meta} id={investigatorCode} />
-      <Grid container spacing={3}>
-        <Grid item xs={12} />
-        {selectedInvestigator && (
-          <>
-            <Grid item xs={9} style={{ justifyContent: 'left' }}>
+    <ViewWrapper>
+      <ViewRow>
+        <>
+          <ViewColumn>
+            <>
+              {selectedInvestigator && (
+                <FactBoxes meta={meta} id={investigatorCode} />
+              )}
               {selectedInvestigator &&
                 (selectedInvestigator[dataType] as DataPoints) &&
                 (chartType === CHARTTYPE.BAR ? (
@@ -126,9 +124,11 @@ export const InvestigatorPortrait = ({
                     numMode={NUMMODE.DIST}
                   />
                 ))}
-            </Grid>
-            <Grid item xs={3} className={classes.pieContainer}>
-              <Grid container spacing={1}>
+            </>
+          </ViewColumn>
+          <div style={{ margin: '0 auto' }}>
+            <>
+              <div className={classes.pieContainer}>
                 {selectedInvestigator && (
                   <div className={classes.pieChartBundle}>
                     <InvestigatorPerFactionPieChart
@@ -147,18 +147,18 @@ export const InvestigatorPortrait = ({
                     />
                   </div>
                 )}
-              </Grid>
-            </Grid>
-          </>
-        )}
-      </Grid>
-      <YearSlider handleSetYear={handleSetYear} year={year} />
-      <Controls
-        dataMode={dataMode}
-        setRelMode={setMode}
-        chartType={chartType}
-        setChartType={setChartType}
-      />
-    </div>
+              </div>
+            </>
+          </div>
+          <YearSlider handleSetYear={handleSetYear} year={year} />
+          <Controls
+            dataMode={dataMode}
+            setRelMode={setMode}
+            chartType={chartType}
+            setChartType={setChartType}
+          />
+        </>
+      </ViewRow>
+    </ViewWrapper>
   );
 };

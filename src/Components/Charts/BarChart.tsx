@@ -30,10 +30,10 @@ export const InvestigatorBarChart = ({
   if (!ids[0])
     return (
       <BarChart
-        width={900}
-        height={450}
+        width={1200}
+        height={600}
         data={input}
-        margin={{ top: 25, right: 25, left: 25, bottom: 25 }}
+        margin={{ top: 50, right: 10, left: 10, bottom: 25 }}
       >
         <CartesianGrid strokeDasharray='1 1' />
         <XAxis dataKey='date' />
@@ -43,10 +43,10 @@ export const InvestigatorBarChart = ({
   return (
     <div style={{ width: '100%', display: 'flex' }}>
       <BarChart
-        width={900}
-        height={450}
+        width={1200}
+        height={600}
         data={input}
-        margin={{ top: 25, right: 25, left: 25, bottom: 25 }}
+        margin={{ top: 50, right: 10, left: 10, bottom: 25 }}
       >
         <CartesianGrid strokeDasharray='1 1' />
         <XAxis dataKey='date' />
@@ -116,10 +116,10 @@ export const ClassBarChart = ({
   if (!ids[0])
     return (
       <BarChart
-        width={900}
-        height={450}
+        width={1200}
+        height={600}
         data={input}
-        margin={{ top: 25, right: 25, left: 25, bottom: 25 }}
+        margin={{ top: 50, right: 10, left: 10, bottom: 25 }}
       >
         <CartesianGrid strokeDasharray='1 1' />
         <XAxis dataKey='date' />
@@ -129,10 +129,10 @@ export const ClassBarChart = ({
   return (
     <div style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
       <BarChart
-        width={900}
-        height={450}
+        width={1200}
+        height={600}
         data={input}
-        margin={{ top: 25, right: 25, left: 25, bottom: 25 }}
+        margin={{ top: 50, right: 10, left: 10, bottom: 25 }}
       >
         <CartesianGrid strokeDasharray='1 1' />
         <XAxis dataKey='date' />

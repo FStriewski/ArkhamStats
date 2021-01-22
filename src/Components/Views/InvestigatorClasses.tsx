@@ -1,31 +1,31 @@
 import React, { useEffect } from 'react';
-import { YearSlider } from './UI/YearSlider';
-import { Title, SubTitle } from './UI/Title';
-import { ClassLineChart } from './Charts/LineChart';
-import { ClassBarChart } from './Charts/BarChart';
-import { ClassAreaChart } from './Charts/AreaChart';
+import { YearSlider } from '../UI/YearSlider';
+import { Title, SubTitle } from '../UI/Title';
+import { ClassLineChart } from '../Charts/LineChart';
+import { ClassBarChart } from '../Charts/BarChart';
+import { ClassAreaChart } from '../Charts/AreaChart';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Box from '@material-ui/core/Box';
 import Paper from '@material-ui/core/Paper';
-import { Controls } from './UI/Controls';
+import { Controls } from '../UI/Controls';
 import {
   CHARTTYPE,
   NUMMODE,
   determineDataTypeMode,
   APIResponse,
   SingleInvestigator
-} from '../types';
+} from '../../types';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
-import { investigatorClassColor } from '../lookups/lists';
+import { investigatorClassColor } from '../../lookups/lists';
 import {
   getClassDistributionByDate,
   getClassSumByDate
-} from '../utils/requests';
+} from '../../utils/requests';
 
 interface TabPanelProps {
   children?: React.ReactNode;

@@ -1,18 +1,18 @@
 import React, { useEffect } from 'react';
-import { InvestigatorLineChart } from './Charts/LineChart';
-import { InvestigatorBarChart } from './Charts/BarChart';
-import { InvestigatorAreaChart } from './Charts/AreaChart';
+import { InvestigatorLineChart } from '../Charts/LineChart';
+import { InvestigatorBarChart } from '../Charts/BarChart';
+import { InvestigatorAreaChart } from '../Charts/AreaChart';
 import {
   getInvestigatorDistributionByDate,
   getInvestigatorSumByDate
-} from '../utils/requests';
+} from '../../utils/requests';
 import {
   APIResponse,
   CHARTTYPE,
   determineDataTypeMode,
   SingleInvestigator,
   NUMMODE
-} from '../types';
+} from '../../types';
 
 type Props = {
   year: number;
