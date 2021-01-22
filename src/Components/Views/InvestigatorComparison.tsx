@@ -14,6 +14,7 @@ import {
   SingleInvestigator
 } from '../../types';
 import { ViewWrapper, ViewRow, ViewColumn } from '../UI/ViewWrapper';
+import { FactBoxes, forComparison } from '../UI/FactBoxes';
 
 type Props = {
   investigatorCodes: string[];
@@ -52,36 +53,42 @@ export const InvestigatorComparison = ({
     selectedInvestigators &&
     selectedInvestigators[dataType] &&
     (selectedInvestigators[dataType][selectedYear] as SingleInvestigator[]);
+  const ids = investigatorCodes;
 
   return (
     <ViewWrapper>
       <ViewRow>
         <>
           <ViewColumn>
-            {selectedInvestigators &&
-              selectedInvestigators[dataType] &&
-              (chartType === CHARTTYPE.BAR ? (
-                <InvestigatorBarChart
-                  input={input}
-                  ids={investigatorCodes}
-                  dataMode={dataMode}
-                  numMode={numMode}
-                />
-              ) : chartType === CHARTTYPE.LINE ? (
-                <InvestigatorLineChart
-                  input={input}
-                  ids={investigatorCodes}
-                  dataMode={dataMode}
-                  numMode={numMode}
-                />
-              ) : (
-                <InvestigatorAreaChart
-                  input={input}
-                  ids={investigatorCodes}
-                  dataMode={dataMode}
-                  numMode={numMode}
-                />
-              ))}
+            <>
+              {selectedInvestigators && (
+                <FactBoxes input={forComparison(ids)} />
+              )}
+              {selectedInvestigators &&
+                selectedInvestigators[dataType] &&
+                (chartType === CHARTTYPE.BAR ? (
+                  <InvestigatorBarChart
+                    input={input}
+                    ids={investigatorCodes}
+                    dataMode={dataMode}
+                    numMode={numMode}
+                  />
+                ) : chartType === CHARTTYPE.LINE ? (
+                  <InvestigatorLineChart
+                    input={input}
+                    ids={investigatorCodes}
+                    dataMode={dataMode}
+                    numMode={numMode}
+                  />
+                ) : (
+                  <InvestigatorAreaChart
+                    input={input}
+                    ids={investigatorCodes}
+                    dataMode={dataMode}
+                    numMode={numMode}
+                  />
+                ))}
+            </>
           </ViewColumn>
         </>
       </ViewRow>

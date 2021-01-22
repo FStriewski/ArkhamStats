@@ -58,6 +58,17 @@ export const forPortrait = ({ ids, meta }: Props): BoxInput => {
 
   return { facts, colors };
 };
+export const forComparison = (ids: string[]): BoxInput => {
+  const investigators = ids.map((id) => lookupInvestigator(id));
+
+  const facts = investigators.map((investigator, index: number) => ({
+    name: `Investigator ${index + 1}:`,
+    val: investigator.name
+  }));
+
+  const colors = investigators.map((investigator) => investigator.color);
+  return { facts, colors };
+};
 
 export const FactBoxes = ({
   input
