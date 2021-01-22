@@ -8,7 +8,7 @@ import { CHARTTYPE } from '../../types';
 const useStyles = makeStyles(() =>
   createStyles({
     paper: {
-      bottom: '55px',
+      bottom: '50px',
       left: '300px',
       height: '60px',
       position: 'absolute',

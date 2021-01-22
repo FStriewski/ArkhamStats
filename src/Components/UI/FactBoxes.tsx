@@ -2,7 +2,7 @@ import React from 'react';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
 import { Paper, Typography } from '@material-ui/core';
 import { Meta } from '../../types';
-import { lookupInvestigator } from '../../lookups/helpers';
+import { lookupInvestigator, daysSinceRelease } from '../../lookups/helpers';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -30,12 +30,19 @@ type Props = {
 export const FactBoxes = ({ id, meta }: Props): React.ReactElement => {
   const classes = useStyles();
   const investigator = lookupInvestigator(id);
+  const decksPerDay =
+    Math.round(
+      (meta.numDecks[id] / daysSinceRelease(investigator.date) +
+        Number.EPSILON) *
+        100
+    ) / 100 || 0;
 
   const facts = [
     { name: 'Name:', val: investigator.name },
     { name: 'Class:', val: investigator.faction },
+    { name: 'Release:', val: investigator.date },
     { name: 'Total Decks:', val: meta.numDecks[id] },
-    { name: 'Decks/Day:', val: meta.numDecks[id] }
+    { name: 'Decks/Day:', val: decksPerDay }
   ];
 
   return (

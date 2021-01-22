@@ -1,6 +1,7 @@
-import { Typography } from '@material-ui/core';
 import React from 'react';
-import { PieChart, Pie, Cell, Legend, Tooltip, Label } from 'recharts';
+import { makeStyles, createStyles } from '@material-ui/core/styles';
+import { Typography, Paper } from '@material-ui/core';
+import { PieChart, Pie, Cell, Legend, Tooltip } from 'recharts';
 import { investigatorClassColor } from '../../lookups/lists';
 import { Meta } from '../../types';
 
@@ -10,11 +11,28 @@ type Props = {
   factionCode: string;
 };
 
+const useStyles = makeStyles(() =>
+  createStyles({
+    typo: {
+      textAlign: 'center',
+      color: '#6a6969'
+    },
+    paper: {
+      margin: '20px 0',
+      padding: '5px',
+      backgroundColor: 'white',
+      border: '1px solid grey'
+    }
+  })
+);
+
 export const InvestigatorPerFactionPieChart = ({
   meta,
   ids,
   factionCode
 }: Props): React.ReactElement => {
+  const classes = useStyles();
+
   const decksPercent = Math.floor(
     (meta.numDecks[ids[0]] / meta.factionTotal.facCnt_abs[factionCode]) * 100
   );
@@ -28,20 +46,11 @@ export const InvestigatorPerFactionPieChart = ({
   const COLORS = [investigatorClassColor[factionCode], '#D0D0D0'];
   return (
     <>
-      <Typography
-        style={{
-          textAlign: 'center',
-          marginBottom: '20px',
-          marginTop: '20px',
-          color: '#6a6969',
-          padding: '4px',
-          backgroundColor: 'white',
-          border: '1px solid grey'
-        }}
-        variant='subtitle1'
-      >
-        Compared to faction:
-      </Typography>
+      <Paper className={classes.paper}>
+        <Typography className={classes.typo} variant='h6'>
+          Compared to faction:
+        </Typography>
+      </Paper>
       <PieChart width={300} height={250}>
         <Pie
           data={data}
@@ -70,6 +79,7 @@ export const InvestigatorPerTotalPieChart = ({
   ids,
   factionCode
 }: Props): React.ReactElement => {
+  const classes = useStyles();
   const COLORS = [investigatorClassColor[factionCode], '#D0D0D0'];
   const decksPercent = Math.floor(
     (meta.numDecks[ids[0]] / meta.allDeckTotal) * 100
@@ -83,20 +93,11 @@ export const InvestigatorPerTotalPieChart = ({
   ];
   return (
     <>
-      <Typography
-        style={{
-          textAlign: 'center',
-          marginTop: '50px',
-          marginBottom: '20px',
-          color: '#6a6969',
-          padding: '4px',
-          backgroundColor: 'white',
-          border: '1px solid grey'
-        }}
-        variant='subtitle1'
-      >
-        Compared to all decks:
-      </Typography>
+      <Paper className={classes.paper} style={{ marginTop: '60px' }}>
+        <Typography className={classes.typo} variant='h6'>
+          Compared to all decks:
+        </Typography>
+      </Paper>
       <PieChart width={300} height={250}>
         <Pie
           data={data}

@@ -4,6 +4,7 @@ import {
   investigatorClassColor,
   investigatorByFaction
 } from './lists';
+import dayjs from 'dayjs';
 
 const lookupFaction = (icode: string) => {
   const factions = Object.keys(investigatorByFaction);
@@ -25,4 +26,10 @@ export const lookupInvestigator = (icode: string): InvestigatorListEntry => {
   investigator.faction = lookupFaction(icode);
 
   return investigator;
+};
+
+export const daysSinceRelease = (release: string): number => {
+  const rel = dayjs(release);
+  const now = dayjs().format().slice(0, 10);
+  return Math.abs(rel.diff(now, 'day'));
 };

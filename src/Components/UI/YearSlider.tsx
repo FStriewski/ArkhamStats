@@ -16,7 +16,7 @@ const useStyles = makeStyles(() =>
       display: 'flex',
       justifyContent: 'center',
       position: 'absolute',
-      bottom: '55px',
+      bottom: '50px',
       left: '900px'
     },
     slider: {

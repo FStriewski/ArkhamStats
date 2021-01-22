@@ -129,10 +129,7 @@ export const App = (): React.ReactElement => {
                 <InvestigatorPortrait
                   dataMode={dataMode}
                   chartType={chartType}
-                  setChartType={setChartType}
-                  setMode={setMode}
                   year={year}
-                  handleSetYear={handleSetYear}
                   investigatorCode={investigatorSelection[0]}
                 />
               )}

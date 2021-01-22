@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { makeStyles, Theme } from '@material-ui/core/styles';
-import { Controls } from '../UI/Controls';
 import { ViewWrapper, ViewRow, ViewColumn } from '../UI/ViewWrapper';
 import {
   CHARTTYPE,
@@ -19,27 +18,16 @@ import { InvestigatorBarChart } from '../Charts/BarChart';
 import { InvestigatorAreaChart } from '../Charts/AreaChart';
 import { FactBoxes } from '../UI/FactBoxes';
 import { getInvestigatorDistributionByDate } from '../../utils/requests';
-import { YearSlider } from '../UI/YearSlider';
 import { lookupInvestigator } from '../../lookups/helpers';
 
 type Props = {
   dataMode: boolean;
   chartType: CHARTTYPE;
-  setChartType: (type: CHARTTYPE) => void;
   year: number;
-  handleSetYear: (event: React.ChangeEvent, year: number) => void;
-  setMode: (
-    event: React.ChangeEvent<HTMLInputElement>,
-    checked: boolean
-  ) => void;
   investigatorCode: string;
 };
 
 const useStyles = makeStyles((theme: Theme) => ({
-  root: {},
-  viewWrapper: {
-    // flexGrow: 1
-  },
   pieChartBundle: {
     margin: '0 auto'
   },
@@ -49,19 +37,13 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   control: {
     marginLeft: 'auto'
-  },
-  pieContainer: {
-    marginTop: '50px'
   }
 }));
 
 export const InvestigatorPortrait = ({
   dataMode,
   chartType,
-  setChartType,
-  setMode,
   year,
-  handleSetYear,
   investigatorCode
 }: Props): React.ReactElement => {
   const classes = useStyles();
@@ -126,7 +108,7 @@ export const InvestigatorPortrait = ({
             </>
           </ViewColumn>
           <div style={{ margin: '0 auto' }}>
-            <div className={classes.pieContainer}>
+            <div>
               {selectedInvestigator && (
                 <div className={classes.pieChartBundle}>
                   <InvestigatorPerFactionPieChart

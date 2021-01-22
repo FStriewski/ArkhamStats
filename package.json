@@ -19,6 +19,7 @@
     "@typescript-eslint/parser": "^4.12.0",
     "canvasjs": "^1.8.3",
     "create-react-app": "^4.0.1",
+    "dayjs": "^1.10.4",
     "eslint-config-prettier": "^7.0.0",
     "eslint-config-standard": "^14.1.1",
     "eslint-config-standard-react": "^9.2.0",

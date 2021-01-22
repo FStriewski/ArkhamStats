@@ -53,7 +53,7 @@ export const InvestigatorBarChart = ({
         {releases.map((rel) => (
           <ReferenceLine
             key={rel.name}
-            x={rel.date}
+          x={rel.date.slice(0, 7)}
             stroke='grey'
             strokeDasharray='3 3'
             strokeWidth={2}
@@ -139,7 +139,7 @@ export const ClassBarChart = ({
         {releases.map((rel) => (
           <ReferenceLine
             key={rel.name}
-            x={rel.date}
+          x={rel.date.slice(0, 7)}
             stroke='grey'
             strokeDasharray='3 3'
             strokeWidth={2}
