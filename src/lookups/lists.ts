@@ -69,6 +69,7 @@ export const investigatorList = [
     name: 'Roland Banks',
     code: '01001',
     faction_code: 'guardian',
+    date: '2016-11-10',
     deck_options: [
       { faction: ['guardian', 'neutral'], level: { min: 0, max: 5 } },
       { faction: ['seeker'], level: { min: 0, max: 2 } }
@@ -78,6 +79,7 @@ export const investigatorList = [
     name: 'Daisy Walker',
     code: '01002',
     faction_code: 'seeker',
+    date: '2016-11-10',
     deck_options: [
       { faction: ['seeker', 'neutral'], level: { min: 0, max: 5 } },
       { faction: ['mystic'], level: { min: 0, max: 2 } }
@@ -86,6 +88,7 @@ export const investigatorList = [
   {
     name: '"Skids" O\'Toole',
     code: '01003',
+    date: '2016-11-10',
     faction_code: 'rogue',
     deck_options: [
       { faction: ['rogue', 'neutral'], level: { min: 0, max: 5 } },
@@ -95,6 +98,7 @@ export const investigatorList = [
   {
     name: 'Agnes Baker',
     code: '01004',
+    date: '2016-11-10',
     faction_code: 'mystic',
     deck_options: [
       { faction: ['mystic', 'neutral'], level: { min: 0, max: 5 } },
@@ -104,6 +108,7 @@ export const investigatorList = [
   {
     name: 'Wendy Adams',
     code: '01005',
+    date: '2016-11-10',
     faction_code: 'survivor',
     deck_options: [
       { faction: ['survivor', 'neutral'], level: { min: 0, max: 5 } },
@@ -113,6 +118,7 @@ export const investigatorList = [
   {
     name: 'Zoey Samaras',
     code: '02001',
+    date: '2017-01-12',
     faction_code: 'guardian',
     deck_options: [
       { faction: ['guardian', 'neutral'], level: { min: 0, max: 5 } },
@@ -127,6 +133,7 @@ export const investigatorList = [
   {
     name: 'Rex Murphy',
     code: '02002',
+    date: '2017-01-12',
     faction_code: 'seeker',
     deck_options: [
       { not: true, trait: ['fortune'] },
@@ -142,6 +149,7 @@ export const investigatorList = [
   {
     name: 'Jenny Barnes',
     code: '02003',
+    date: '2017-01-12',
     faction_code: 'rogue',
     deck_options: [
       { faction: ['rogue', 'neutral'], level: { min: 0, max: 5 } },
@@ -155,6 +163,7 @@ export const investigatorList = [
   {
     name: 'Jim Culver',
     code: '02004',
+    date: '2017-01-12',
     faction_code: 'mystic',
     deck_options: [
       { faction: ['mystic', 'neutral'], level: { min: 0, max: 5 } },
@@ -169,6 +178,7 @@ export const investigatorList = [
   {
     name: '"Ashcan" Pete',
     code: '02005',
+    date: '2017-01-12',
     faction_code: 'survivor',
     deck_options: [
       { faction: ['survivor', 'neutral'], level: { min: 0, max: 5 } },
@@ -183,6 +193,7 @@ export const investigatorList = [
   {
     name: 'Mark Harrigan',
     code: '03001',
+    date: '2017-09-14',
     faction_code: 'guardian',
     deck_options: [
       { faction: ['guardian', 'neutral'], level: { min: 0, max: 5 } },
@@ -192,6 +203,7 @@ export const investigatorList = [
   {
     name: 'Minh Thi Phan',
     code: '03002',
+    date: '2017-09-14',
     faction_code: 'seeker',
     deck_options: [
       { faction: ['seeker', 'neutral'], level: { min: 0, max: 5 } },
@@ -201,6 +213,7 @@ export const investigatorList = [
   {
     name: 'Sefina Rousseau',
     code: '03003',
+    date: '2017-09-14',
     faction_code: 'rogue',
     deck_options: [
       { faction: ['rogue', 'neutral'], level: { min: 0, max: 5 } },
@@ -210,6 +223,7 @@ export const investigatorList = [
   {
     name: 'Akachi Onyele',
     code: '03004',
+    date: '2017-09-14',
     faction_code: 'mystic',
     deck_options: [
       { faction: ['mystic', 'neutral'], level: { min: 0, max: 5 } },
@@ -220,6 +234,7 @@ export const investigatorList = [
   {
     name: 'William Yorick',
     code: '03005',
+    date: '2017-09-14',
     faction_code: 'survivor',
     deck_options: [
       { faction: ['survivor', 'neutral'], level: { min: 0, max: 5 } },
@@ -229,6 +244,7 @@ export const investigatorList = [
   {
     name: 'Lola Hayes',
     code: '03006',
+    date: '2017-09-14',
     faction_code: 'neutral',
     deck_options: [
       {
@@ -243,6 +259,7 @@ export const investigatorList = [
   {
     name: 'Leo Anderson',
     code: '04001',
+    date: '2018-05-10',
     faction_code: 'guardian',
     deck_options: [
       { faction: ['guardian', 'neutral'], level: { min: 0, max: 5 } },
@@ -253,6 +270,7 @@ export const investigatorList = [
     name: 'Ursula Downs',
     faction_code: 'seeker',
     code: '04002',
+    date: '2018-05-10',
     deck_options: [
       { faction: ['seeker', 'neutral'], level: { min: 0, max: 5 } },
       { trait: ['relic'], level: { min: 0, max: 4 } }
@@ -261,6 +279,7 @@ export const investigatorList = [
   {
     name: 'Finn Edwards',
     code: '04003',
+    date: '2018-05-10',
     faction_code: 'rogue',
     deck_options: [
       { trait: ['illicit'], level: { min: 0, max: 5 } },
@@ -272,6 +291,7 @@ export const investigatorList = [
   {
     name: 'Father Mateo',
     code: '04004',
+    date: '2018-05-10',
     faction_code: 'mystic',
     deck_options: [
       { faction: ['mystic', 'neutral'], level: { min: 0, max: 5 } },
@@ -281,6 +301,7 @@ export const investigatorList = [
   {
     name: 'Calvin Wright',
     code: '04005',
+    date: '2018-05-10',
     faction_code: 'survivor',
     deck_options: [
       { faction: ['survivor', 'neutral'], level: { min: 0, max: 5 } },
@@ -291,6 +312,7 @@ export const investigatorList = [
     name: 'Carolyn Fern',
     faction_code: 'guardian',
     code: '98010',
+    date: '2018-04-05',
     deck_options: [
       { not: true, trait: ['weapon'], level: { min: 1, max: 5 } },
       { faction: ['guardian'], level: { min: 0, max: 3 } },
@@ -313,6 +335,7 @@ export const investigatorList = [
   {
     name: 'Joe Diamond',
     code: '05002',
+    date: '2019-01-31',
     faction_code: 'seeker',
     deck_options: [
       { faction: ['seeker', 'neutral'], level: { min: 0, max: 5 } },
@@ -322,6 +345,7 @@ export const investigatorList = [
   {
     name: 'Preston Fairmont',
     code: '05003',
+    date: '2019-01-31',
     faction_code: 'rogue',
     deck_options: [
       { not: true, trait: ['illicit'] },
@@ -332,6 +356,7 @@ export const investigatorList = [
   {
     name: 'Diana Stanley',
     code: '05004',
+    date: '2019-01-31',
     faction_code: 'mystic',
     deck_options: [
       { faction: ['mystic', 'neutral'], level: { min: 0, max: 5 } },
@@ -341,6 +366,7 @@ export const investigatorList = [
   {
     code: '05005',
     name: 'Rita Young',
+    date: '2019-01-31',
     faction_code: 'survivor',
     deck_options: [
       { trait: ['trick'], level: { min: 0, max: 3 } },
@@ -350,6 +376,7 @@ export const investigatorList = [
   {
     name: 'Marie Lambeau',
     code: '05006',
+    date: '2019-01-31',
     faction_code: 'mystic',
     deck_options: [
       { trait: ['spell'], level: { min: 0, max: 5 } },
@@ -363,6 +390,7 @@ export const investigatorList = [
   {
     name: 'Tommy Muldoon',
     code: '06001',
+    date: '2019-09-27',
     faction_code: 'guardian',
     deck_options: [
       { faction: ['guardian', 'neutral'], level: { min: 0, max: 5 } },
@@ -372,6 +400,7 @@ export const investigatorList = [
   {
     name: 'Mandy Thompson',
     code: '06002',
+    date: '2019-09-27',
     faction_code: 'seeker',
     deck_options: [
       { name: 'Deck Size', deck_size_select: ['30', '40', '50'], faction: [] },
@@ -388,6 +417,7 @@ export const investigatorList = [
   {
     name: 'Tony Morgan',
     code: '06003',
+    date: '2019-09-27',
     faction_code: 'rogue',
     deck_options: [
       { faction: ['rogue', 'neutral'], level: { min: 0, max: 5 } },
@@ -403,6 +433,7 @@ export const investigatorList = [
   {
     name: 'Luke Robinson',
     code: '06004',
+    date: '2019-09-27',
     faction_code: 'mystic',
     deck_options: [
       { faction: ['mystic', 'neutral'], level: { min: 0, max: 5 } },
@@ -412,6 +443,7 @@ export const investigatorList = [
   {
     name: 'Patrice Hathaway',
     code: '06005',
+    date: '2019-09-27',
     faction_code: 'survivor',
     deck_options: [
       { faction: ['survivor', 'neutral'], level: { min: 0, max: 5 } },
@@ -422,6 +454,7 @@ export const investigatorList = [
   {
     name: 'Sister Mary',
     code: '07001',
+    date: '2020-10-02',
     faction_code: 'guardian',
     deck_options: [
       { faction: ['guardian', 'neutral'], level: { min: 0, max: 5 } },
@@ -431,6 +464,7 @@ export const investigatorList = [
   {
     name: 'Amanda Sharpe',
     code: '07002',
+    date: '2020-10-02',
     faction_code: 'seeker',
     deck_options: [
       { faction: ['seeker', 'neutral'], level: { min: 0, max: 5 } },
@@ -440,6 +474,7 @@ export const investigatorList = [
   {
     name: 'Trish Scarborough',
     code: '07003',
+    date: '2020-10-02',
     faction_code: 'rogue',
     deck_options: [
       { faction: ['rogue', 'neutral'], level: { min: 0, max: 5 } },
@@ -449,6 +484,7 @@ export const investigatorList = [
   {
     name: 'Dexter Drake',
     code: '98016',
+    date: '2020-06-05',
     faction_code: 'mystic',
     deck_options: [
       { faction: ['mystic', 'neutral'], level: { min: 0, max: 5 } },
@@ -458,12 +494,14 @@ export const investigatorList = [
   {
     name: 'Norman Withers',
     code: '98007',
+    date: '2017-12-07',
     faction_code: 'seeker',
     deck_options: []
   },
   {
     name: 'Silas Marsh',
     code: '98013',
+    date: '2018-06-07',
     faction_code: 'survivor',
     deck_options: [
       { faction: ['survivor', 'neutral'], level: { min: 0, max: 5 } },
@@ -474,12 +512,14 @@ export const investigatorList = [
   {
     name: 'Winifred Habbamock',
     code: '60301',
+    date: '2020-08-28',
     faction_code: 'rogue',
     deck_options: [{ faction: ['rogue', 'neutral'], level: { min: 0, max: 5 } }]
   },
   {
     name: 'Nathaniel Cho',
     code: '60101',
+    date: '2020-08-28',
     faction_code: 'guardian',
     deck_options: [
       { faction: ['guardian', 'neutral'], level: { min: 0, max: 5 } }
@@ -488,6 +528,7 @@ export const investigatorList = [
   {
     name: 'Jacqueline Fine',
     code: '60401',
+    date: '2020-08-28',
     faction_code: 'mystic',
     deck_options: [
       { faction: ['mystic', 'neutral'], level: { min: 0, max: 5 } }
@@ -496,6 +537,7 @@ export const investigatorList = [
   {
     name: 'Harvey Walters',
     code: '60201',
+    date: '2020-08-28',
     faction_code: 'seeker',
     deck_options: [
       { faction: ['seeker', 'neutral'], level: { min: 0, max: 5 } }
@@ -504,6 +546,7 @@ export const investigatorList = [
   {
     name: 'Stella Clark',
     code: '60501',
+    date: '2020-08-28',
     faction_code: 'survivor',
     deck_options: [
       { faction: ['survivor', 'neutral'], level: { min: 0, max: 5 } }

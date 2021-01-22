@@ -8,8 +8,8 @@ import { CHARTTYPE } from '../../types';
 const useStyles = makeStyles(() =>
   createStyles({
     paper: {
-      bottom: '45px',
-      left: '220px',
+      bottom: '55px',
+      left: '300px',
       height: '60px',
       position: 'absolute',
       cursor: 'pointer',
@@ -19,14 +19,10 @@ const useStyles = makeStyles(() =>
       flexDirection: 'row',
       justifyContent: 'space-around',
       alignItems: 'center',
-      padding: '5px',
-      marginRight: 'auto',
-      marginLeft: '85px',
-      marginBottom: '-25px'
+      // padding: '5px',
+      marginRight: 'auto'
     },
-    button: {
-      margin: '0 5px'
-    }
+    button: {}
   })
 );
 type Props = {

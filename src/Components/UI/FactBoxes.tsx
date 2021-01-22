@@ -34,7 +34,8 @@ export const FactBoxes = ({ id, meta }: Props): React.ReactElement => {
   const facts = [
     { name: 'Name:', val: investigator.name },
     { name: 'Class:', val: investigator.faction },
-    { name: 'Total Decks:', val: meta.numDecks[id] }
+    { name: 'Total Decks:', val: meta.numDecks[id] },
+    { name: 'Decks/Day:', val: meta.numDecks[id] }
   ];
 
   return (

@@ -11,6 +11,7 @@ export type InvestigatorListEntry = {
   code: string;
   name: string;
   faction_code: string;
+  date: string;
   faction?: string;
   color?: string;
   deck_options: any;

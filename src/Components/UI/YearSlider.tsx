@@ -11,16 +11,17 @@ type YearSliderProps = {
 const useStyles = makeStyles(() =>
   createStyles({
     paper: {
-      width: '400px',
+      width: '450px',
+      height: '60px',
       display: 'flex',
       justifyContent: 'center',
       position: 'absolute',
-      bottom: '20px',
-      left: '700px'
+      bottom: '55px',
+      left: '900px'
     },
     slider: {
-      maxWidth: '350px',
-      marginBottom: '30px',
+      maxWidth: '400px',
+      marginBottom: '25px',
       position: 'relative'
     }
   })
