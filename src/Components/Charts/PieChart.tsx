@@ -1,6 +1,6 @@
 import { Typography } from '@material-ui/core';
 import React from 'react';
-import { PieChart, Pie, Cell, Legend, Tooltip } from 'recharts';
+import { PieChart, Pie, Cell, Legend, Tooltip, Label } from 'recharts';
 import { investigatorClassColor } from '../../lookups/lists';
 import { Meta } from '../../types';
 
@@ -31,10 +31,12 @@ export const InvestigatorPerFactionPieChart = ({
       <Typography
         style={{
           textAlign: 'center',
-          fontWeight: 600,
           marginBottom: '20px',
           marginTop: '20px',
-          color: '#6a6969'
+          color: '#6a6969',
+          padding: '4px',
+          backgroundColor: 'white',
+          border: '1px solid grey'
         }}
         variant='subtitle1'
       >
@@ -57,7 +59,7 @@ export const InvestigatorPerFactionPieChart = ({
           ))}
         </Pie>
         <Tooltip />
-        <Legend />
+        <Legend wrapperStyle={{ position: 'relative' }} />
       </PieChart>
     </>
   );
@@ -84,10 +86,12 @@ export const InvestigatorPerTotalPieChart = ({
       <Typography
         style={{
           textAlign: 'center',
-          fontWeight: 600,
           marginTop: '50px',
           marginBottom: '20px',
-          color: '#6a6969'
+          color: '#6a6969',
+          padding: '4px',
+          backgroundColor: 'white',
+          border: '1px solid grey'
         }}
         variant='subtitle1'
       >
@@ -110,7 +114,7 @@ export const InvestigatorPerTotalPieChart = ({
           ))}
         </Pie>
         <Tooltip />
-        <Legend />
+        <Legend wrapperStyle={{ position: 'relative' }} />
       </PieChart>
     </>
   );

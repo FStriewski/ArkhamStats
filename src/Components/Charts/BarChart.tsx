@@ -30,10 +30,10 @@ export const InvestigatorBarChart = ({
   if (!ids[0])
     return (
       <BarChart
-        width={1200}
-        height={600}
+        width={1100}
+        height={550}
         data={input}
-        margin={{ top: 50, right: 10, left: 10, bottom: 25 }}
+        margin={{ top: 70, right: 10, left: 0, bottom: 15 }}
       >
         <CartesianGrid strokeDasharray='1 1' />
         <XAxis dataKey='date' />
@@ -43,10 +43,10 @@ export const InvestigatorBarChart = ({
   return (
     <div style={{ width: '100%', display: 'flex' }}>
       <BarChart
-        width={1200}
-        height={600}
+        width={1100}
+        height={550}
         data={input}
-        margin={{ top: 50, right: 10, left: 10, bottom: 25 }}
+        margin={{ top: 70, right: 10, left: 0, bottom: 15 }}
       >
         <CartesianGrid strokeDasharray='1 1' />
         <XAxis dataKey='date' />
@@ -65,7 +65,7 @@ export const InvestigatorBarChart = ({
               angle={-90}
             />
           </ReferenceLine>
-        ))}{' '}
+        ))}
         {setYAxis(dataMode, numMode)}
         <Tooltip />
         <Legend />
@@ -116,10 +116,10 @@ export const ClassBarChart = ({
   if (!ids[0])
     return (
       <BarChart
-        width={1200}
-        height={600}
+        width={1100}
+        height={550}
         data={input}
-        margin={{ top: 50, right: 10, left: 10, bottom: 25 }}
+        margin={{ top: 70, right: 10, left: 0, bottom: 15 }}
       >
         <CartesianGrid strokeDasharray='1 1' />
         <XAxis dataKey='date' />
@@ -129,10 +129,10 @@ export const ClassBarChart = ({
   return (
     <div style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
       <BarChart
-        width={1200}
-        height={600}
+        width={1100}
+        height={550}
         data={input}
-        margin={{ top: 50, right: 10, left: 10, bottom: 25 }}
+        margin={{ top: 70, right: 10, left: 0, bottom: 15 }}
       >
         <CartesianGrid strokeDasharray='1 1' />
         <XAxis dataKey='date' />

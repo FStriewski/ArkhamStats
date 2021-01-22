@@ -8,13 +8,16 @@ const useStyles = makeStyles(() =>
   createStyles({
     row: {
       display: 'flex',
-      flexDirection: 'row'
+      flexDirection: 'row',
+      marginTop: '10px',
+      marginLeft: '40px'
     },
     paper: {
       height: 80,
-      marginRight: '20px',
+      marginRight: '25px',
       padding: '10px 25px',
-      border: '1px solid grey'
+      border: '1px solid grey',
+      textTransform: 'capitalize'
     }
   })
 );
