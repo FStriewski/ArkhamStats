@@ -13,6 +13,7 @@ import {
   NUMMODE,
   SingleInvestigator
 } from '../../types';
+import { ViewWrapper, ViewRow, ViewColumn } from '../UI/ViewWrapper';
 
 type Props = {
   investigatorCodes: string[];
@@ -53,31 +54,37 @@ export const InvestigatorComparison = ({
     (selectedInvestigators[dataType][selectedYear] as SingleInvestigator[]);
 
   return (
-    <div>
-      {selectedInvestigators &&
-        selectedInvestigators[dataType] &&
-        (chartType === CHARTTYPE.BAR ? (
-          <InvestigatorBarChart
-            input={input}
-            ids={investigatorCodes}
-            dataMode={dataMode}
-            numMode={numMode}
-          />
-        ) : chartType === CHARTTYPE.LINE ? (
-          <InvestigatorLineChart
-            input={input}
-            ids={investigatorCodes}
-            dataMode={dataMode}
-            numMode={numMode}
-          />
-        ) : (
-          <InvestigatorAreaChart
-            input={input}
-            ids={investigatorCodes}
-            dataMode={dataMode}
-            numMode={numMode}
-          />
-        ))}
-    </div>
+    <ViewWrapper>
+      <ViewRow>
+        <>
+          <ViewColumn>
+            {selectedInvestigators &&
+              selectedInvestigators[dataType] &&
+              (chartType === CHARTTYPE.BAR ? (
+                <InvestigatorBarChart
+                  input={input}
+                  ids={investigatorCodes}
+                  dataMode={dataMode}
+                  numMode={numMode}
+                />
+              ) : chartType === CHARTTYPE.LINE ? (
+                <InvestigatorLineChart
+                  input={input}
+                  ids={investigatorCodes}
+                  dataMode={dataMode}
+                  numMode={numMode}
+                />
+              ) : (
+                <InvestigatorAreaChart
+                  input={input}
+                  ids={investigatorCodes}
+                  dataMode={dataMode}
+                  numMode={numMode}
+                />
+              ))}
+          </ViewColumn>
+        </>
+      </ViewRow>
+    </ViewWrapper>
   );
 };

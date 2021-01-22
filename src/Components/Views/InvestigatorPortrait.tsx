@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 import { Controls } from '../UI/Controls';
 import { ViewWrapper, ViewRow, ViewColumn } from '../UI/ViewWrapper';
-
 import {
   CHARTTYPE,
   NUMMODE,
@@ -127,36 +126,27 @@ export const InvestigatorPortrait = ({
             </>
           </ViewColumn>
           <div style={{ margin: '0 auto' }}>
-            <>
-              <div className={classes.pieContainer}>
-                {selectedInvestigator && (
-                  <div className={classes.pieChartBundle}>
-                    <InvestigatorPerFactionPieChart
-                      meta={selectedInvestigator.meta}
-                      ids={[investigatorCode]}
-                      factionCode={
-                        lookupInvestigator(investigatorCode).faction_code
-                      }
-                    />
-                    <InvestigatorPerTotalPieChart
-                      meta={selectedInvestigator.meta}
-                      ids={[investigatorCode]}
-                      factionCode={
-                        lookupInvestigator(investigatorCode).faction_code
-                      }
-                    />
-                  </div>
-                )}
-              </div>
-            </>
+            <div className={classes.pieContainer}>
+              {selectedInvestigator && (
+                <div className={classes.pieChartBundle}>
+                  <InvestigatorPerFactionPieChart
+                    meta={selectedInvestigator.meta}
+                    ids={[investigatorCode]}
+                    factionCode={
+                      lookupInvestigator(investigatorCode).faction_code
+                    }
+                  />
+                  <InvestigatorPerTotalPieChart
+                    meta={selectedInvestigator.meta}
+                    ids={[investigatorCode]}
+                    factionCode={
+                      lookupInvestigator(investigatorCode).faction_code
+                    }
+                  />
+                </div>
+              )}
+            </div>
           </div>
-          <YearSlider handleSetYear={handleSetYear} year={year} />
-          <Controls
-            dataMode={dataMode}
-            setRelMode={setMode}
-            chartType={chartType}
-            setChartType={setChartType}
-          />
         </>
       </ViewRow>
     </ViewWrapper>

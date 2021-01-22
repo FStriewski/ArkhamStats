@@ -121,11 +121,20 @@ export const InvestigatorPicker = ({
                   expandIcon={<ExpandMoreIcon />}
                   aria-controls='panel1bh-content'
                   id={`${invClass}-header`}
+                  style={{
+                    fontSize: '18px',
+                    textTransform: 'capitalize',
+                    marginLeft: '10px'
+                  }}
                 >
                   {invClass}
                 </AccordionSummary>
                 <AccordionDetails>
-                  <List component='nav' aria-label='secondary mailbox folders'>
+                  <List
+                    component='nav'
+                    aria-label='secondary mailbox folders'
+                    style={{ marginTop: '-20px', marginBottom: '-10px' }}
+                  >
                     {investigatorList.length &&
                       investigatorList
                         .filter((investigator) =>

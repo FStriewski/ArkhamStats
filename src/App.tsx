@@ -256,6 +256,13 @@ export const App = (): React.ReactElement => {
           </TabPanel>
         </div>
       )}
+      <YearSlider handleSetYear={handleSetYear} year={year} />
+      <Controls
+        dataMode={dataMode}
+        setRelMode={setMode}
+        chartType={chartType}
+        setChartType={setChartType}
+      />
     </div>
   );
 };

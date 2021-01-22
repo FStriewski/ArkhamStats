@@ -31,7 +31,7 @@ const useStyles = makeStyles({
     }
   },
   checkedIcon: {
-    backgroundColor: '#137cbd',
+    backgroundColor: '#3E51B5',
     backgroundImage:
       'linear-gradient(180deg,hsla(0,0%,100%,.1),hsla(0,0%,100%,0))',
     '&:before': {
