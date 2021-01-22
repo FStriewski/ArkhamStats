@@ -16,7 +16,7 @@ import {
 import { InvestigatorLineChart } from '../Charts/LineChart';
 import { InvestigatorBarChart } from '../Charts/BarChart';
 import { InvestigatorAreaChart } from '../Charts/AreaChart';
-import { FactBoxes } from '../UI/FactBoxes';
+import { FactBoxes, forPortrait } from '../UI/FactBoxes';
 import { getInvestigatorDistributionByDate } from '../../utils/requests';
 import { lookupInvestigator } from '../../lookups/helpers';
 
@@ -71,7 +71,7 @@ export const InvestigatorPortrait = ({
     (selectedInvestigator[dataType] as DataPoints) &&
     (selectedInvestigator[dataType][selectedYear] as SingleInvestigator[]);
   const meta = selectedInvestigator && selectedInvestigator.meta;
-
+  const ids = [investigatorCode];
   return (
     <ViewWrapper>
       <ViewRow>
@@ -79,7 +79,7 @@ export const InvestigatorPortrait = ({
           <ViewColumn>
             <>
               {selectedInvestigator && (
-                <FactBoxes meta={meta} id={investigatorCode} />
+                <FactBoxes input={forPortrait({ ids, meta })} />
               )}
               {selectedInvestigator &&
                 (selectedInvestigator[dataType] as DataPoints) &&

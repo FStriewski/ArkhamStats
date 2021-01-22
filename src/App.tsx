@@ -53,9 +53,6 @@ const useStyles = makeStyles((theme: Theme) => ({
   root: {
     flexGrow: 1
   },
-  viewWrapper: {
-    // justifyContent: 'center'
-  },
   chartBundle: {
     width: '800px',
     justify: 'right'
@@ -71,7 +68,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 export const App = (): React.ReactElement => {
   const classes = useStyles();
-  const [tab1, setTab1] = React.useState(0); // Current Tab
+  const [tab1, setTab1] = React.useState(1); // Current Tab
   const [totalTab, setTotalTab] = React.useState(0); // Current Tab
   const [tab3, setTab3] = React.useState(0); // Current Tab
   const [year, setYear] = React.useState(2020);
@@ -136,28 +133,26 @@ export const App = (): React.ReactElement => {
             </InvestigatorPicker>
           </TabPanel>
           <TabPanel value={tab1} index={1}>
-            <div className={classes.viewWrapper}>
-              <InvestigatorPicker pickerType={PICKERSELECTION.MULTI}>
-                {(investigatorSelection: string[]) => (
-                  <div className={classes.chartBundle}>
-                    <Controls
-                      dataMode={dataMode}
-                      setRelMode={setMode}
-                      chartType={chartType}
-                      setChartType={setChartType}
-                    />
-                    <InvestigatorComparison
-                      year={year}
-                      investigatorCodes={investigatorSelection}
-                      dataMode={dataMode}
-                      chartType={chartType}
-                      numMode={NUMMODE.DIST}
-                    />
-                    <YearSlider year={year} handleSetYear={handleSetYear} />
-                  </div>
-                )}
-              </InvestigatorPicker>
-            </div>
+            <InvestigatorPicker pickerType={PICKERSELECTION.MULTI}>
+              {(investigatorSelection: string[]) => (
+                <div className={classes.chartBundle}>
+                  <Controls
+                    dataMode={dataMode}
+                    setRelMode={setMode}
+                    chartType={chartType}
+                    setChartType={setChartType}
+                  />
+                  <InvestigatorComparison
+                    year={year}
+                    investigatorCodes={investigatorSelection}
+                    dataMode={dataMode}
+                    chartType={chartType}
+                    numMode={NUMMODE.DIST}
+                  />
+                  <YearSlider year={year} handleSetYear={handleSetYear} />
+                </div>
+              )}
+            </InvestigatorPicker>
           </TabPanel>
         </>
       )}
@@ -190,7 +185,7 @@ export const App = (): React.ReactElement => {
             </Tabs>
           </Paper>
           <TabPanel value={tab3} index={0}>
-            <div className={classes.viewWrapper}>
+            <div>
               <Typography>BLABLA</Typography>
               <FormControl className={classes.formControl}>
                 <InputLabel id='demo-simple-select-label'>
@@ -228,28 +223,26 @@ export const App = (): React.ReactElement => {
             </div>
           </TabPanel>
           <TabPanel value={tab3} index={1}>
-            <div className={classes.viewWrapper}>
-              <Sidebar>
-                {(investigatorSelection: string[]) => (
-                  <div className={classes.chartBundle}>
-                    <Controls
-                      dataMode={dataMode}
-                      setRelMode={setMode}
-                      chartType={chartType}
-                      setChartType={setChartType}
-                    />
-                    <InvestigatorComparison
-                      year={year}
-                      investigatorCodes={investigatorSelection}
-                      dataMode={dataMode}
-                      chartType={chartType}
-                      numMode={NUMMODE.SUM}
-                    />
-                    <YearSlider handleSetYear={handleSetYear} year={year} />
-                  </div>
-                )}
-              </Sidebar>
-            </div>
+            <Sidebar>
+              {(investigatorSelection: string[]) => (
+                <div className={classes.chartBundle}>
+                  <Controls
+                    dataMode={dataMode}
+                    setRelMode={setMode}
+                    chartType={chartType}
+                    setChartType={setChartType}
+                  />
+                  <InvestigatorComparison
+                    year={year}
+                    investigatorCodes={investigatorSelection}
+                    dataMode={dataMode}
+                    chartType={chartType}
+                    numMode={NUMMODE.SUM}
+                  />
+                  <YearSlider handleSetYear={handleSetYear} year={year} />
+                </div>
+              )}
+            </Sidebar>
           </TabPanel>
         </div>
       )}

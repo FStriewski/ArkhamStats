@@ -23,12 +23,22 @@ const useStyles = makeStyles(() =>
 );
 
 type Props = {
-  id: string;
+  ids: string[];
   meta: Meta;
 };
 
-export const FactBoxes = ({ id, meta }: Props): React.ReactElement => {
-  const classes = useStyles();
+type Facts = {
+  name: string;
+  val: string | number[];
+}[];
+
+type BoxInput = {
+  facts: Facts;
+  colors: string[];
+};
+
+export const forPortrait = ({ ids, meta }: Props): BoxInput => {
+  const id = ids[0];
   const investigator = lookupInvestigator(id);
   const decksPerDay =
     Math.round(
@@ -44,34 +54,49 @@ export const FactBoxes = ({ id, meta }: Props): React.ReactElement => {
     { name: 'Total Decks:', val: meta.numDecks[id] },
     { name: 'Decks/Day:', val: decksPerDay }
   ];
+  const colors = [investigator.color];
+
+  return { facts, colors };
+};
+
+export const FactBoxes = ({
+  input
+}: {
+  input: BoxInput;
+}): React.ReactElement => {
+  const classes = useStyles();
+  const { facts, colors } = input;
 
   return (
     <div className={classes.row}>
-      {facts.map((fact, index) => (
-        <Paper className={classes.paper} key={index}>
-          <Typography
-            variant='subtitle2'
-            style={{
-              textAlign: 'left',
-              paddingTop: '5px',
-              marginLeft: '-15px',
-              color: '#6a6969'
-            }}
-          >
-            {fact.name}
-          </Typography>
-          <Typography
-            variant='h5'
-            style={{
-              textAlign: 'right',
-              marginRight: '-15px',
-              color: investigator.color
-            }}
-          >
-            {fact.val}
-          </Typography>
-        </Paper>
-      ))}
+      {facts.map((fact, index: number) => {
+        const color = colors.length === 1 ? colors[0] : colors[index];
+        return (
+          <Paper className={classes.paper} key={index}>
+            <Typography
+              variant='subtitle2'
+              style={{
+                textAlign: 'left',
+                paddingTop: '5px',
+                marginLeft: '-15px',
+                color: '#6a6969'
+              }}
+            >
+              {fact.name}
+            </Typography>
+            <Typography
+              variant='h5'
+              style={{
+                textAlign: 'right',
+                marginRight: '-15px',
+                color: color
+              }}
+            >
+              {fact.val}
+            </Typography>
+          </Paper>
+        );
+      })}
     </div>
   );
 };
