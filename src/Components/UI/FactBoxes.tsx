@@ -94,46 +94,50 @@ export const FactBoxes = ({
 
   return (
     <div className={classes.row}>
-      {facts.map((fact, index: number) => {
-        const color = colors.length === 1 ? colors[0] : colors[index];
-        return (
-          <Paper className={classes.paper} key={index}>
-            {closable && (
-              <IconButton
-                color='primary'
-                aria-label='upload picture'
-                component='span'
-                className={classes.closeButton}
-                id={fact.id}
-                onClick={deleteFromSelection}
+      {facts.length > 0 ? (
+        facts.map((fact, index: number) => {
+          const color = colors.length === 1 ? colors[0] : colors[index];
+          return (
+            <Paper className={classes.paper} key={index}>
+              {closable && (
+                <IconButton
+                  color='primary'
+                  aria-label='upload picture'
+                  component='span'
+                  className={classes.closeButton}
+                  id={fact.id}
+                  onClick={deleteFromSelection}
+                >
+                  <CloseIcon />
+                </IconButton>
+              )}
+              <Typography
+                variant='subtitle2'
+                style={{
+                  textAlign: 'left',
+                  paddingTop: '5px',
+                  marginLeft: '-15px',
+                  color: '#6a6969'
+                }}
               >
-                <CloseIcon />
-              </IconButton>
-            )}
-            <Typography
-              variant='subtitle2'
-              style={{
-                textAlign: 'left',
-                paddingTop: '5px',
-                marginLeft: '-15px',
-                color: '#6a6969'
-              }}
-            >
-              {fact.name}
-            </Typography>
-            <Typography
-              variant='h5'
-              style={{
-                textAlign: 'right',
-                marginRight: '-15px',
-                color: color
-              }}
-            >
-              {fact.val}
-            </Typography>
-          </Paper>
-        );
-      })}
+                {fact.name}
+              </Typography>
+              <Typography
+                variant='h5'
+                style={{
+                  textAlign: 'right',
+                  marginRight: '-15px',
+                  color: color
+                }}
+              >
+                {fact.val}
+              </Typography>
+            </Paper>
+          );
+        })
+      ) : (
+        <Paper className={classes.paper} style={{ width: '150px' }} />
+      )}
     </div>
   );
 };

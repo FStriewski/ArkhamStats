@@ -10,22 +10,25 @@ import {
   CartesianGrid
 } from 'recharts';
 import { lookupInvestigator } from '../../lookups/helpers';
-import { NUMMODE, SingleInvestigator } from '../../types';
-import { setYAxis, setClassYAxis } from './Shared';
+import { NUMMODE, SinglePoint, CONTEXTMODE } from '../../types';
+import { setYAxis, setClassYAxis } from './YAxis';
 import { releases } from '../../lookups/decks';
+import { investigatorClassColor } from '../../lookups/lists';
 
 type Props = {
-  input: SingleInvestigator[];
+  input: SinglePoint[];
   ids: string[];
   dataMode: boolean;
   numMode: NUMMODE;
+  context: CONTEXTMODE;
 };
 
-export const InvestigatorLineChart = ({
+export const ILineChart = ({
   input,
   ids,
   dataMode,
-  numMode
+  numMode,
+  context
 }: Props): React.ReactElement => {
   if (!ids[0])
     return (
@@ -37,7 +40,9 @@ export const InvestigatorLineChart = ({
       >
         <CartesianGrid strokeDasharray='1 1' />
         <XAxis dataKey='date' />
-        {setYAxis(dataMode, numMode)}
+        {context === CONTEXTMODE.INVESTIGATOR
+          ? setYAxis(dataMode, numMode)
+          : setClassYAxis(dataMode, numMode)}
       </LineChart>
     );
   return (
@@ -69,19 +74,7 @@ export const InvestigatorLineChart = ({
         {setYAxis(dataMode, numMode)}
         <Tooltip />
         <Legend />
-        {ids.length === 1 ? (
-          <Line
-            name={
-              dataMode
-                ? `${lookupInvestigator(ids[0]).name} [%]`
-                : `${lookupInvestigator(ids[0]).name}`
-            }
-            type='monotone'
-            strokeWidth={1.5}
-            dataKey={ids[0]}
-            stroke={lookupInvestigator(ids[0]).color}
-          />
-        ) : (
+        {context === CONTEXTMODE.INVESTIGATOR &&
           ids.map((id: string) => (
             <Line
               key={id}
@@ -95,22 +88,31 @@ export const InvestigatorLineChart = ({
               dataKey={id}
               stroke={lookupInvestigator(id).color}
             />
-          ))
-        )}
+          ))}
+        {context === CONTEXTMODE.ICLASS &&
+          ids.map((iclass: string) => (
+            <Line
+              name={dataMode ? `${iclass} [%]` : `${iclass}`}
+              dataKey={iclass}
+              key={iclass}
+              type='monotone'
+              stroke={investigatorClassColor[iclass]}
+            />
+          ))}
       </LineChart>
     </div>
   );
 };
 
 type Props2 = {
-  input: SingleInvestigator[];
+  input: SinglePoint[];
   ids: string[];
   dataMode: boolean;
   numMode: NUMMODE;
   color: string;
 };
 
-export const ClassLineChart = ({
+export const LineChartxxx = ({
   input,
   ids,
   dataMode,

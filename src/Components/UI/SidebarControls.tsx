@@ -4,8 +4,6 @@ import IconButton from '@material-ui/core/IconButton';
 import PersonIcon from '@material-ui/icons/Person';
 import PersonAddDisabledIcon from '@material-ui/icons/PersonAddDisabled';
 import { PICKERSELECTION } from '../../types';
-import DeleteIcon from '@material-ui/icons/Delete';
-import CancelOutlinedIcon from '@material-ui/icons/CancelOutlined';
 import { Button } from '@material-ui/core';
 
 const useStyles = makeStyles(() =>

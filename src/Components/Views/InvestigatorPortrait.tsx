@@ -4,18 +4,19 @@ import { ViewWrapper, ViewRow, ViewColumn } from '../UI/ViewWrapper';
 import {
   CHARTTYPE,
   NUMMODE,
+  CONTEXTMODE,
   determineDataTypeMode,
   APIResponse,
   DataPoints,
-  SingleInvestigator
+  SinglePoint
 } from '../../types';
 import {
   InvestigatorPerFactionPieChart,
   InvestigatorPerTotalPieChart
 } from '../Charts/PieChart';
-import { InvestigatorLineChart } from '../Charts/LineChart';
-import { InvestigatorBarChart } from '../Charts/BarChart';
-import { InvestigatorAreaChart } from '../Charts/AreaChart';
+import { ILineChart } from '../Charts/LineChart';
+import { IBarChart } from '../Charts/BarChart';
+import { IAreaChart } from '../Charts/AreaChart';
 import { FactBoxes, forPortrait } from '../UI/FactBoxes';
 import { getInvestigatorDistributionByDate } from '../../utils/requests';
 import { lookupInvestigator } from '../../lookups/helpers';
@@ -69,7 +70,7 @@ export const InvestigatorPortrait = ({
   const input =
     selectedInvestigator &&
     (selectedInvestigator[dataType] as DataPoints) &&
-    (selectedInvestigator[dataType][selectedYear] as SingleInvestigator[]);
+    (selectedInvestigator[dataType][selectedYear] as SinglePoint[]);
   const meta = selectedInvestigator && selectedInvestigator.meta;
   const ids = [investigatorCode];
   return (
@@ -84,25 +85,28 @@ export const InvestigatorPortrait = ({
               {selectedInvestigator &&
                 (selectedInvestigator[dataType] as DataPoints) &&
                 (chartType === CHARTTYPE.BAR ? (
-                  <InvestigatorBarChart
+                  <IBarChart
                     input={input}
                     ids={[investigatorCode]}
                     dataMode={dataMode}
                     numMode={NUMMODE.DIST}
+                    context={CONTEXTMODE.INVESTIGATOR}
                   />
                 ) : chartType === CHARTTYPE.LINE ? (
-                  <InvestigatorLineChart
+                  <ILineChart
                     input={input}
                     ids={[investigatorCode]}
                     dataMode={dataMode}
                     numMode={NUMMODE.DIST}
+                    context={CONTEXTMODE.INVESTIGATOR}
                   />
                 ) : (
-                  <InvestigatorAreaChart
+                  <IAreaChart
                     input={input}
                     ids={[investigatorCode]}
                     dataMode={dataMode}
                     numMode={NUMMODE.DIST}
+                    context={CONTEXTMODE.INVESTIGATOR}
                   />
                 ))}
             </>

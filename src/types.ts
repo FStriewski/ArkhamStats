@@ -17,7 +17,7 @@ export type InvestigatorListEntry = {
   deck_options: any;
 };
 
-export type SingleInvestigator = {
+export type SinglePoint = {
   [index: string]: Tick[];
 };
 
@@ -26,7 +26,7 @@ export type Tick = {
   y: number;
 };
 
-export type DataPoints = { [year: string]: SingleInvestigator };
+export type DataPoints = { [year: string]: SinglePoint };
 
 export type Meta = {
   investigators: string[];
@@ -68,6 +68,10 @@ export type LineHistogram = {
 export enum NUMMODE {
   SUM = 'SUM',
   DIST = 'DIST'
+}
+export enum CONTEXTMODE {
+  INVESTIGATOR = 'INVESTIGATOR',
+  ICLASS = 'ICLASS'
 }
 export enum PICKERSELECTION {
   SINGLE = 'SINGLE',

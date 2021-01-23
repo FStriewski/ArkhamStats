@@ -1,14 +1,14 @@
 import React, { useEffect } from 'react';
-import { ClassLineChart } from '../Charts/LineChart';
-import { ClassBarChart } from '../Charts/BarChart';
-import { ClassAreaChart } from '../Charts/AreaChart';
-import { makeStyles, Theme } from '@material-ui/core/styles';
+import { ILineChart } from '../Charts/LineChart';
+import { IBarChart } from '../Charts/BarChart';
+import { IAreaChart } from '../Charts/AreaChart';
 import {
   CHARTTYPE,
   NUMMODE,
   determineDataTypeMode,
   APIResponse,
-  SingleInvestigator
+  SinglePoint,
+  CONTEXTMODE
 } from '../../types';
 
 import { investigatorClassColor } from '../../lookups/lists';
@@ -37,46 +37,37 @@ export const InvestigatorClasses = ({
   numMode
 }: Props): React.ReactElement => {
   // const [investigatorClass, setInvestigatorClass] = React.useState('all');
+  if (!iclassSelection.length) {
+    return;
+  }
 
-  const [selectedClassDist, chooseClassDist] = React.useState<APIResponse>();
-  const [selectedClassSum, chooseClassSum] = React.useState<APIResponse>();
-
-  const selectedYear = year.toString();
+  const [selectedClass, chooseClass] = React.useState<APIResponse>();
   const investigatorClass = iclassSelection[0];
 
   useEffect(() => {
     const fetchData = async () => {
-      const result: APIResponse = await getClassDistributionByDate(
-        investigatorClass
-      );
-      chooseClassDist(result);
+      const result: APIResponse =
+        numMode === NUMMODE.DIST
+          ? await getClassDistributionByDate(investigatorClass)
+          : await getClassSumByDate(investigatorClass);
+
+      chooseClass(result);
     };
     fetchData().catch((e) => console.log(e));
   }, [investigatorClass]);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const result: APIResponse = await getClassSumByDate(investigatorClass);
-      chooseClassSum(result);
-    };
-    fetchData().catch((e) => console.log(e));
-  }, [investigatorClass]);
-
-  const investigatorClassList = Object.keys(investigatorClassColor).map(
-    (entry) => ({
-      name: entry,
-      color: investigatorClassColor[entry] as string
-    })
-  );
+  // const investigatorClassList = Object.keys(investigatorClassColor).map(
+  //   (entry) => ({
+  //     name: entry,
+  //     color: investigatorClassColor[entry] as string
+  //   })
+  // );
+  const selectedYear = year.toString();
   const dataType = determineDataTypeMode(dataMode);
-  const color =
-    investigatorClass === 'all'
-      ? '#000000'
-      : (investigatorClassColor[investigatorClass] as string);
   const input =
-    selectedClassDist &&
-    selectedClassDist[dataType] &&
-    (selectedClassDist[dataType][selectedYear] as SingleInvestigator[]);
+    selectedClass &&
+    selectedClass[dataType] &&
+    (selectedClass[dataType][selectedYear] as SinglePoint[]);
   const ids = investigatorClass;
 
   return (
@@ -85,37 +76,37 @@ export const InvestigatorClasses = ({
         <>
           <ViewColumn>
             <>
-              {selectedClassDist && (
+              {/* {selectedClass && (
                 <FactBoxes
                   deleteFromSelection={deleteFromSelection}
                   input={forComparison([ids])}
                   closable
                 />
-              )}
+              )} */}
 
-              {selectedClassDist &&
-                selectedClassDist[dataType] &&
+              {selectedClass &&
+                selectedClass[dataType] &&
                 (chartType === CHARTTYPE.BAR ? (
-                  <ClassBarChart
+                  <IBarChart
                     input={input}
                     ids={[investigatorClass]}
-                    color={color}
+                    context={CONTEXTMODE.ICLASS}
                     dataMode={dataMode}
                     numMode={numMode}
                   />
                 ) : chartType === CHARTTYPE.LINE ? (
-                  <ClassLineChart
+                  <ILineChart
                     input={input}
                     ids={[investigatorClass]}
-                    color={color}
+                    context={CONTEXTMODE.ICLASS}
                     dataMode={dataMode}
                     numMode={numMode}
                   />
                 ) : (
-                  <ClassAreaChart
+                  <IAreaChart
                     input={input}
                     ids={[investigatorClass]}
-                    color={color}
+                    context={CONTEXTMODE.ICLASS}
                     dataMode={dataMode}
                     numMode={numMode}
                   />
