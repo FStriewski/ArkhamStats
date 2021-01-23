@@ -14,7 +14,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import { CustomCheckbox } from '../UI/Checkbox';
 import { SidebarControls } from '../UI/SidebarControls';
 
-const drawerWidth = 220;
+const drawerWidth = 250;
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -91,6 +91,15 @@ export const InvestigatorPicker = ({
         setSelection([investigator]);
       }
     }
+  };
+
+  const deleteFromSelection = (event) => {
+    console.log(event.currentTarget.id);
+    console.log(investigatorSelection);
+    const newstate = investigatorSelection.filter(
+      (item) => item !== event.currentTarget.id
+    );
+    setSelection(newstate);
   };
 
   const checked = (code: string) => investigatorSelection.includes(code);
@@ -174,7 +183,7 @@ export const InvestigatorPicker = ({
       </Drawer>
       <main className={classes.content}>
         {/* eslint-disable-next-line @typescript-eslint/no-unsafe-member-access,  @typescript-eslint/no-unsafe-call */}
-        {children(investigatorSelection)}
+        {children(investigatorSelection, deleteFromSelection)}
       </main>
     </div>
   );

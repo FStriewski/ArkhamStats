@@ -1,8 +1,7 @@
 import React from 'react';
-import { Sidebar } from './Components/UI/Sidebar';
+import { ClassPicker } from './Components/UI/ClassPicker';
 import { InvestigatorPicker } from './Components/UI/InvestigatorPicker';
 import { YearSlider } from './Components/UI/YearSlider';
-import { SingleInvestigatorComponent } from './Components/Views/SingleInvestigator';
 import { InvestigatorComparison } from './Components/Views/InvestigatorComparison';
 import { InvestigatorPortrait } from './Components/Views/InvestigatorPortrait';
 import { InvestigatorClasses } from './Components/Views/InvestigatorClasses';
@@ -68,8 +67,8 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 export const App = (): React.ReactElement => {
   const classes = useStyles();
-  const [tab1, setTab1] = React.useState(1); // Current Tab
-  const [totalTab, setTotalTab] = React.useState(0); // Current Tab
+  const [tab1, setTab1] = React.useState(0); // Current Tab
+  const [tab2, setTab2] = React.useState(1); // Current Tab
   const [tab3, setTab3] = React.useState(0); // Current Tab
   const [year, setYear] = React.useState(2020);
   const [dataMode, setRelMode] = React.useState<boolean>(true);
@@ -81,8 +80,8 @@ export const App = (): React.ReactElement => {
   const handleChange1 = (event: React.ChangeEvent, newTab: number) => {
     setTab1(newTab);
   };
-  const switchToTotalTab = (event: React.ChangeEvent, newTab: number) => {
-    setTotalTab(newTab);
+  const handleChange2 = (event: React.ChangeEvent, newTab: number) => {
+    setTab2(newTab);
   };
   const handleChange3 = (event: React.ChangeEvent, newTab: number) => {
     setTab3(newTab);
@@ -134,13 +133,17 @@ export const App = (): React.ReactElement => {
           </TabPanel>
           <TabPanel value={tab1} index={1}>
             <InvestigatorPicker pickerType={PICKERSELECTION.MULTI}>
-              {(investigatorSelection: string[]) => (
+              {(
+                investigatorSelection: string[],
+                deleteFromSelection: () => void
+              ) => (
                 <InvestigatorComparison
                   year={year}
                   investigatorCodes={investigatorSelection}
                   dataMode={dataMode}
                   chartType={chartType}
                   numMode={NUMMODE.DIST}
+                  deleteFromSelection={deleteFromSelection}
                 />
               )}
             </InvestigatorPicker>
@@ -149,16 +152,35 @@ export const App = (): React.ReactElement => {
       )}
 
       {headerOpen.open && headerOpen.id === '1' && (
-        <InvestigatorClasses
-          dataMode={dataMode}
-          chartType={chartType}
-          setChartType={setChartType}
-          setMode={setMode}
-          totalTab={totalTab}
-          switchToTotalTab={switchToTotalTab}
-          year={year}
-          handleSetYear={handleSetYear}
-        />
+        <>
+          <Paper className={classes.root}>
+            <Tabs
+              value={tab2}
+              onChange={handleChange2}
+              indicatorColor='primary'
+              textColor='primary'
+              centered
+            >
+              <Tab label='Investigator Portrait' />
+              <Tab label='Investigator Comparison' />
+            </Tabs>
+          </Paper>
+
+          <TabPanel value={tab2} index={0}>
+            <ClassPicker>
+              {(iclassSelection: string[], deleteFromSelection: () => void) => (
+                <InvestigatorClasses
+                  dataMode={dataMode}
+                  chartType={chartType}
+                  year={year}
+                  iclassSelection={iclassSelection}
+                  numMode={NUMMODE.DIST}
+                  deleteFromSelection={deleteFromSelection}
+                />
+              )}
+            </ClassPicker>
+          </TabPanel>
+        </>
       )}
 
       {headerOpen.open && headerOpen.id === '2' && (
@@ -202,38 +224,30 @@ export const App = (): React.ReactElement => {
                   chartType={chartType}
                   setChartType={setChartType}
                 />
-                <SingleInvestigatorComponent
-                  year={year}
-                  dataMode={dataMode}
-                  chartType={chartType}
-                  numMode={NUMMODE.SUM}
-                  investigatorCode={investigatorCode}
-                />
               </div>
               <YearSlider handleSetYear={handleSetYear} year={year} />
             </div>
           </TabPanel>
           <TabPanel value={tab3} index={1}>
-            <Sidebar>
-              {(investigatorSelection: string[]) => (
-                <div className={classes.chartBundle}>
-                  <Controls
-                    dataMode={dataMode}
-                    setRelMode={setMode}
-                    chartType={chartType}
-                    setChartType={setChartType}
-                  />
-                  <InvestigatorComparison
-                    year={year}
-                    investigatorCodes={investigatorSelection}
-                    dataMode={dataMode}
-                    chartType={chartType}
-                    numMode={NUMMODE.SUM}
-                  />
-                  <YearSlider handleSetYear={handleSetYear} year={year} />
-                </div>
-              )}
-            </Sidebar>
+            {(investigatorSelection: string[], deleteFromSelection) => (
+              <div className={classes.chartBundle}>
+                <Controls
+                  dataMode={dataMode}
+                  setRelMode={setMode}
+                  chartType={chartType}
+                  setChartType={setChartType}
+                />
+                <InvestigatorComparison
+                  year={year}
+                  investigatorCodes={investigatorSelection}
+                  dataMode={dataMode}
+                  chartType={chartType}
+                  numMode={NUMMODE.SUM}
+                  deleteFromSelection={deleteFromSelection}
+                />
+                <YearSlider handleSetYear={handleSetYear} year={year} />
+              </div>
+            )}
           </TabPanel>
         </div>
       )}

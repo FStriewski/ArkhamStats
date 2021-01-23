@@ -28,6 +28,7 @@ type Props = {
   dataMode: boolean;
   chartType: CHARTTYPE;
   numMode: NUMMODE;
+  deleteFromSelection: (event) => void;
 };
 
 const useStyles = makeStyles(() => ({
@@ -41,6 +42,7 @@ export const InvestigatorComparison = ({
   year,
   dataMode,
   chartType,
+  deleteFromSelection,
   numMode
 }: Props): React.ReactElement => {
   const [
@@ -75,7 +77,11 @@ export const InvestigatorComparison = ({
           <ViewColumn>
             <>
               {selectedInvestigators && (
-                <FactBoxes input={forComparison(ids)} />
+                <FactBoxes
+                  input={forComparison(ids)}
+                  deleteFromSelection={deleteFromSelection}
+                  closable
+                />
               )}
               {selectedInvestigators &&
                 selectedInvestigators[dataType] &&

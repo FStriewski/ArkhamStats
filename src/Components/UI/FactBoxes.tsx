@@ -1,8 +1,9 @@
 import React from 'react';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
-import { Paper, Typography } from '@material-ui/core';
+import { Paper, Typography, IconButton } from '@material-ui/core';
 import { Meta } from '../../types';
 import { lookupInvestigator, daysSinceRelease } from '../../lookups/helpers';
+import CloseIcon from '@material-ui/icons/Close';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -17,7 +18,14 @@ const useStyles = makeStyles(() =>
       marginRight: '25px',
       padding: '10px 25px',
       border: '1px solid grey',
-      textTransform: 'capitalize'
+      textTransform: 'capitalize',
+      position: 'relative'
+    },
+    closeButton: {
+      position: 'absolute',
+      right: '-10px',
+      top: '-10px',
+      color: 'grey'
     }
   })
 );
@@ -30,6 +38,7 @@ type Props = {
 type Facts = {
   name: string;
   val: string | number[];
+  id?: string;
 }[];
 
 type BoxInput = {
@@ -63,7 +72,8 @@ export const forComparison = (ids: string[]): BoxInput => {
 
   const facts = investigators.map((investigator, index: number) => ({
     name: `Investigator ${index + 1}:`,
-    val: investigator.name
+    val: investigator.name,
+    id: investigator.code
   }));
 
   const colors = investigators.map((investigator) => investigator.color);
@@ -71,9 +81,13 @@ export const forComparison = (ids: string[]): BoxInput => {
 };
 
 export const FactBoxes = ({
-  input
+  input,
+  closable,
+  deleteFromSelection
 }: {
   input: BoxInput;
+  closable?: boolean;
+  deleteFromSelection?: (event) => void;
 }): React.ReactElement => {
   const classes = useStyles();
   const { facts, colors } = input;
@@ -84,6 +98,18 @@ export const FactBoxes = ({
         const color = colors.length === 1 ? colors[0] : colors[index];
         return (
           <Paper className={classes.paper} key={index}>
+            {closable && (
+              <IconButton
+                color='primary'
+                aria-label='upload picture'
+                component='span'
+                className={classes.closeButton}
+                id={fact.id}
+                onClick={deleteFromSelection}
+              >
+                <CloseIcon />
+              </IconButton>
+            )}
             <Typography
               variant='subtitle2'
               style={{
