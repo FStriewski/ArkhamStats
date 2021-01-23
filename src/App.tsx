@@ -135,22 +135,13 @@ export const App = (): React.ReactElement => {
           <TabPanel value={tab1} index={1}>
             <InvestigatorPicker pickerType={PICKERSELECTION.MULTI}>
               {(investigatorSelection: string[]) => (
-                <div className={classes.chartBundle}>
-                  <Controls
-                    dataMode={dataMode}
-                    setRelMode={setMode}
-                    chartType={chartType}
-                    setChartType={setChartType}
-                  />
-                  <InvestigatorComparison
-                    year={year}
-                    investigatorCodes={investigatorSelection}
-                    dataMode={dataMode}
-                    chartType={chartType}
-                    numMode={NUMMODE.DIST}
-                  />
-                  <YearSlider year={year} handleSetYear={handleSetYear} />
-                </div>
+                <InvestigatorComparison
+                  year={year}
+                  investigatorCodes={investigatorSelection}
+                  dataMode={dataMode}
+                  chartType={chartType}
+                  numMode={NUMMODE.DIST}
+                />
               )}
             </InvestigatorPicker>
           </TabPanel>

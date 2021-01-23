@@ -108,26 +108,24 @@ export const InvestigatorPortrait = ({
             </>
           </ViewColumn>
           <div style={{ margin: '0 auto' }}>
-            <div>
-              {selectedInvestigator && (
-                <div className={classes.pieChartBundle}>
-                  <InvestigatorPerFactionPieChart
-                    meta={selectedInvestigator.meta}
-                    ids={[investigatorCode]}
-                    factionCode={
-                      lookupInvestigator(investigatorCode).faction_code
-                    }
-                  />
-                  <InvestigatorPerTotalPieChart
-                    meta={selectedInvestigator.meta}
-                    ids={[investigatorCode]}
-                    factionCode={
-                      lookupInvestigator(investigatorCode).faction_code
-                    }
-                  />
-                </div>
-              )}
-            </div>
+            {selectedInvestigator && (
+              <div className={classes.pieChartBundle}>
+                <InvestigatorPerFactionPieChart
+                  meta={selectedInvestigator.meta}
+                  ids={[investigatorCode]}
+                  factionCodes={[
+                    lookupInvestigator(investigatorCode).faction_code
+                  ]}
+                />
+                <InvestigatorPerTotalPieChart
+                  meta={selectedInvestigator.meta}
+                  ids={[investigatorCode]}
+                  factionCodes={[
+                    lookupInvestigator(investigatorCode).faction_code
+                  ]}
+                />
+              </div>
+            )}
           </div>
         </>
       </ViewRow>

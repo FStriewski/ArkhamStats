@@ -108,6 +108,7 @@ export const InvestigatorPicker = ({
         <SidebarControls
           selectCount={investigatorSelection.length}
           setSelection={setSelection}
+          pickerType={pickerType}
         />
         <div className={classes.drawerContainer}>
           <FormGroup>
