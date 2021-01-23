@@ -70,7 +70,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 export const App = (): React.ReactElement => {
   const classes = useStyles();
-  const [tab1, setTab1] = React.useState(2); // Current Tab
+  const [tab1, setTab1] = React.useState(3); // Current Tab
   const [tab3, setTab3] = React.useState(0); // Current Tab
   const [year, setYear] = React.useState(2020);
   const [dataMode, setRelMode] = React.useState<boolean>(true);
@@ -149,7 +149,7 @@ export const App = (): React.ReactElement => {
               )}
             </InvestigatorPicker>
           </TabPanel>
-          <TabPanel value={tab1} index={2}>
+          <TabPanel value={tab1} index={3}>
             <ClassPicker>
               {(iclassSelection: string[], deleteFromSelection: () => void) => (
                 <InvestigatorClasses
