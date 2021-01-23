@@ -4,6 +4,7 @@ import { Paper, Typography, IconButton } from '@material-ui/core';
 import { Meta } from '../../types';
 import { lookupInvestigator, daysSinceRelease } from '../../lookups/helpers';
 import CloseIcon from '@material-ui/icons/Close';
+import { investigatorClassColor } from '../../lookups/lists';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -67,7 +68,17 @@ export const forPortrait = ({ ids, meta }: Props): BoxInput => {
 
   return { facts, colors };
 };
-export const forComparison = (ids: string[]): BoxInput => {
+export const forClassComparison = (ids: string[]): BoxInput => {
+  const facts = ids.map((faction, index: number) => ({
+    name: `Faction ${index + 1}:`,
+    val: faction,
+    id: faction
+  }));
+
+  const colors = ids.map((faction) => investigatorClassColor[faction]);
+  return { facts, colors };
+};
+export const forInvComparison = (ids: string[]): BoxInput => {
   const investigators = ids.map((id) => lookupInvestigator(id));
 
   const facts = investigators.map((investigator, index: number) => ({

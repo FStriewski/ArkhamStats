@@ -10,14 +10,12 @@ import {
   SinglePoint,
   CONTEXTMODE
 } from '../../types';
-
-import { investigatorClassColor } from '../../lookups/lists';
 import {
   getClassDistributionByDate,
   getClassSumByDate
 } from '../../utils/requests';
 import { ViewWrapper, ViewRow, ViewColumn } from '../UI/ViewWrapper';
-import { FactBoxes, forComparison } from '../UI/FactBoxes';
+import { FactBoxes, forClassComparison } from '../UI/FactBoxes';
 
 type Props = {
   dataMode: boolean;
@@ -36,7 +34,6 @@ export const InvestigatorClasses = ({
   deleteFromSelection,
   numMode
 }: Props): React.ReactElement => {
-  // const [investigatorClass, setInvestigatorClass] = React.useState('all');
   if (!iclassSelection.length) {
     return;
   }
@@ -68,7 +65,6 @@ export const InvestigatorClasses = ({
     selectedClass &&
     selectedClass[dataType] &&
     (selectedClass[dataType][selectedYear] as SinglePoint[]);
-  const ids = investigatorClass;
 
   return (
     <ViewWrapper>
@@ -76,14 +72,13 @@ export const InvestigatorClasses = ({
         <>
           <ViewColumn>
             <>
-              {/* {selectedClass && (
+              {selectedClass && (
                 <FactBoxes
                   deleteFromSelection={deleteFromSelection}
-                  input={forComparison([ids])}
+                  input={forClassComparison(iclassSelection)}
                   closable
                 />
-              )} */}
-
+              )}
               {selectedClass &&
                 selectedClass[dataType] &&
                 (chartType === CHARTTYPE.BAR ? (

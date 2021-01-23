@@ -20,7 +20,7 @@ import {
   SinglePoint
 } from '../../types';
 import { ViewWrapper, ViewRow, ViewColumn } from '../UI/ViewWrapper';
-import { FactBoxes, forComparison } from '../UI/FactBoxes';
+import { FactBoxes, forInvComparison } from '../UI/FactBoxes';
 import { lookupInvestigator } from '../../lookups/helpers';
 
 type Props = {
@@ -79,7 +79,7 @@ export const InvestigatorComparison = ({
             <>
               {selectedInvestigators && (
                 <FactBoxes
-                  input={forComparison(ids)}
+                  input={forInvComparison(ids)}
                   deleteFromSelection={deleteFromSelection}
                   closable
                 />
