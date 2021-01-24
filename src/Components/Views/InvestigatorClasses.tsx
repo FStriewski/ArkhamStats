@@ -38,33 +38,26 @@ export const InvestigatorClasses = ({
     return;
   }
 
-  const [selectedClass, chooseClass] = React.useState<APIResponse>();
-  const investigatorClass = iclassSelection[0];
+  const [selectedClasses, chooseClass] = React.useState<APIResponse>();
 
   useEffect(() => {
     const fetchData = async () => {
       const result: APIResponse =
         numMode === NUMMODE.DIST
-          ? await getClassDistributionByDate(investigatorClass)
-          : await getClassSumByDate(investigatorClass);
+          ? await getClassDistributionByDate(iclassSelection)
+          : await getClassSumByDate(iclassSelection);
 
       chooseClass(result);
     };
     fetchData().catch((e) => console.log(e));
-  }, [investigatorClass]);
+  }, [iclassSelection]);
 
-  // const investigatorClassList = Object.keys(investigatorClassColor).map(
-  //   (entry) => ({
-  //     name: entry,
-  //     color: investigatorClassColor[entry] as string
-  //   })
-  // );
   const selectedYear = year.toString();
   const dataType = determineDataTypeMode(dataMode);
   const input =
-    selectedClass &&
-    selectedClass[dataType] &&
-    (selectedClass[dataType][selectedYear] as SinglePoint[]);
+    selectedClasses &&
+    selectedClasses[dataType] &&
+    (selectedClasses[dataType][selectedYear] as SinglePoint[]);
 
   return (
     <ViewWrapper>
@@ -72,19 +65,19 @@ export const InvestigatorClasses = ({
         <>
           <ViewColumn>
             <>
-              {selectedClass && (
+              {selectedClasses && (
                 <FactBoxes
                   deleteFromSelection={deleteFromSelection}
                   input={forClassComparison(iclassSelection)}
                   closable
                 />
               )}
-              {selectedClass &&
-                selectedClass[dataType] &&
+              {selectedClasses &&
+                selectedClasses[dataType] &&
                 (chartType === CHARTTYPE.BAR ? (
                   <IBarChart
                     input={input}
-                    ids={[investigatorClass]}
+                    ids={iclassSelection}
                     context={CONTEXTMODE.ICLASS}
                     dataMode={dataMode}
                     numMode={numMode}
@@ -92,7 +85,7 @@ export const InvestigatorClasses = ({
                 ) : chartType === CHARTTYPE.LINE ? (
                   <ILineChart
                     input={input}
-                    ids={[investigatorClass]}
+                    ids={iclassSelection}
                     context={CONTEXTMODE.ICLASS}
                     dataMode={dataMode}
                     numMode={numMode}
@@ -100,7 +93,7 @@ export const InvestigatorClasses = ({
                 ) : (
                   <IAreaChart
                     input={input}
-                    ids={[investigatorClass]}
+                    ids={iclassSelection}
                     context={CONTEXTMODE.ICLASS}
                     dataMode={dataMode}
                     numMode={numMode}

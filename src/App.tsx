@@ -8,6 +8,8 @@ import { InvestigatorClasses } from './Components/Views/InvestigatorClasses';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 import { Divider, Tabs, Box, Paper, CssBaseline, Tab } from '@material-ui/core';
 import { CHARTTYPE, NUMMODE, PICKERSELECTION } from './types';
+import { Controls } from './Components/UI/Controls';
+import { YearSlider } from './Components/UI/YearSlider';
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -60,25 +62,21 @@ export const App = (): React.ReactElement => {
   const [dataMode, setRelMode] = React.useState<boolean>(true);
   const [chartType, setChartType] = React.useState<CHARTTYPE>(CHARTTYPE.LINE);
 
-  const setMode = () => setRelMode(!dataMode);
-
   const handleChange1 = (event: React.ChangeEvent, newTab: number) => {
     setTab1(newTab);
   };
 
-  const [investigatorCode, setInvestigatorCode] = React.useState('01004');
+  const handleSetYear = (event: React.ChangeEvent, year: number) => {
+    setYear(year);
+  };
+
+  const setMode = () => setRelMode(!dataMode);
 
   return (
     <div className={classes.root}>
       <Header />
 
       <CssBaseline />
-      {/* <CustomizedAccordions
-        setHeaderOpen={setHeaderOpen}
-        headerOpen={headerOpen}
-      />
-      {headerOpen.open && headerOpen.id === '0' && (
-    <> */}
       <>
         <Paper className={classes.root}>
           <Tabs
@@ -139,85 +137,15 @@ export const App = (): React.ReactElement => {
           </ClassPicker>
         </TabPanel>
       </>
+      <>
+        <YearSlider handleSetYear={handleSetYear} year={year} />
+        <Controls
+          dataMode={dataMode}
+          setRelMode={setMode}
+          chartType={chartType}
+          setChartType={setChartType}
+        />
+      </>
     </div>
   );
 };
-
-//       {headerOpen.open && headerOpen.id === '2' && (
-//         <div>
-//           <Paper className={classes.root}>
-//             <Tabs
-//               value={tab3}
-//               onChange={handleChange3}
-//               indicatorColor='primary'
-//               textColor='primary'
-//               centered
-//             >
-//               <Tab label='Sums' />
-//               <Tab label='Sums Multiple' />
-//             </Tabs>
-//           </Paper>
-//           <TabPanel value={tab3} index={0}>
-//             <div>
-//               <Typography>BLABLA</Typography>
-//               <FormControl className={classes.formControl}>
-//                 <InputLabel id='demo-simple-select-label'>
-//                   Investigator
-//                 </InputLabel>
-//                 <Select
-//                   labelId='demo-simple-select-label'
-//                   id='demo-simple-select'
-//                   value={investigatorCode}
-//                   onChange={handleDropdown}
-//                 >
-//                   {investigatorList.map((inv) => (
-//                     <MenuItem key={inv.code} value={inv.code}>
-//                       {inv.name}
-//                     </MenuItem>
-//                   ))}
-//                 </Select>
-//               </FormControl>
-//               <div className={classes.chartBundle}>
-//                 <Controls
-//                   dataMode={dataMode}
-//                   setRelMode={setMode}
-//                   chartType={chartType}
-//                   setChartType={setChartType}
-//                 />
-//               </div>
-//               <YearSlider handleSetYear={handleSetYear} year={year} />
-//             </div>
-//           </TabPanel>
-//           <TabPanel value={tab3} index={1}>
-//             {(investigatorSelection: string[], deleteFromSelection) => (
-//               <div className={classes.chartBundle}>
-//                 <Controls
-//                   dataMode={dataMode}
-//                   setRelMode={setMode}
-//                   chartType={chartType}
-//                   setChartType={setChartType}
-//                 />
-//                 <InvestigatorComparison
-//                   year={year}
-//                   investigatorCodes={investigatorSelection}
-//                   dataMode={dataMode}
-//                   chartType={chartType}
-//                   numMode={NUMMODE.SUM}
-//                   deleteFromSelection={deleteFromSelection}
-//                 />
-//                 <YearSlider handleSetYear={handleSetYear} year={year} />
-//               </div>
-//             )}
-//           </TabPanel>
-//         </div>
-//       )}
-//       <YearSlider handleSetYear={handleSetYear} year={year} />
-//       <Controls
-//         dataMode={dataMode}
-//         setRelMode={setMode}
-//         chartType={chartType}
-//         setChartType={setChartType}
-//       />
-//     </div>
-//   );
-// };

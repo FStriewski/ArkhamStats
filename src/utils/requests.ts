@@ -44,12 +44,12 @@ export const getMultipleInvestigatorDistributionByDate = async (
   }).then((response) => response.json())) as APIResponse;
   return result;
 };
+
 export const getMultipleInvestigatorSumByDate = async (
   icodes: string[]
 ): Promise<APIResponse> => {
   const params = {};
   icodes.forEach((code, index) => (params[`i${index}`] = code));
-  console.log(params);
 
   const queryString = new URLSearchParams(params);
   // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
@@ -64,9 +64,14 @@ export const getMultipleInvestigatorSumByDate = async (
 };
 
 export const getClassDistributionByDate = async (
-  iclass: string
+  iclasses: string[]
 ): Promise<APIResponse> => {
-  const route = `/class/dist/${iclass}`;
+  const params = {};
+  iclasses.forEach((code, index) => (params[`i${index}`] = code));
+
+  const queryString = new URLSearchParams(params);
+  // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+  const route = `/class/dist?${queryString}`;
   const result = (await fetch(route, {
     method: 'GET',
     mode: 'no-cors',
@@ -77,9 +82,14 @@ export const getClassDistributionByDate = async (
 };
 
 export const getClassSumByDate = async (
-  iclass: string
+  iclasses: string[]
 ): Promise<APIResponse> => {
-  const route = `/class/sum/${iclass}`;
+  const params = {};
+  iclasses.forEach((code, index) => (params[`i${index}`] = code));
+
+  const queryString = new URLSearchParams(params);
+  // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+  const route = `/class/sum/${queryString}`;
   const result = (await fetch(route, {
     method: 'GET',
     mode: 'no-cors',

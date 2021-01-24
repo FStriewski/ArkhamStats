@@ -128,13 +128,13 @@ export const IAreaChart = ({
           ids.length &&
           ids.map((iclass: string) => (
             <Area
+              key={iclass}
               name={dataMode ? `${iclass} [%]` : `${iclass}`}
               type='monotone'
               dataKey={iclass}
               stroke={investigatorClassColor[iclass]}
               fillOpacity={1}
               fill={`url(#${iclass})`}
-              key={iclass}
             />
           ))}
       </AreaChart>
