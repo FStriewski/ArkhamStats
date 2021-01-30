@@ -40,7 +40,9 @@ export const IAreaChart = ({
       >
         <CartesianGrid strokeDasharray='1 1' />
         <XAxis dataKey='date' />
-        {setYAxis(dataMode, numMode)}
+        {context === CONTEXTMODE.INVESTIGATOR
+          ? setYAxis(dataMode, numMode)
+          : setClassYAxis(dataMode, numMode)}
       </AreaChart>
     );
   return (

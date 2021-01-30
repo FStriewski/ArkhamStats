@@ -71,7 +71,9 @@ export const ILineChart = ({
             />
           </ReferenceLine>
         ))}
-        {setYAxis(dataMode, numMode)}
+        {context === CONTEXTMODE.INVESTIGATOR
+          ? setYAxis(dataMode, numMode)
+          : setClassYAxis(dataMode, numMode)}
         <Tooltip />
         <Legend />
         {context === CONTEXTMODE.INVESTIGATOR &&
@@ -99,74 +101,6 @@ export const ILineChart = ({
               stroke={investigatorClassColor[iclass]}
             />
           ))}
-      </LineChart>
-    </div>
-  );
-};
-
-type Props2 = {
-  input: SinglePoint[];
-  ids: string[];
-  dataMode: boolean;
-  numMode: NUMMODE;
-  color: string;
-};
-
-export const LineChartxxx = ({
-  input,
-  ids,
-  dataMode,
-  color,
-  numMode
-}: Props2): React.ReactElement => {
-  if (!ids[0])
-    return (
-      <LineChart
-        width={1100}
-        height={550}
-        data={input}
-        margin={{ top: 70, right: 10, left: 0, bottom: 15 }}
-      >
-        <CartesianGrid strokeDasharray='1 1' />
-        <XAxis dataKey='date' />
-        {setYAxis(dataMode, numMode)}
-      </LineChart>
-    );
-  return (
-    <div style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
-      <LineChart
-        width={1100}
-        height={550}
-        data={input}
-        margin={{ top: 70, right: 10, left: 0, bottom: 15 }}
-      >
-        <CartesianGrid strokeDasharray='1 1' />
-        <XAxis dataKey='date' />
-        {setClassYAxis(dataMode, numMode)}
-        {releases.map((rel) => (
-          <ReferenceLine
-            key={rel.name}
-            x={rel.date.slice(0, 7)}
-            stroke='grey'
-            strokeDasharray='3 3'
-            strokeWidth={2}
-          >
-            <Label
-              value={rel.name}
-              offset={10}
-              position='insideLeft'
-              angle={-90}
-            />
-          </ReferenceLine>
-        ))}{' '}
-        <Tooltip />
-        <Legend />
-        <Line
-          name={dataMode ? `${ids[0]} [%]` : `${ids[0]}`}
-          type='monotone'
-          dataKey={ids[0]}
-          stroke={color}
-        />
       </LineChart>
     </div>
   );

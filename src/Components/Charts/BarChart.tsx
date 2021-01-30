@@ -71,7 +71,9 @@ export const IBarChart = ({
             />
           </ReferenceLine>
         ))}
-        {setYAxis(dataMode, numMode)}
+        {context === CONTEXTMODE.INVESTIGATOR
+          ? setYAxis(dataMode, numMode)
+          : setClassYAxis(dataMode, numMode)}
         <Tooltip />
         <Legend />
         {context === CONTEXTMODE.INVESTIGATOR &&
