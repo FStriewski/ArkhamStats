@@ -22,14 +22,17 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     drawerPaper: {
       width: drawerWidth,
-      marginTop: '140px'
+      marginTop: '97px'
     },
     drawerContainer: {
-      overflow: 'auto'
+      overflow: 'auto',
+      marginTop: '20px'
     },
     fcLabel: {
-      color: '#6C6A6A',
-      fontSize: '10px'
+      fontSize: '20px',
+      textTransform: 'capitalize',
+      marginLeft: '30px',
+      margin: theme.spacing(1)
     },
     formControl: {
       margin: theme.spacing(2)
@@ -77,21 +80,23 @@ export const ClassPicker = ({ children }: Props): React.ReactElement => {
         <div className={classes.drawerContainer}>
           <FormGroup>
             {iclasses.map((iclass: string) => (
-              <FormControlLabel
-                control={
-                  <CustomCheckbox
-                    checked={checked(iclass)}
-                    onChange={handleSelection}
-                    name={iclass}
-                    id={iclass}
-                    disabled={!checked(iclass) && error}
-                  />
-                }
-                label={iclass}
+              <div
                 key={iclass}
-                style={{ color: investigatorClassColor[iclass] }}
+                style={{
+                  color: investigatorClassColor[iclass]
+                }}
                 className={classes.fcLabel}
-              />
+              >
+                <CustomCheckbox
+                  checked={checked(iclass)}
+                  onChange={handleSelection}
+                  name={iclass}
+                  id={iclass}
+                  disabled={!checked(iclass) && error}
+                  style={{ marginRight: '5px' }}
+                />
+                {iclass}
+              </div>
             ))}
           </FormGroup>
         </div>

@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     drawerPaper: {
       width: drawerWidth,
-      marginTop: '140px'
+      marginTop: '97px'
     },
     drawerContainer: {
       overflow: 'auto'
