@@ -7,6 +7,7 @@ import {
   Tooltip,
   Label,
   ReferenceLine,
+  Brush,
   CartesianGrid
 } from 'recharts';
 import { lookupInvestigator } from '../../lookups/helpers';
@@ -39,6 +40,7 @@ export const ILineChart = ({
         margin={{ top: 70, right: 10, left: 20, bottom: 15 }}
       >
         <CartesianGrid strokeDasharray='1 1' />
+
         <XAxis dataKey='date' />
         {context === CONTEXTMODE.INVESTIGATOR
           ? setYAxis(dataMode, numMode)
@@ -53,6 +55,7 @@ export const ILineChart = ({
         data={input}
         margin={{ top: 70, right: 10, left: 0, bottom: 15 }}
       >
+        <Brush dataKey='date' height={30} />
         <CartesianGrid strokeDasharray='1 1' />
         <XAxis dataKey='date' />
         {releases.map((rel) => (

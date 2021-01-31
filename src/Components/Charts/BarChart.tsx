@@ -7,7 +7,8 @@ import {
   Tooltip,
   CartesianGrid,
   Label,
-  ReferenceLine
+  ReferenceLine,
+  Brush
 } from 'recharts';
 import { lookupInvestigator } from '../../lookups/helpers';
 import { NUMMODE, SinglePoint, CONTEXTMODE } from '../../types';
@@ -54,6 +55,7 @@ export const IBarChart = ({
         margin={{ top: 70, right: 10, left: 0, bottom: 15 }}
       >
         <CartesianGrid strokeDasharray='1 1' />
+        <Brush dataKey='date' height={30} />
         <XAxis dataKey='date' />
         {releases.map((rel) => (
           <ReferenceLine

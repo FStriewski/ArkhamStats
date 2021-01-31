@@ -6,6 +6,7 @@ import {
   Legend,
   Tooltip,
   Label,
+  Brush,
   ReferenceLine,
   CartesianGrid
 } from 'recharts';
@@ -39,7 +40,7 @@ export const IAreaChart = ({
         margin={{ top: 70, right: 10, left: 0, bottom: 15 }}
       >
         <CartesianGrid strokeDasharray='1 1' />
-        <XAxis dataKey='date' />
+        <Brush dataKey='date' height={30} /> <XAxis dataKey='date' />
         {context === CONTEXTMODE.INVESTIGATOR
           ? setYAxis(dataMode, numMode)
           : setClassYAxis(dataMode, numMode)}
@@ -53,6 +54,7 @@ export const IAreaChart = ({
         data={input}
         margin={{ top: 70, right: 10, left: 0, bottom: 15 }}
       >
+        <Brush dataKey='date' height={30} />
         <defs>
           {context === CONTEXTMODE.INVESTIGATOR &&
             ids.length &&

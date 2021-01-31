@@ -88,8 +88,11 @@ export const App = (): React.ReactElement => {
           >
             <Tab label='Investigator Portrait' />
             <Tab label='Investigator Comparison' />
+            <Tab label='Investigator Sum Chart' />
             <Divider orientation='vertical' flexItem />
             <Tab label='Class Comparison' />
+            <Divider orientation='vertical' flexItem />
+            <Tab label='Cards' />
           </Tabs>
         </Paper>
 
@@ -122,7 +125,24 @@ export const App = (): React.ReactElement => {
             )}
           </InvestigatorPicker>
         </TabPanel>
-        <TabPanel value={tab1} index={3}>
+        <TabPanel value={tab1} index={2}>
+          <InvestigatorPicker pickerType={PICKERSELECTION.MULTI}>
+            {(
+              investigatorSelection: string[],
+              deleteFromSelection: () => void
+            ) => (
+              <InvestigatorComparison
+                year={year}
+                investigatorCodes={investigatorSelection}
+                dataMode={dataMode}
+                chartType={chartType}
+                numMode={NUMMODE.SUM}
+                deleteFromSelection={deleteFromSelection}
+              />
+            )}
+          </InvestigatorPicker>
+        </TabPanel>
+        <TabPanel value={tab1} index={4}>
           <ClassPicker>
             {(iclassSelection: string[], deleteFromSelection: () => void) => (
               <ClassComparison
@@ -137,15 +157,18 @@ export const App = (): React.ReactElement => {
           </ClassPicker>
         </TabPanel>
       </>
-      <>
-        <YearSlider handleSetYear={handleSetYear} year={year} />
-        <Controls
-          dataMode={dataMode}
-          setRelMode={setMode}
-          chartType={chartType}
-          setChartType={setChartType}
-        />
-      </>
+      {/* ENABLE FOR SOME TABS ONLY */}
+      {[0, 1].includes(tab1) && (
+        <>
+          <YearSlider handleSetYear={handleSetYear} year={year} />
+          <Controls
+            dataMode={dataMode}
+            setRelMode={setMode}
+            chartType={chartType}
+            setChartType={setChartType}
+          />
+        </>
+      )}
     </div>
   );
 };
