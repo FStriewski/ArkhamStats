@@ -48,7 +48,6 @@ export const InvestigatorPerFactionPieChart = ({
   return (
     <>
       <Paper className={classes.paper}>
-        15px
         <Typography className={classes.typo} variant='h6'>
           Compared to faction:
         </Typography>

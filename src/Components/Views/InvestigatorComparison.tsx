@@ -69,7 +69,6 @@ export const InvestigatorComparison = ({
     selectedInvestigators &&
     selectedInvestigators[dataType] &&
     (selectedInvestigators[dataType][selectedYear] as SinglePoint[]);
-  const ids = investigatorCodes;
 
   return (
     <ViewWrapper>
@@ -79,7 +78,7 @@ export const InvestigatorComparison = ({
             <>
               {selectedInvestigators && (
                 <FactBoxes
-                  input={forInvComparison(ids)}
+                  input={forInvComparison(investigatorCodes)}
                   deleteFromSelection={deleteFromSelection}
                   closable
                 />

@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { makeStyles } from '@material-ui/core/styles';
 import { ILineChart } from '../Charts/LineChart';
 import { IBarChart } from '../Charts/BarChart';
 import { IAreaChart } from '../Charts/AreaChart';
@@ -16,6 +17,10 @@ import {
 } from '../../utils/requests';
 import { ViewWrapper, ViewRow, ViewColumn } from '../UI/ViewWrapper';
 import { FactBoxes, forClassComparison } from '../UI/FactBoxes';
+import {
+  ComparisonPieChart,
+  InvestigatorPerTotalPieChart
+} from '../Charts/PieChart';
 
 type Props = {
   dataMode: boolean;
@@ -26,7 +31,13 @@ type Props = {
   deleteFromSelection: (event) => void;
 };
 
-export const InvestigatorClasses = ({
+const useStyles = makeStyles(() => ({
+  pieChartBundle: {
+    margin: '0 auto'
+  }
+}));
+
+export const ClassComparison = ({
   dataMode,
   chartType,
   year,
@@ -37,7 +48,7 @@ export const InvestigatorClasses = ({
   if (!iclassSelection.length) {
     return;
   }
-
+  const classes = useStyles();
   const [selectedClasses, chooseClass] = React.useState<APIResponse>();
 
   useEffect(() => {
@@ -101,6 +112,22 @@ export const InvestigatorClasses = ({
                 ))}
             </>
           </ViewColumn>
+          <div style={{ margin: '0 auto' }}>
+            {selectedClasses && (
+              <div className={classes.pieChartBundle}>
+                <ComparisonPieChart
+                  meta={selectedClasses.meta}
+                  ids={iclassSelection}
+                  factionCodes={iclassSelection}
+                />
+                <InvestigatorPerTotalPieChart
+                  meta={selectedClasses.meta}
+                  ids={iclassSelection}
+                  factionCodes={iclassSelection}
+                />
+              </div>
+            )}
+          </div>
         </>
       </ViewRow>
     </ViewWrapper>

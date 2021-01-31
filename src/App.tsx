@@ -4,7 +4,7 @@ import { InvestigatorPicker } from './Components/UI/InvestigatorPicker';
 import { Header } from './Components/UI/Header';
 import { InvestigatorComparison } from './Components/Views/InvestigatorComparison';
 import { InvestigatorPortrait } from './Components/Views/InvestigatorPortrait';
-import { InvestigatorClasses } from './Components/Views/InvestigatorClasses';
+import { ClassComparison } from './Components/Views/ClassComparison';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 import { Divider, Tabs, Box, Paper, CssBaseline, Tab } from '@material-ui/core';
 import { CHARTTYPE, NUMMODE, PICKERSELECTION } from './types';
@@ -125,7 +125,7 @@ export const App = (): React.ReactElement => {
         <TabPanel value={tab1} index={3}>
           <ClassPicker>
             {(iclassSelection: string[], deleteFromSelection: () => void) => (
-              <InvestigatorClasses
+              <ClassComparison
                 dataMode={dataMode}
                 chartType={chartType}
                 year={year}
