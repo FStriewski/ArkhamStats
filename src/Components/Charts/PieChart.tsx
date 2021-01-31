@@ -18,7 +18,7 @@ const useStyles = makeStyles(() =>
       color: '#6a6969'
     },
     paper: {
-      margin: '20px 0',
+      marginTop: '10px',
       padding: '5px',
       backgroundColor: 'white',
       border: '1px solid grey'
@@ -48,18 +48,19 @@ export const InvestigatorPerFactionPieChart = ({
   return (
     <>
       <Paper className={classes.paper}>
+        15px
         <Typography className={classes.typo} variant='h6'>
           Compared to faction:
         </Typography>
       </Paper>
-      <PieChart width={300} height={250}>
+      <PieChart width={300} height={290}>
         <Pie
           data={data}
           dataKey='value'
           nameKey='name'
           cx='50%'
           cy='50%'
-          outerRadius={100}
+          outerRadius={90}
           startAngle={180}
           endAngle={-180}
           label
@@ -69,7 +70,7 @@ export const InvestigatorPerFactionPieChart = ({
           ))}
         </Pie>
         <Tooltip />
-        <Legend wrapperStyle={{ position: 'relative' }} />
+        <Legend wrapperStyle={{ position: 'relative', bottom: '25px' }} />
       </PieChart>
     </>
   );
@@ -108,14 +109,14 @@ export const InvestigatorPerTotalPieChart = ({
           Compared to all decks:
         </Typography>
       </Paper>
-      <PieChart width={300} height={250}>
+      <PieChart width={300} height={290}>
         <Pie
           data={data}
           dataKey='value'
           nameKey='name'
           cx='50%'
           cy='50%'
-          outerRadius={100}
+          outerRadius={90}
           startAngle={180}
           endAngle={-180}
           label
@@ -125,7 +126,7 @@ export const InvestigatorPerTotalPieChart = ({
           ))}
         </Pie>
         <Tooltip />
-        <Legend wrapperStyle={{ position: 'relative' }} />
+        <Legend wrapperStyle={{ position: 'relative', bottom: '25px' }} />
       </PieChart>
     </>
   );
@@ -158,14 +159,14 @@ export const ComparisonPieChart = ({
           Number of decks:
         </Typography>
       </Paper>
-      <PieChart width={300} height={250}>
+      <PieChart width={300} height={290}>
         <Pie
           data={data}
           dataKey='value'
           nameKey='name'
           cx='50%'
           cy='50%'
-          outerRadius={100}
+          outerRadius={90}
           startAngle={180}
           endAngle={-180}
           label
@@ -175,7 +176,7 @@ export const ComparisonPieChart = ({
           ))}
         </Pie>
         <Tooltip />
-        <Legend wrapperStyle={{ position: 'relative' }} />
+        <Legend wrapperStyle={{ position: 'relative', bottom: '25px' }} />
       </PieChart>
     </>
   );
