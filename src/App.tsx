@@ -18,6 +18,8 @@ interface TabPanelProps {
   value: number;
 }
 
+require('./index.css');
+
 function TabPanel(props: TabPanelProps) {
   // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
   const { children, value, index, ...other } = props;
@@ -74,11 +76,12 @@ export const App = (): React.ReactElement => {
   const setMode = () => setRelMode(!dataMode);
 
   return (
-    <div className={classes.root}>
-      <Header />
+    <div className='viewer_wrapper'>
+      <div className='viewer_header'>
+        <Header />
 
-      <CssBaseline />
-      <>
+        <CssBaseline />
+        {/* <> */}
         <Paper className={classes.root}>
           <Tabs
             value={tab1}
@@ -98,7 +101,8 @@ export const App = (): React.ReactElement => {
             <Divider orientation='vertical' flexItem />
           </Tabs>
         </Paper>
-
+      </div>
+      <div className='viewer_content'>
         <TabPanel value={tab1} index={1}>
           <InvestigatorPicker pickerType={PICKERSELECTION.SINGLE}>
             {(investigatorSelection: string[]) => (
@@ -159,19 +163,19 @@ export const App = (): React.ReactElement => {
             )}
           </ClassPicker>
         </TabPanel>
-      </>
-      {/* ENABLE FOR SOME TABS ONLY */}
-      {[1, 3, 7].includes(tab1) && (
-        <>
+      </div>
+      <div className='viewer_footer'>
+        <Controls
+          dataMode={dataMode}
+          setRelMode={setMode}
+          chartType={chartType}
+          setChartType={setChartType}
+        />
+        {/* ENABLE FOR SOME TABS ONLY */}
+        {[1, 3, 7].includes(tab1) && (
           <YearSlider handleSetYear={handleSetYear} year={year} />
-          <Controls
-            dataMode={dataMode}
-            setRelMode={setMode}
-            chartType={chartType}
-            setChartType={setChartType}
-          />
-        </>
-      )}
+        )}
+      </div>
     </div>
   );
 };

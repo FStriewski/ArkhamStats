@@ -8,19 +8,19 @@ import { CHARTTYPE } from '../../types';
 const useStyles = makeStyles(() =>
   createStyles({
     paper: {
-      bottom: '50px',
-      left: '300px',
+      // bottom: '50px',
+      // left: '300px',
       height: '60px',
-      position: 'absolute',
+      // position: 'absolute',
       cursor: 'pointer',
       backgroundColor: 'white',
-      width: '350px',
+      width: '400px',
       display: 'flex',
       flexDirection: 'row',
       justifyContent: 'space-around',
-      alignItems: 'center',
+      alignItems: 'center'
       // padding: '5px',
-      marginRight: 'auto'
+      // marginRight: 'auto'
     },
     button: {}
   })

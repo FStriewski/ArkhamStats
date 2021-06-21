@@ -11,17 +11,14 @@ type YearSliderProps = {
 const useStyles = makeStyles(() =>
   createStyles({
     paper: {
-      width: '450px',
+      width: '550px',
       height: '60px',
       display: 'flex',
-      justifyContent: 'center',
-      position: 'absolute',
-      bottom: '50px',
-      left: '900px'
+      justifyContent: 'center'
     },
     slider: {
-      maxWidth: '400px',
-      marginBottom: '25px',
+      maxWidth: '450px',
+      marginBottom: '20px',
       position: 'relative'
     }
   })
@@ -57,6 +54,10 @@ export const YearSlider = ({
     {
       value: 2021,
       label: '2021'
+    },
+    {
+      value: 2022,
+      label: '2022'
     }
   ];
   return (
@@ -65,7 +66,7 @@ export const YearSlider = ({
         className={classes.slider}
         defaultValue={2020}
         min={2016}
-        max={2021}
+        max={2022}
         step={1}
         marks={marks}
         track={false}

@@ -4,5 +4,5 @@ export enum CHART_WIDTH {
 }
 export enum CHART_HEIGHT {
   NORMAL = 550,
-  WIDE = 700
+  WIDE = 650
 }
