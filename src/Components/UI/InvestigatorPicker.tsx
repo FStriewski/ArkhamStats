@@ -94,9 +94,8 @@ export const InvestigatorPicker = ({
   };
 
   const deleteFromSelection = (event) => {
-    console.log(event.currentTarget.id);
-    console.log(investigatorSelection);
     const newstate = investigatorSelection.filter(
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
       (item) => item !== event.currentTarget.id
     );
     setSelection(newstate);

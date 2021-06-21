@@ -101,7 +101,7 @@ export const IBarChart = ({
             <Bar
               name={dataMode ? `${iclass} [%]` : `${iclass}`}
               dataKey={iclass}
-              fill={investigatorClassColor[iclass]}
+              fill={investigatorClassColor[iclass] as string}
               key={iclass}
             />
           ))}

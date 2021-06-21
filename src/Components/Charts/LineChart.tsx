@@ -106,7 +106,7 @@ export const ILineChart = ({
               dataKey={iclass}
               key={iclass}
               type='monotone'
-              stroke={investigatorClassColor[iclass]}
+              stroke={investigatorClassColor[iclass] as string}
             />
           ))}
       </LineChart>

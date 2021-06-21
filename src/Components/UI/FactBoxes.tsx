@@ -38,7 +38,7 @@ type Props = {
 
 type Facts = {
   name: string;
-  val: string | number[];
+  val: string | number[] | number;
   id?: string;
 }[];
 
@@ -61,7 +61,7 @@ export const forPortrait = ({ ids, meta }: Props): BoxInput => {
     { name: 'Name:', val: investigator.name },
     { name: 'Class:', val: investigator.faction },
     { name: 'Release:', val: investigator.date },
-    { name: 'Total Decks:', val: meta.numDecks[id] },
+    { name: 'Total Decks:', val: meta.numDecks[id] as number },
     { name: 'Decks/Day:', val: decksPerDay }
   ];
   const colors = [investigator.color];
@@ -75,7 +75,9 @@ export const forClassComparison = (ids: string[]): BoxInput => {
     id: faction
   }));
 
-  const colors = ids.map((faction) => investigatorClassColor[faction]);
+  const colors = ids.map(
+    (faction) => investigatorClassColor[faction] as string
+  );
   return { facts, colors };
 };
 export const forInvComparison = (ids: string[]): BoxInput => {

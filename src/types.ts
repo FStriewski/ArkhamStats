@@ -14,7 +14,7 @@ export type InvestigatorListEntry = {
   date: string;
   faction?: string;
   color?: string;
-  deck_options: any;
+  deck_options: unknown;
 };
 
 export type SinglePoint = {

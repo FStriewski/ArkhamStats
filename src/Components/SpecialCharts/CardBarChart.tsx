@@ -31,6 +31,7 @@ export const CardBarChart = ({
   numMode,
   context
 }: Props): React.ReactElement => {
+  console.log(numMode);
   if (!ids[0])
     return (
       <BarChart
@@ -92,7 +93,7 @@ export const CardBarChart = ({
             <Bar
               name={dataMode ? `${iclass} [%]` : `${iclass}`}
               dataKey={iclass}
-              fill={investigatorClassColor[iclass]}
+              fill={investigatorClassColor[iclass] as string}
               key={iclass}
             />
           ))}

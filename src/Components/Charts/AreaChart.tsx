@@ -78,7 +78,7 @@ export const IAreaChart = ({
                   stopColor={
                     context === CONTEXTMODE.INVESTIGATOR
                       ? lookupInvestigator(id).color
-                      : investigatorClassColor[id]
+                      : (investigatorClassColor[id] as string)
                   }
                   stopOpacity={0.8}
                 />
@@ -87,7 +87,7 @@ export const IAreaChart = ({
                   stopColor={
                     context === CONTEXTMODE.INVESTIGATOR
                       ? lookupInvestigator(id).color
-                      : investigatorClassColor[id]
+                      : (investigatorClassColor[id] as string)
                   }
                   stopOpacity={0}
                 />
@@ -142,7 +142,7 @@ export const IAreaChart = ({
               name={dataMode ? `${iclass} [%]` : `${iclass}`}
               type='monotone'
               dataKey={iclass}
-              stroke={investigatorClassColor[iclass]}
+              stroke={investigatorClassColor[iclass] as string}
               fillOpacity={1}
               fill={`url(#${iclass})`}
             />

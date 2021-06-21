@@ -2,7 +2,6 @@ import React from 'react';
 import { createStyles, Theme, makeStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import FormGroup from '@material-ui/core/FormGroup';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
 import { CustomCheckbox } from './Checkbox';
 import { investigatorClassColor } from '../../lookups/lists';
 
@@ -83,7 +82,7 @@ export const ClassPicker = ({ children }: Props): React.ReactElement => {
               <div
                 key={iclass}
                 style={{
-                  color: investigatorClassColor[iclass]
+                  color: investigatorClassColor[iclass] as string
                 }}
                 className={classes.fcLabel}
               >
