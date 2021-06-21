@@ -3,6 +3,7 @@ import {
   BarChart,
   Bar,
   XAxis,
+  YAxis,
   Legend,
   Tooltip,
   CartesianGrid,
@@ -12,10 +13,8 @@ import {
 } from 'recharts';
 import { lookupInvestigator } from '../../lookups/helpers';
 import { NUMMODE, SinglePoint, CONTEXTMODE } from '../../types';
-import { setYAxis, setClassYAxis } from './YAxis';
 import { releases } from '../../lookups/decks';
 import { investigatorClassColor } from '../../lookups/lists';
-import { CHART_HEIGHT, CHART_WIDTH } from '../../utils/constants';
 
 type Props = {
   input: SinglePoint[];
@@ -25,7 +24,7 @@ type Props = {
   context: CONTEXTMODE;
 };
 
-export const IBarChart = ({
+export const CardBarChart = ({
   input,
   ids,
   dataMode,
@@ -35,27 +34,21 @@ export const IBarChart = ({
   if (!ids[0])
     return (
       <BarChart
-        width={numMode === NUMMODE.DIST ? CHART_WIDTH.NORMAL : CHART_WIDTH.WIDE}
-        height={
-          numMode === NUMMODE.DIST ? CHART_HEIGHT.NORMAL : CHART_HEIGHT.WIDE
-        }
+        width={1100}
+        height={550}
         data={input}
         margin={{ top: 70, right: 10, left: 0, bottom: 15 }}
       >
         <CartesianGrid strokeDasharray='1 1' />
         <XAxis dataKey='date' />
-        {context === CONTEXTMODE.INVESTIGATOR
-          ? setYAxis(dataMode, numMode)
-          : setClassYAxis(dataMode, numMode)}
+        <YAxis />
       </BarChart>
     );
   return (
     <div style={{ width: '100%', display: 'flex' }}>
       <BarChart
-        width={numMode === NUMMODE.DIST ? CHART_WIDTH.NORMAL : CHART_WIDTH.WIDE}
-        height={
-          numMode === NUMMODE.DIST ? CHART_HEIGHT.NORMAL : CHART_HEIGHT.WIDE
-        }
+        width={1100}
+        height={550}
         data={input}
         margin={{ top: 70, right: 10, left: 0, bottom: 15 }}
       >
@@ -78,9 +71,7 @@ export const IBarChart = ({
             />
           </ReferenceLine>
         ))}
-        {context === CONTEXTMODE.INVESTIGATOR
-          ? setYAxis(dataMode, numMode)
-          : setClassYAxis(dataMode, numMode)}
+        <YAxis />
         <Tooltip />
         <Legend />
         {context === CONTEXTMODE.INVESTIGATOR &&

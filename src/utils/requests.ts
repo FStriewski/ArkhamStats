@@ -98,3 +98,19 @@ export const getClassSumByDate = async (
   }).then((response) => response.json())) as APIResponse;
   return result;
 };
+
+export const getCardDist = async (cards: string[]): Promise<APIResponse> => {
+  const params = {};
+  cards.forEach((code, index) => (params[`i${index}`] = code));
+
+  const queryString = new URLSearchParams(params);
+  // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+  const route = `/cards/dist/${queryString}`;
+  const result = (await fetch(route, {
+    method: 'GET',
+    mode: 'no-cors',
+    cache: 'no-cache',
+    referrerPolicy: 'same-origin'
+  }).then((response) => response.json())) as APIResponse;
+  return result;
+};

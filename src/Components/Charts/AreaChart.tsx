@@ -15,6 +15,7 @@ import { NUMMODE, SinglePoint, CONTEXTMODE } from '../../types';
 import { setYAxis, setClassYAxis } from './YAxis';
 import { releases } from '../../lookups/decks';
 import { investigatorClassColor } from '../../lookups/lists';
+import { CHART_HEIGHT, CHART_WIDTH } from '../../utils/constants';
 
 type Props = {
   input: SinglePoint[];
@@ -34,13 +35,16 @@ export const IAreaChart = ({
   if (!ids[0])
     return (
       <AreaChart
-        width={1100}
-        height={550}
+        width={numMode === NUMMODE.DIST ? CHART_WIDTH.WIDE : CHART_WIDTH.WIDE}
+        height={
+          numMode === NUMMODE.DIST ? CHART_HEIGHT.WIDE : CHART_HEIGHT.WIDE
+        }
         data={input}
         margin={{ top: 70, right: 10, left: 0, bottom: 15 }}
       >
         <CartesianGrid strokeDasharray='1 1' />
-        <Brush dataKey='date' height={30} /> <XAxis dataKey='date' />
+        <Brush dataKey='date' height={30} travellerWidth={10} />{' '}
+        <XAxis dataKey='date' />
         {context === CONTEXTMODE.INVESTIGATOR
           ? setYAxis(dataMode, numMode)
           : setClassYAxis(dataMode, numMode)}
@@ -49,12 +53,14 @@ export const IAreaChart = ({
   return (
     <div style={{ width: '100%', display: 'flex' }}>
       <AreaChart
-        width={1100}
-        height={550}
+        width={numMode === NUMMODE.DIST ? CHART_WIDTH.NORMAL : CHART_WIDTH.WIDE}
+        height={
+          numMode === NUMMODE.DIST ? CHART_HEIGHT.NORMAL : CHART_HEIGHT.WIDE
+        }
         data={input}
         margin={{ top: 70, right: 10, left: 0, bottom: 15 }}
       >
-        <Brush dataKey='date' height={30} />
+        <Brush dataKey='date' height={30} travellerWidth={10} />
         <defs>
           {context === CONTEXTMODE.INVESTIGATOR &&
             ids.length &&

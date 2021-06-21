@@ -15,6 +15,7 @@ import { NUMMODE, SinglePoint, CONTEXTMODE } from '../../types';
 import { setYAxis, setClassYAxis } from './YAxis';
 import { releases } from '../../lookups/decks';
 import { investigatorClassColor } from '../../lookups/lists';
+import { CHART_HEIGHT, CHART_WIDTH } from '../../utils/constants';
 
 type Props = {
   input: SinglePoint[];
@@ -34,8 +35,10 @@ export const ILineChart = ({
   if (!ids[0])
     return (
       <LineChart
-        width={1100}
-        height={550}
+        width={numMode === NUMMODE.DIST ? CHART_WIDTH.NORMAL : CHART_WIDTH.WIDE}
+        height={
+          numMode === NUMMODE.DIST ? CHART_HEIGHT.NORMAL : CHART_HEIGHT.WIDE
+        }
         data={input}
         margin={{ top: 70, right: 10, left: 20, bottom: 15 }}
       >
@@ -50,12 +53,14 @@ export const ILineChart = ({
   return (
     <div>
       <LineChart
-        width={1100}
-        height={550}
+        width={numMode === NUMMODE.DIST ? CHART_WIDTH.NORMAL : CHART_WIDTH.WIDE}
+        height={
+          numMode === NUMMODE.DIST ? CHART_HEIGHT.NORMAL : CHART_HEIGHT.WIDE
+        }
         data={input}
         margin={{ top: 70, right: 10, left: 0, bottom: 15 }}
       >
-        <Brush dataKey='date' height={30} />
+        <Brush dataKey='date' height={30} travellerWidth={10} />
         <CartesianGrid strokeDasharray='1 1' />
         <XAxis dataKey='date' />
         {releases.map((rel) => (

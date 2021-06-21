@@ -3,6 +3,7 @@ import { ClassPicker } from './Components/UI/ClassPicker';
 import { InvestigatorPicker } from './Components/UI/InvestigatorPicker';
 import { Header } from './Components/UI/Header';
 import { InvestigatorComparison } from './Components/Views/InvestigatorComparison';
+import { InvestigatorSumComparison } from './Components/Views/InvestigatorSumComparison';
 import { InvestigatorPortrait } from './Components/Views/InvestigatorPortrait';
 import { ClassComparison } from './Components/Views/ClassComparison';
 import { makeStyles, Theme } from '@material-ui/core/styles';
@@ -84,19 +85,21 @@ export const App = (): React.ReactElement => {
             onChange={handleChange1}
             indicatorColor='primary'
             textColor='primary'
-            centered
+            // centered
           >
+            <Divider orientation='vertical' flexItem />
             <Tab label='Investigator Portrait' />
+            <Divider orientation='vertical' flexItem />
             <Tab label='Investigator Comparison' />
+            <Divider orientation='vertical' flexItem />
             <Tab label='Investigator Sum Chart' />
             <Divider orientation='vertical' flexItem />
             <Tab label='Class Comparison' />
             <Divider orientation='vertical' flexItem />
-            <Tab label='Cards' />
           </Tabs>
         </Paper>
 
-        <TabPanel value={tab1} index={0}>
+        <TabPanel value={tab1} index={1}>
           <InvestigatorPicker pickerType={PICKERSELECTION.SINGLE}>
             {(investigatorSelection: string[]) => (
               <InvestigatorPortrait
@@ -108,7 +111,7 @@ export const App = (): React.ReactElement => {
             )}
           </InvestigatorPicker>
         </TabPanel>
-        <TabPanel value={tab1} index={1}>
+        <TabPanel value={tab1} index={3}>
           <InvestigatorPicker pickerType={PICKERSELECTION.MULTI}>
             {(
               investigatorSelection: string[],
@@ -125,14 +128,14 @@ export const App = (): React.ReactElement => {
             )}
           </InvestigatorPicker>
         </TabPanel>
-        <TabPanel value={tab1} index={2}>
+        <TabPanel value={tab1} index={5}>
           <InvestigatorPicker pickerType={PICKERSELECTION.MULTI}>
             {(
               investigatorSelection: string[],
               deleteFromSelection: () => void
             ) => (
-              <InvestigatorComparison
-                year={year}
+              <InvestigatorSumComparison
+                year={1} // This indicates that years are dissolved
                 investigatorCodes={investigatorSelection}
                 dataMode={dataMode}
                 chartType={chartType}
@@ -142,7 +145,7 @@ export const App = (): React.ReactElement => {
             )}
           </InvestigatorPicker>
         </TabPanel>
-        <TabPanel value={tab1} index={4}>
+        <TabPanel value={tab1} index={7}>
           <ClassPicker>
             {(iclassSelection: string[], deleteFromSelection: () => void) => (
               <ClassComparison
@@ -158,7 +161,7 @@ export const App = (): React.ReactElement => {
         </TabPanel>
       </>
       {/* ENABLE FOR SOME TABS ONLY */}
-      {[0, 1].includes(tab1) && (
+      {[1, 3, 7].includes(tab1) && (
         <>
           <YearSlider handleSetYear={handleSetYear} year={year} />
           <Controls

@@ -1,16 +1,8 @@
 import React, { useEffect } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
 import { ILineChart } from '../Charts/LineChart';
 import { IBarChart } from '../Charts/BarChart';
 import { IAreaChart } from '../Charts/AreaChart';
-import {
-  ComparisonPieChart,
-  InvestigatorPerTotalPieChart
-} from '../Charts/PieChart';
-import {
-  getMultipleInvestigatorDistributionByDate,
-  getMultipleInvestigatorSumByDate
-} from '../../utils/requests';
+import { getMultipleInvestigatorSumByDate } from '../../utils/requests';
 import {
   determineDataTypeMode,
   APIResponse,
@@ -21,7 +13,6 @@ import {
 } from '../../types';
 import { ViewWrapper, ViewRow, ViewColumn } from '../UI/ViewWrapper';
 import { FactBoxes, forInvComparison } from '../UI/FactBoxes';
-import { lookupInvestigator } from '../../lookups/helpers';
 
 type Props = {
   investigatorCodes: string[];
@@ -32,13 +23,7 @@ type Props = {
   deleteFromSelection: (event) => void;
 };
 
-const useStyles = makeStyles(() => ({
-  pieChartBundle: {
-    margin: '0 auto'
-  }
-}));
-
-export const InvestigatorComparison = ({
+export const InvestigatorSumComparison = ({
   investigatorCodes,
   year,
   dataMode,
@@ -50,14 +35,12 @@ export const InvestigatorComparison = ({
     selectedInvestigators,
     chooseInvestigators
   ] = React.useState<APIResponse>();
-  const classes = useStyles();
 
   useEffect(() => {
     const fetchData = async () => {
-      const result: APIResponse =
-        numMode === NUMMODE.DIST
-          ? await getMultipleInvestigatorDistributionByDate(investigatorCodes)
-          : await getMultipleInvestigatorSumByDate(investigatorCodes);
+      const result: APIResponse = await getMultipleInvestigatorSumByDate(
+        investigatorCodes
+      );
       chooseInvestigators(result);
     };
     fetchData().catch((e) => console.log(e));
@@ -111,26 +94,6 @@ export const InvestigatorComparison = ({
                 ))}
             </>
           </ViewColumn>
-          <div style={{ margin: '0 auto' }}>
-            {selectedInvestigators && (
-              <div className={classes.pieChartBundle}>
-                <ComparisonPieChart
-                  meta={selectedInvestigators.meta}
-                  ids={investigatorCodes}
-                  factionCodes={investigatorCodes.map(
-                    (id) => lookupInvestigator(id).faction_code
-                  )}
-                />
-                <InvestigatorPerTotalPieChart
-                  meta={selectedInvestigators.meta}
-                  ids={investigatorCodes}
-                  factionCodes={investigatorCodes.map(
-                    (id) => lookupInvestigator(id).faction_code
-                  )}
-                />
-              </div>
-            )}
-          </div>
         </>
       </ViewRow>
     </ViewWrapper>
