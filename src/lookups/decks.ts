@@ -25,9 +25,24 @@ export const releases = [
     year: '2019'
   },
   {
+    name: 'Return to Dunwich',
+    date: '2019-01-10',
+    year: '2019'
+  },
+  {
+    name: 'Return to Carcosa',
+    date: '2019-09-06',
+    year: '2019'
+  },
+  {
     name: 'The Dream-Eaters',
     date: '2019-09-27',
     year: '2019'
+  },
+  {
+    name: 'Return to Forgotten Age',
+    date: '2020-08-07',
+    year: '2020'
   },
   {
     name: 'Starter Decks',
@@ -38,5 +53,15 @@ export const releases = [
     name: 'The Innsmouth Conspiracy',
     date: '2020-10-02',
     year: '2020'
+  },
+  {
+    name: 'Return to Circle',
+    date: '2021-08-27',
+    year: '2021'
+  },
+  {
+    name: 'Edge of The Earth',
+    date: '2021-11-19',
+    year: '2021'
   }
 ];
